@@ -63,7 +63,6 @@ internal fun PickerOutlinedTextField(
         colors.textColor(enabled, isError, interactionSource).value
     }
     val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
-
     CompositionLocalProvider(LocalTextSelectionColors provides colors.textSelectionColors) {
         BasicTextField(
             value = value,
