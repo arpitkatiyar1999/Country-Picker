@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("maven-publish")
 }
 
 android {
@@ -47,5 +48,18 @@ dependencies {
     implementation(libs.androidx.material3)
     // google phone number
     implementation(libs.libPhoneNumber)
+}
 
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.github.arpitkatiyar1999"
+                artifactId = "countrypicker"
+                version = "1.0.0"
+                from(components["release"])
+            }
+        }
+    }
 }
