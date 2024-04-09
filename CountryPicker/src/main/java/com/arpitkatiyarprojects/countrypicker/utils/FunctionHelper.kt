@@ -7,6 +7,13 @@ import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 
 internal object FunctionHelper {
 
+
+    /**
+     * Searches for countries in the list of [CountryDetails] based on the specified search string.
+     *
+     * @param searchStr The search string to match against country names, phone number codes, and country codes.
+     * @return A list of [CountryDetails] matching the search criteria.
+     */
     fun List<CountryDetails>.searchForCountry(searchStr: String): List<CountryDetails> {
         return filter {
             it.countryName.contains(searchStr, ignoreCase = true)
@@ -16,6 +23,14 @@ internal object FunctionHelper {
     }
 
 
+    /**
+     * Retrieves the default selected country based on the provided parameters.
+     *
+     * @param context The context used for retrieving default country code if countryCode is null.
+     * @param countryCode The country code of the selected country.
+     * @param countriesList The list of [CountryDetails] containing country information.
+     * @return The default selected [CountryDetails].
+     */
     fun getDefaultSelectedCountry(
         context: Context,
         countryCode: String?,
@@ -32,6 +47,15 @@ internal object FunctionHelper {
         }
     }
 
+
+    /**
+     * Retrieves the country details for the specified country code.
+     *
+     * @param countriesList The list of [CountryDetails] containing country information.
+     * @param countryCode The country code of the desired country.
+     * @return The [CountryDetails] corresponding to the provided country code.
+     * @throws NoSuchElementException if no country with the specified country code is found in the list.
+     */
     private fun getCountryForCountryCode(
         countriesList: List<CountryDetails>,
         countryCode: String
@@ -39,6 +63,14 @@ internal object FunctionHelper {
         return countriesList.single { it.countryCode == countryCode }
     }
 
+
+    /**
+     * Retrieves the default country details based on the current locale.
+     *
+     * @param context The context used for accessing system services.
+     * @param countriesList The list of [CountryDetails] containing country information.
+     * @return The default country details based on the current locale.
+     */
     private fun getDefaultCountryCode(
         context: Context,
         countriesList: List<CountryDetails>
@@ -53,6 +85,13 @@ internal object FunctionHelper {
         }
     }
 
+
+    /**
+     * Retrieves the details of all countries.
+     *
+     * @param context The context used for accessing country name from string file to provide multilanguage feature.
+     * @return The list of [CountryDetails] containing details of all countries.
+     */
     fun getAllCountries(context: Context): List<CountryDetails> = listOf(
         CountryDetails(
             countryCode = "ad",

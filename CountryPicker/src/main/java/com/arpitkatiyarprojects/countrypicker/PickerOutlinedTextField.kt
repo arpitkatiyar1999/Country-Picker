@@ -31,6 +31,34 @@ import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 
 
+/**
+ * Composable function for displaying an outlined text field with picker functionality.
+ *
+ * @param value The current value of the text field.
+ * @param onValueChange Callback triggered when the value of the text field changes.
+ * @param modifier Modifier for customizing the layout and appearance of the text field.
+ * @param enabled Whether the text field is enabled for user interaction.
+ * @param readOnly Whether the text field is read-only.
+ * @param textStyle The style of the text displayed in the text field.
+ * @param label The label to be displayed above the text field.
+ * @param placeholder The placeholder text to be displayed when the text field is empty.
+ * @param leadingIcon The icon to be displayed at the start of the text field.
+ * @param trailingIcon The icon to be displayed at the end of the text field.
+ * @param prefix The content to be displayed before the text input.
+ * @param suffix The content to be displayed after the text input.
+ * @param supportingText The additional supporting text to be displayed below the text field.
+ * @param isError Whether the text field is in an error state.
+ * @param visualTransformation The visual transformation to be applied to the text.
+ * @param keyboardOptions The keyboard options to be applied to the text field.
+ * @param keyboardActions The keyboard actions to be applied to the text field.
+ * @param singleLine Whether the text field should be limited to a single line.
+ * @param maxLines The maximum number of lines allowed in the text field.
+ * @param minLines The minimum number of lines allowed in the text field.
+ * @param interactionSource The interaction source of the text field.
+ * @param shape The shape of the text field.
+ * @param colors The colors to be used for the text field.
+ * @param borderThickness The thickness of the border for the text field.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun PickerOutlinedTextField(

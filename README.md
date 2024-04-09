@@ -70,11 +70,7 @@ fun CountryPicker(
 )
 ```
 
-- `modifier`: Modifier - Defines the modifier for the composable, allowing customization of layout
-  and appearance.
-
-
-- `defaultPaddingValues`: PaddingValues - Defines the default padding values for the CountryPicker.
+- `defaultPaddingValues`: PaddingValues -The spacing values to apply internally between the container and the content.
 
 
 - `countryPickerProperties`: CountryPickerProperties - Defines the configurations for the
@@ -153,7 +149,35 @@ fun CountryPickerOutlinedTextField(
     onDone: () -> Unit = {},
 )
 ```
+- `mobileNumber`: String -  The mobile number to be shown in the text field.
 
+
+- `onMobileNumberChange`: (String) -> Unit -  The callback that is triggered when the input service updates the mobile number. An updated mobile number comes as a parameter of the callback.
+
+
+- `borderThickness`: BorderThickness - Represents the border thickness for focused and unfocused states.It includes following properties :-
+
+    - `focusedBorderThickness`: Dp - The thickness of the border when focused.
+    - `unfocusedBorderThickness`: Dp - The thickness of the border when unfocused.
+
+
+- `onDone`: () -> Unit -  The callback is triggered when the user clicks the `Done` button on the keyboard, as the default IME action is set to `Done`.
+
+
+This library also provides a function to test whether the provided number is valid or not. To use this function, use the following:
+
+```kotlin
+CountryPickerUtils.isMobileNumberValid(mobileNumber: String)
+```
+Where mobileNumber must be in the format of country phone code followed by the mobile number. For example, for India, use +919999999999.
+
+
+### Example Usage
+
+```kotlin
+val mobileNumber = "+919999999999"
+val isValid = CountryPickerUtils.isMobileNumberValid(mobileNumber)
+```
 
 
 

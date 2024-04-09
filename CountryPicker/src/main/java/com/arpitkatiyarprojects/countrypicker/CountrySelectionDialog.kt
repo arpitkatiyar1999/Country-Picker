@@ -42,6 +42,15 @@ import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
 
+
+/**
+ * Composable function for displaying a country selection dialog.
+ * @param modifier Modifier for customizing the layout and appearance of the dialog.
+ * @param countryList List of country details to be displayed in the dialog.
+ * @param onDismissRequest Callback triggered when the dialog is dismissed.
+ * @param onSelected Callback triggered when a country is selected from the dialog.
+ * @param properties Properties for customizing the behavior of the dialog.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CountrySelectionDialog(

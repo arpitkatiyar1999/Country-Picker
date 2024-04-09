@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,6 +33,17 @@ import com.arpitkatiyarprojects.countrypicker.models.PickerTextStyles
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
 
 
+/**
+ * Displays the country picker without any outlined text field.
+ * @param modifier the Modifier to be applied to this text field.
+ * @param defaultPaddingValues The spacing values to apply internally between the container and the content
+ * @param countryPickerProperties Defines the configurations for the CountryPicker
+ * @param countryFlagDimensions Defines the dimensions for the country flags displayed within the picker.
+ * @param pickerTextStyles  Defines the text styles for the picker items.
+ * @param defaultCountryCode  Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
+ * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
+ * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
+ */
 @Composable
 fun CountryPicker(
     modifier: Modifier = Modifier,
@@ -42,6 +55,7 @@ fun CountryPicker(
     countriesList: List<String>? = null,
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
+
     val context = LocalContext.current
     var openCountrySelectionDialog by remember { mutableStateOf(false) }
     val countryList = remember {
