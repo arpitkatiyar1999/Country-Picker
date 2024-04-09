@@ -54,10 +54,12 @@ fun CountryPicker(
         }
     }
     var selectedCountry by remember {
-        val defaultSelectedCountryCode =
-            if (!defaultCountryCode.isNullOrEmpty()) defaultCountryCode
-            else FunctionHelper.getDefaultCountryCode(context)
-        val selectedCountry = countryList.single { it.countryCode == defaultSelectedCountryCode }
+        val selectedCountry =
+            FunctionHelper.getDefaultSelectedCountry(
+                context,
+                defaultCountryCode?.lowercase(),
+                countryList
+            )
         onCountrySelected(selectedCountry)
         mutableStateOf(selectedCountry)
     }

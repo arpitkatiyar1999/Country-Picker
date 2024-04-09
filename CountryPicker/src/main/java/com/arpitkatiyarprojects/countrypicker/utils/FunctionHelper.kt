@@ -15,18 +15,42 @@ internal object FunctionHelper {
         }
     }
 
-    fun getDefaultCountryCode(context: Context): String {
-        val code = try {
+
+    fun getDefaultSelectedCountry(
+        context: Context,
+        countryCode: String?,
+        countriesList: List<CountryDetails>
+    ): CountryDetails {
+        return try {
+            if (countryCode != null) {
+                getCountryForCountryCode(countriesList, countryCode)
+            } else {
+                getDefaultCountryCode(context, countriesList)
+            }
+        } catch (exception: Exception) {
+            countriesList[0]
+        }
+    }
+
+    private fun getCountryForCountryCode(
+        countriesList: List<CountryDetails>,
+        countryCode: String
+    ): CountryDetails {
+        return countriesList.single { it.countryCode == countryCode }
+    }
+
+    private fun getDefaultCountryCode(
+        context: Context,
+        countriesList: List<CountryDetails>
+    ): CountryDetails {
+        return try {
             val localeCode: TelephonyManager =
                 context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             val countryCode = localeCode.networkCountryIso
-            countryCode.ifEmpty {
-                "in"
-            }
+            getCountryForCountryCode(countriesList, countryCode.lowercase())
         } catch (e: Exception) {
-            "in"
+            countriesList[0]
         }
-        return code
     }
 
     fun getAllCountries(context: Context): List<CountryDetails> = listOf(
