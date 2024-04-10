@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
@@ -65,7 +64,7 @@ fun CountryPickerOutlinedTextField(
     modifier: Modifier = Modifier,
     defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
     countryPickerProperties: CountryPickerProperties = CountryPickerProperties(),
-    countryFlagDimensions: Dimensions = Dimensions(28.dp, 18.dp),
+    countryFlagDimensions: Dimensions = Dimensions(),
     pickerTextStyles: PickerTextStyles = PickerTextStyles(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,

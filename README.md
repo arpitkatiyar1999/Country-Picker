@@ -70,7 +70,8 @@ fun CountryPicker(
 )
 ```
 
-- `defaultPaddingValues`: PaddingValues -The spacing values to apply internally between the container and the content.
+- `defaultPaddingValues`: PaddingValues -The spacing values to apply internally between the
+  container and the content.
 
 
 - `countryPickerProperties`: CountryPickerProperties - Defines the configurations for the
@@ -82,35 +83,42 @@ fun CountryPicker(
     - `showCountryName`: Boolean - Specifies whether to display the country name within the picker.
     - `showCountryCode`: Boolean - Specifies whether to display the country code within the picker.
     - `spaceAfterCountryFlag`: Dp - Defines the spacing after the country flag,
-      if `showCountryFlag = true`.
+      only if `showCountryFlag = true`.
     - `spaceAfterCountryPhoneCode`: Dp - Defines the spacing after the country phone code,
-      if `showCountryPhoneCode = true`.
+      only if `showCountryPhoneCode = true`.
     - `spaceAfterCountryName`: Dp - Defines the spacing after the country name,
-      if `showCountryName = true`.
+      only if `showCountryName = true`.
     - `spaceAfterCountryCode`: Dp - Defines the spacing after the country code,
-      if `showCountryCode = true`.
-  
+      only if `showCountryCode = true`.
+
 
 - `countryFlagDimensions`: Dimensions - Defines the dimensions for the country flags displayed
   within the picker.
 
 
-- `pickerTextStyles`: PickerTextStyles - Defines the text styles for the picker items. It includes text styles for:-
+- `pickerTextStyles`: PickerTextStyles - Defines the text styles for the picker items. It includes
+  text styles for:-
 
     - `countryPhoneCodeTextStyle`: TextStyle - Specifies the text style for the country phone code.
     - `countryNameTextStyle`: TextStyle - Specifies the text style for the country name.
-    - `countryCodeTextStyle`: TextStyle - Specifies the text style for the country code.   
-  
+    - `countryCodeTextStyle`: TextStyle - Specifies the text style for the country code.
+
 
 - `defaultCountryCode`: String? - Specifies the default country code to be pre-selected in the
   picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If
-  not explicitly provided, the picker will automatically detect the user's country.To know countries' 2-letter ISO codes, you can refer to the [ISO 3166-1 alpha-2 country codes Wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+  not explicitly provided, the picker will automatically detect the user's country.To know
+  countries' 2-letter ISO codes, you can refer to
+  the [ISO 3166-1 alpha-2 country codes Wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 
-- `countriesList`: List<String>? - Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
+- `countriesList`: List<String>? - Specifies a list of countries to populate in the picker. If not
+  provided, the picker will use a predefined list of countries. It's essential that the provided
+  countries list strictly adheres to the standard 2-letter ISO code format for each country.
 
 
-- `onCountrySelected`: (country: CountryDetails) -> Unit - The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country
+- `onCountrySelected`: (country: CountryDetails) -> Unit - The callback function is triggered each
+  time a country is selected within the picker. Additionally, it is also invoked when the picker is
+  first displayed on the screen with the default selected country
 
 2. **CountryPickerOutlinedTextField**: This function displays the country picker with outlined text
    field.
@@ -149,35 +157,33 @@ fun CountryPickerOutlinedTextField(
     onDone: () -> Unit = {},
 )
 ```
-- `mobileNumber`: String -  The mobile number to be shown in the text field.
+
+- `mobileNumber`: String - The mobile number to be shown in the text field.
 
 
-- `onMobileNumberChange`: (String) -> Unit -  The callback that is triggered when the input service updates the mobile number. An updated mobile number comes as a parameter of the callback.
+- `onMobileNumberChange`: (String) -> Unit - The callback that is triggered when the input service
+  updates the mobile number. An updated mobile number comes as a parameter of the callback.
 
 
-- `borderThickness`: BorderThickness - Represents the border thickness for focused and unfocused states.It includes following properties :-
+- `borderThickness`: BorderThickness - Represents the border thickness for focused and unfocused
+  states.It includes following properties :-
 
     - `focusedBorderThickness`: Dp - The thickness of the border when focused.
     - `unfocusedBorderThickness`: Dp - The thickness of the border when unfocused.
 
 
-- `onDone`: () -> Unit -  The callback is triggered when the user clicks the `Done` button on the keyboard, as the default IME action is set to `Done`.
+- `onDone`: () -> Unit - The callback is triggered when the user clicks the `Done` button on the
+  keyboard, as the default IME action is set to `Done`.
 
-
-This library also provides a function to test whether the provided number is valid or not. To use this function, use the following:
+##### This library also provides a function to test whether the provided number is valid or not. To use this function, use the following:
 
 ```kotlin
 CountryPickerUtils.isMobileNumberValid(mobileNumber: String)
 ```
-Where mobileNumber must be in the format of country phone code followed by the mobile number. For example, for India, use +919999999999.
 
+Where mobileNumber must be in the format of country phone code followed by the mobile number. For
+example, for India, use +919999999999.
 
-### Example Usage
-
-```kotlin
-val mobileNumber = "+919999999999"
-val isValid = CountryPickerUtils.isMobileNumberValid(mobileNumber)
-```
 
 
 

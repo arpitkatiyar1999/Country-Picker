@@ -49,7 +49,7 @@ fun CountryPicker(
     modifier: Modifier = Modifier,
     defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
     countryPickerProperties: CountryPickerProperties = CountryPickerProperties(),
-    countryFlagDimensions: Dimensions = Dimensions(28.dp, 18.dp),
+    countryFlagDimensions: Dimensions = Dimensions(),
     pickerTextStyles: PickerTextStyles = PickerTextStyles(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,

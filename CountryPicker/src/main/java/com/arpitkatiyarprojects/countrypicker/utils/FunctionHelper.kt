@@ -37,7 +37,7 @@ internal object FunctionHelper {
         countriesList: List<CountryDetails>
     ): CountryDetails {
         return try {
-            if (countryCode != null) {
+            if (!countryCode.isNullOrBlank()) {
                 getCountryForCountryCode(countriesList, countryCode)
             } else {
                 getDefaultCountryCode(context, countriesList)
