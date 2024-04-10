@@ -9,7 +9,7 @@ integration with the visual identity of your application.
 ![Platform](https://img.shields.io/badge/Platform-Android-crimson) &nbsp;
 ![API Level](https://img.shields.io/badge/API-21%2B-yellow) &nbsp;
 ![License](https://img.shields.io/badge/License-Apache%202-blue) &nbsp;
-![JitPack](https://img.shields.io/badge/JitPack-1.0.1-mediumseagreen) &nbsp;
+![JitPack](https://img.shields.io/badge/JitPack-1.0.2-mediumseagreen) &nbsp;
 ![Language](https://img.shields.io/badge/Language-Kotlin-orange)
 
 ## Preview
