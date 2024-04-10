@@ -192,6 +192,15 @@ CountryPickerUtils.isMobileNumberValid(mobileNumber: String)
 Where mobileNumber must be in the format of country phone code followed by the mobile number. For
 example, for India, use +919999999999.
 
+## Contributing
+We love seeing improvements to this project! Here's how to contribute to the project:-
+
+1. **Fork the Repo**: Click "Fork" on the main repository page to create your own copy.
+2. **Clone & Develop**: Clone your fork locally and make your changes.
+3. **Create a Branch**: Create a new branch for your specific contribution.
+4. **Commit & Push**: Commit your changes with clear messages and push them to your forked repository.
+5. **Pull Request**: Open a pull request from your branch to the main branch of the upstream repository.
+
 
 
 
