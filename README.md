@@ -12,7 +12,15 @@ integration with the visual identity of your application.
 ![JitPack](https://img.shields.io/badge/JitPack-1.0.0-mediumseagreen) &nbsp;
 ![Language](https://img.shields.io/badge/Language-Kotlin-orange)
 
+## Preview
+
+
+|  <div style="width:50%;">CountryPicker</div>                                                                          | <div style="width:50%;">CountryPickerOutlinedTextField</div>   |
+|:---------------------------------------------------------------------------------------------------------------------:|:------------------------------:|
+| <video src="https://github.com/arpitkatiyar1999/Country-Picker/assets/60139160/6ae5d601-f53e-480b-a00d-74aa8095860b"> | <video src="https://github.com/arpitkatiyar1999/Country-Picker/assets/60139160/97f3186f-f86c-49fc-a73c-b38562a43eb1">        |                                                                                            |
+
 ## Requirement
+
 
 Jetpack Compose Country Code Picker requires Material 3 version **1.2.1** or later to work properly.
 To
