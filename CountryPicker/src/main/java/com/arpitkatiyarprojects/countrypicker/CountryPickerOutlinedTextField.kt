@@ -120,7 +120,7 @@ fun CountryPickerOutlinedTextField(
         isError = isError,
         visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.NumberPassword,
+            keyboardType = KeyboardType.Number,
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(onDone = {
