@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
  * @param spaceAfterCountryName Defines the spacing after the country name, if showCountryName = true.
  * @param spaceAfterCountryCode Defines the spacing after the country code, if showCountryCode = true.
  */
-data class CountryPickerProperties(
+data class SelectedCountryProperties(
     val showCountryFlag: Boolean = true,
     val showCountryPhoneCode: Boolean = true,
     val showCountryName: Boolean = false,

@@ -48,8 +48,8 @@ import com.arpitkatiyarprojects.countrypicker.CountryPicker
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerProperties
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
 import com.arpitkatiyarprojects.countrypickerproject.ui.theme.CountryPickerProjectTheme
 
@@ -70,8 +70,8 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // CountryPickerWithoutOutlinedText()
-                        CountryPickerWithOutlinedText()
+                        CountryPickerWithoutOutlinedText()
+                        //CountryPickerWithOutlinedText()
                     }
                 }
             }
@@ -120,17 +120,17 @@ fun CountryPickerWithoutOutlinedText() {
     Column(modifier = Modifier.fillMaxSize()) {
         CountryPicker(
             modifier = Modifier.fillMaxWidth(),
-            countryPickerProperties = CountryPickerProperties(
-                showCountryFlagState.value,
-                showCountryPhoneCodeState.value,
-                showCountryNameState.value,
-                showCountryCodeState.value,
-                spaceAfterCountryFlagMutableState.value,
-                spaceAfterCountryPhoneCode.value,
-                spaceAfterCountryName.value,
-                spaceAfterCountryCode.value
-            ),
-            countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value)
+//            countryPickerProperties = SelectedCountryProperties(
+//                showCountryFlagState.value,
+//                showCountryPhoneCodeState.value,
+//                showCountryNameState.value,
+//                showCountryCodeState.value,
+//                spaceAfterCountryFlagMutableState.value,
+//                spaceAfterCountryPhoneCode.value,
+//                spaceAfterCountryName.value,
+//                spaceAfterCountryCode.value
+//            ),
+            selectedCountryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value)
         ) {
             selectedCountryState.value = it
         }
@@ -254,7 +254,7 @@ fun CountryPickerWithOutlinedText() {
             onCountrySelected = {
                 selectedCountryState.value = it
             },
-            countryPickerProperties = CountryPickerProperties(
+            selectedCountryProperties = SelectedCountryProperties(
                 showCountryFlagState.value,
                 showCountryPhoneCodeState.value,
                 showCountryNameState.value,
@@ -264,7 +264,7 @@ fun CountryPickerWithOutlinedText() {
                 spaceAfterCountryName.value,
                 spaceAfterCountryCode.value
             ),
-            countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value),
+            //countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value),
             borderThickness = BorderThickness(
                 focusedBorderThickness.value,
                 unfocusedBorderThickness.value

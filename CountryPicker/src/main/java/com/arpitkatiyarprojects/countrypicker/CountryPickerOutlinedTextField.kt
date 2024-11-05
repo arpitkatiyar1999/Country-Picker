@@ -2,7 +2,6 @@ package com.arpitkatiyarprojects.countrypicker
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,7 +11,6 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -21,9 +19,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerProperties
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
-import com.arpitkatiyarprojects.countrypicker.models.PickerTextStyles
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerTextStyles
 
 /**
  * @param mobileNumber The mobile number to be shown in the text field.
@@ -31,9 +29,9 @@ import com.arpitkatiyarprojects.countrypicker.models.PickerTextStyles
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  * @param modifier The Modifier to be applied to this text field.
  * @param defaultPaddingValues The spacing values to apply internally between the container and the content
- * @param countryPickerProperties Defines the configurations for the CountryPicker
+ * @param selectedCountryProperties Defines the configurations for the CountryPicker
  * @param countryFlagDimensions  Defines the dimensions for the country flags displayed within the picker.
- * @param pickerTextStyles Defines the text styles for the picker items.
+ * @param countryPickerTextStyles Defines the text styles for the picker items.
  * @param defaultCountryCode Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
  * @param countriesList specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
  * @param enabled controls the enabled state of this text field. When false, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.
@@ -63,9 +61,9 @@ fun CountryPickerOutlinedTextField(
     onCountrySelected: (country: CountryDetails) -> Unit,
     modifier: Modifier = Modifier,
     defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
-    countryPickerProperties: CountryPickerProperties = CountryPickerProperties(),
-    countryFlagDimensions: Dimensions = Dimensions(),
-    pickerTextStyles: PickerTextStyles = PickerTextStyles(),
+    selectedCountryProperties: SelectedCountryProperties = SelectedCountryProperties(),
+    //countryFlagDimensions: Dimensions = Dimensions(),
+    //countryPickerTextStyles: CountryPickerTextStyles = CountryPickerTextStyles(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
     enabled: Boolean = true,
@@ -99,19 +97,19 @@ fun CountryPickerOutlinedTextField(
         label = label,
         placeholder = placeholder,
         leadingIcon = {
-            CountryPicker(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                defaultPaddingValues = defaultPaddingValues,
-                countryPickerProperties = countryPickerProperties,
-                countryFlagDimensions = countryFlagDimensions,
-                pickerTextStyles = pickerTextStyles,
-                defaultCountryCode = defaultCountryCode,
-                countriesList = countriesList,
-            ) { selectedCountry ->
-                onCountrySelected(selectedCountry)
-            }
+//            CountryPicker(
+//                modifier = Modifier
+//                    .padding(start = 8.dp)
+//                    .clip(RoundedCornerShape(12.dp)),
+//                defaultPaddingValues = defaultPaddingValues,
+//                countryPickerProperties = selectedCountryProperties,
+//                selectedCountryFlagDimensions = countryFlagDimensions,
+//                selectedCountryTextStyles = selectedCountryTextStyles,
+//                defaultCountryCode = defaultCountryCode,
+//                countriesList = countriesList,
+//            ) { selectedCountry ->
+//                onCountrySelected(selectedCountry)
+//            }
         },
         trailingIcon = trailingIcon,
         prefix = prefix,
