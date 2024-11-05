@@ -86,7 +86,7 @@ fun CountryPickerOutlinedTextField(
     shape: Shape = RoundedCornerShape(12.dp),
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
     borderThickness: BorderThickness = BorderThickness(),
-    onDone: () -> Unit = {},
+    onDone: (() -> Unit)? = null,
 ) {
 
     PickerOutlinedTextField(
@@ -124,7 +124,7 @@ fun CountryPickerOutlinedTextField(
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(onDone = {
-            onDone()
+            onDone?.invoke()
         }),
         singleLine = singleLine,
         maxLines = maxLines,

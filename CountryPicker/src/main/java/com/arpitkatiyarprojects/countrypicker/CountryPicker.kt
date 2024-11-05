@@ -16,7 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,8 +54,8 @@ fun CountryPicker(
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
     val context = LocalContext.current
-    var openCountrySelectionDialog by remember { mutableStateOf(false) }
-    val countryList = remember {
+    var openCountrySelectionDialog by rememberSaveable { mutableStateOf(false) }
+    val countryList = rememberSaveable {
         if (countriesList.isNullOrEmpty()) {
             FunctionHelper.getAllCountries(context)
         } else {
@@ -64,7 +64,7 @@ fun CountryPicker(
                 .filter { updatedCountriesList.contains(it.countryCode) }
         }
     }
-    var selectedCountry by remember {
+    var selectedCountry by rememberSaveable {
         val selectedCountry =
             FunctionHelper.getDefaultSelectedCountry(
                 context,

@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -64,9 +65,9 @@ internal fun CountrySelectionDialog(
     onSelected: (item: CountryDetails) -> Unit,
     properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false)
 ) {
-    var searchValue by remember { mutableStateOf("") }
-    var isSearchEnabled by remember { mutableStateOf(false) }
-    var filteredCountries by remember { mutableStateOf(countriesList) }
+    var searchValue by rememberSaveable { mutableStateOf("") }
+    var isSearchEnabled by rememberSaveable { mutableStateOf(false) }
+    var filteredCountries by rememberSaveable { mutableStateOf(countriesList) }
     val coroutineScope = rememberCoroutineScope()
     BasicAlertDialog(
         modifier = Modifier
@@ -91,7 +92,9 @@ internal fun CountrySelectionDialog(
                             title = {
                                 if (isSearchEnabled) {
                                     TextField(
-                                        modifier = Modifier.focusRequester(focusRequester),
+                                        modifier = Modifier
+                                            .focusRequester(focusRequester)
+                                            .fillMaxWidth(),
                                         value = searchValue,
                                         onValueChange = { searchStr ->
                                             searchValue = searchStr
