@@ -43,6 +43,7 @@ internal object FunctionHelper {
                 getDefaultCountryCode(context, countriesList)
             }
         } catch (exception: Exception) {
+            LoggerHelper.logError(exception)
             countriesList[0]
         }
     }
@@ -75,14 +76,10 @@ internal object FunctionHelper {
         context: Context,
         countriesList: List<CountryDetails>
     ): CountryDetails {
-        return try {
-            val localeCode: TelephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            val countryCode = localeCode.networkCountryIso
-            getCountryForCountryCode(countriesList, countryCode.lowercase())
-        } catch (e: Exception) {
-            countriesList[0]
-        }
+        val localeCode: TelephonyManager =
+            context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val countryCode = localeCode.networkCountryIso
+        return getCountryForCountryCode(countriesList, countryCode.lowercase())
     }
 
 

@@ -30,6 +30,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -41,12 +42,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /**
  * Composable function for displaying a country selection dialog.
  * @param modifier Modifier for customizing the layout and appearance of the dialog.
- * @param countryList List of country details to be displayed in the dialog.
+ * @param countriesList List of country details to be displayed in the dialog.
  * @param onDismissRequest Callback triggered when the dialog is dismissed.
  * @param onSelected Callback triggered when a country is selected from the dialog.
  * @param properties Properties for customizing the behavior of the dialog.
@@ -55,14 +59,15 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCoun
 @Composable
 internal fun CountrySelectionDialog(
     modifier: Modifier = Modifier,
-    countryList: List<CountryDetails>,
+    countriesList: List<CountryDetails>,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit,
     properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false)
 ) {
     var searchValue by remember { mutableStateOf("") }
     var isSearchEnabled by remember { mutableStateOf(false) }
-    var filteredCountries by remember { mutableStateOf(countryList) }
+    var filteredCountries by remember { mutableStateOf(countriesList) }
+    val coroutineScope = rememberCoroutineScope()
     BasicAlertDialog(
         modifier = Modifier
             .fillMaxSize(),
@@ -90,8 +95,13 @@ internal fun CountrySelectionDialog(
                                         value = searchValue,
                                         onValueChange = { searchStr ->
                                             searchValue = searchStr
-                                            filteredCountries =
-                                                countryList.searchForCountry(searchStr)
+                                            coroutineScope.launch(Dispatchers.Default) {
+                                                val filteredCountryList =
+                                                    countriesList.searchForCountry(searchStr)
+                                                withContext(Dispatchers.Main) {
+                                                    filteredCountries = filteredCountryList
+                                                }
+                                            }
                                         },
                                         placeholder = {
                                             Text(
@@ -131,6 +141,9 @@ internal fun CountrySelectionDialog(
                             actions = {
                                 IconButton(onClick = {
                                     isSearchEnabled = !isSearchEnabled
+                                    if (!isSearchEnabled) {
+                                        searchValue = ""
+                                    }
                                 }) {
                                     Icon(
                                         imageVector = if (isSearchEnabled) Icons.Default.Clear else Icons.Default.Search,
@@ -148,11 +161,11 @@ internal fun CountrySelectionDialog(
                     ) {
                         val countriesData =
                             if (searchValue.isEmpty()) {
-                                countryList
+                                countriesList
                             } else {
                                 filteredCountries
                             }
-                        items(countriesData) { countryItem ->
+                        items(countriesData, key = { it.countryCode }) { countryItem ->
                             ListItem(
                                 modifier = Modifier
                                     .fillMaxWidth()

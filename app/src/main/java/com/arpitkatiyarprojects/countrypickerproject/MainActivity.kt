@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        CountryPickerWithOutlinedText()
+                        CountryPickerWithoutOutlinedText()
                     }
                 }
             }
@@ -117,6 +117,7 @@ fun CountryPickerWithoutOutlinedText() {
 
     Column(modifier = Modifier.fillMaxSize()) {
         CountryPicker(
+            modifier = Modifier.fillMaxWidth(),
             countryPickerProperties = CountryPickerProperties(
                 showCountryFlagState.value,
                 showCountryPhoneCodeState.value,
@@ -214,9 +215,11 @@ fun CountryPickerWithOutlinedText() {
         mutableStateOf(1.dp)
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         CountryPickerOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             mobileNumber = mobileNumber,
@@ -240,7 +243,10 @@ fun CountryPickerWithOutlinedText() {
                 spaceAfterCountryCode.value
             ),
             countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value),
-            borderThickness = BorderThickness(focusedBorderThickness.value, unfocusedBorderThickness.value)
+            borderThickness = BorderThickness(
+                focusedBorderThickness.value,
+                unfocusedBorderThickness.value
+            )
         )
         SpacerHeight16()
         CountryDetailsSectionRow(selectedCountryState.value)
