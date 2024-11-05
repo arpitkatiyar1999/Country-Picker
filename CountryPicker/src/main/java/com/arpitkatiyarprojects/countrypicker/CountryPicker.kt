@@ -99,6 +99,20 @@ fun CountryPicker(
     }
 }
 
+
+/**
+ * A composable function that displays information about the selected country in a row format,
+ * with options to show or hide various country attributes like the flag, phone code, name, and ISO code.
+ *
+ * @param defaultPaddingValues Padding values applied to the Row container for the section.
+ * @param selectedCountry The details of the selected country, encapsulated in a `CountryDetails` object.
+ * @param countryPickerProperties Properties controlling the visibility and spacing of the country details,
+ *                                such as whether to show the flag, phone code, name, and country code.
+ * @param countryFlagDimensions Specifies the width and height for the country flag image, encapsulated in a `Dimensions` object.
+ * @param pickerTextStyles Text styles for displaying different country details, encapsulated in a `PickerTextStyles` object.
+ * @param modifier Modifier applied to the Row, allowing for customization of its appearance and behavior.
+ * @param onSelectCountry A callback function triggered when the user clicks on the Row, used to handle the selection event.
+ */
 @Composable
 private fun SelectedCountrySection(
     defaultPaddingValues: PaddingValues,

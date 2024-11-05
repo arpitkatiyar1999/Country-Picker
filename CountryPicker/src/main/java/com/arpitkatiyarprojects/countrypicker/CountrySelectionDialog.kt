@@ -165,33 +165,43 @@ internal fun CountrySelectionDialog(
                             } else {
                                 filteredCountries
                             }
-                        items(countriesData, key = { it.countryCode }) { countryItem ->
-                            ListItem(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        onSelected(countryItem)
+                        if (countriesData.isEmpty()) {
+                            item {
+                                Text(
+                                    text = stringResource(R.string.no_country_found),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                                )
+                            }
+                        } else {
+                            items(countriesData, key = { it.countryCode }) { countryItem ->
+                                ListItem(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            onSelected(countryItem)
+                                        },
+                                    leadingContent = {
+                                        Image(
+                                            modifier = modifier.width(30.dp),
+                                            painter = painterResource(id = countryItem.countryFlag),
+                                            contentDescription = null,
+                                        )
                                     },
-                                leadingContent = {
-                                    Image(
-                                        modifier = modifier.width(30.dp),
-                                        painter = painterResource(id = countryItem.countryFlag),
-                                        contentDescription = null,
-                                    )
-                                },
-                                trailingContent = {
-                                    Text(
-                                        text = countryItem.countryPhoneNumberCode,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                },
-                                headlineContent = {
-                                    Text(
-                                        text = countryItem.countryName,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                },
-                            )
+                                    trailingContent = {
+                                        Text(
+                                            text = countryItem.countryPhoneNumberCode,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                        )
+                                    },
+                                    headlineContent = {
+                                        Text(
+                                            text = countryItem.countryName,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                        )
+                                    },
+                                )
+                            }
                         }
                     }
                 }
