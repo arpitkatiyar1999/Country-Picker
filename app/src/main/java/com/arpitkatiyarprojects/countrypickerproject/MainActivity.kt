@@ -50,6 +50,7 @@ import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.CountryPickerProperties
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
+import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
 import com.arpitkatiyarprojects.countrypickerproject.ui.theme.CountryPickerProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -69,7 +70,8 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        CountryPickerWithoutOutlinedText()
+                        // CountryPickerWithoutOutlinedText()
+                        CountryPickerWithOutlinedText()
                     }
                 }
             }
@@ -215,19 +217,39 @@ fun CountryPickerWithOutlinedText() {
         mutableStateOf(1.dp)
     }
 
+    var isMobileNumberValidationError by remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
         CountryPickerOutlinedTextField(
+            isError = isMobileNumberValidationError,
+            supportingText = {
+                if (isMobileNumberValidationError) {
+                    Text(text = "Invalid mobile number")
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
-            mobileNumber = mobileNumber,
+            mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
+                selectedCountryState.value?.countryCode ?: "IN", mobileNumber
+            ),
             onMobileNumberChange = {
                 mobileNumber = it
+                isMobileNumberValidationError = !CountryPickerUtils.isMobileNumberValid(
+                    mobileNumber,
+                    selectedCountryState.value?.countryCode ?: "IN"
+                )
             },
-            label = {
-                Text(text = "Mobile Number")
+            placeholder = {
+                Text(
+                    text = CountryPickerUtils.getExampleMobileNumber(
+                        selectedCountryState.value?.countryCode ?: "IN"
+                    )
+                )
             },
             onCountrySelected = {
                 selectedCountryState.value = it
