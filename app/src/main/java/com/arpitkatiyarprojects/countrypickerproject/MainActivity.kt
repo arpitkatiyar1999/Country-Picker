@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import com.arpitkatiyarprojects.countrypicker.CountryPicker
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
@@ -82,90 +83,127 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CountryPickerWithoutOutlinedText() {
-    val showCountryFlagState = remember {
+    val showSelectedCountryFlagState = remember {
         mutableStateOf(true)
     }
-    val showCountryPhoneCodeState = remember {
+    val showSelectedCountryPhoneCodeState = remember {
         mutableStateOf(true)
     }
-    val showCountryNameState = remember {
+    val showSelectedCountryNameState = remember {
         mutableStateOf(false)
     }
-    val showCountryCodeState = remember {
+    val showSelectedCountryCodeState = remember {
         mutableStateOf(false)
     }
-    val spaceAfterCountryFlagMutableState = remember {
+    val spaceAfterSelectedCountryFlagMutableState = remember {
         mutableStateOf(8.dp)
     }
-    val spaceAfterCountryPhoneCode = remember {
+    val spaceAfterSelectedCountryPhoneCode = remember {
         mutableStateOf(6.dp)
     }
-    val spaceAfterCountryName = remember {
+    val spaceAfterSelectedCountryName = remember {
         mutableStateOf(6.dp)
     }
-    val spaceAfterCountryCode = remember {
+    val spaceAfterSelectedCountryCode = remember {
         mutableStateOf(6.dp)
     }
 
-    val flagWidthState = remember {
+    val selectedCountryFlagWidthState = remember {
         mutableStateOf(28.dp)
     }
-    val flagHeightState = remember {
+    val selectedCountryFlagHeightState = remember {
         mutableStateOf(18.dp)
     }
     val selectedCountryState: MutableState<CountryDetails?> = remember {
         mutableStateOf(null)
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    val countryListFlagWidthState = remember {
+        mutableStateOf(30.dp)
+    }
+    val countryListFlagHeightState = remember {
+        mutableStateOf(20.dp)
+    }
+    val countryListShowCountryCode = remember {
+        mutableStateOf(false)
+    }
+
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         CountryPicker(
             modifier = Modifier.fillMaxWidth(),
-//            countryPickerProperties = SelectedCountryProperties(
-//                showCountryFlagState.value,
-//                showCountryPhoneCodeState.value,
-//                showCountryNameState.value,
-//                showCountryCodeState.value,
-//                spaceAfterCountryFlagMutableState.value,
-//                spaceAfterCountryPhoneCode.value,
-//                spaceAfterCountryName.value,
-//                spaceAfterCountryCode.value
-//            ),
-            selectedCountryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value)
+            selectedCountryProperties = SelectedCountryProperties(
+                showSelectedCountryFlagState.value,
+                showSelectedCountryPhoneCodeState.value,
+                showSelectedCountryNameState.value,
+                showSelectedCountryCodeState.value,
+                spaceAfterSelectedCountryFlagMutableState.value,
+                spaceAfterSelectedCountryPhoneCode.value,
+                spaceAfterSelectedCountryName.value,
+                spaceAfterSelectedCountryCode.value
+            ),
+            selectedCountryFlagDimensions = Dimensions(
+                selectedCountryFlagWidthState.value,
+                selectedCountryFlagHeightState.value
+            ),
+            countriesListDialogProperties = CountriesListDialogProperties(countryListShowCountryCode.value),
+            countriesListDialogFlagDimensions = Dimensions(
+                countryListFlagWidthState.value,
+                countryListFlagHeightState.value
+            )
         ) {
             selectedCountryState.value = it
         }
         SpacerHeight16()
         CountryDetailsSectionRow(selectedCountryState.value)
         SpacerHeight16()
-        TextWidthHeightRow(flagWidthState, flagHeightState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Flag", showCountryFlagState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Phone Code", showCountryPhoneCodeState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Name", showCountryNameState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Code", showCountryCodeState)
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Flag",
-            valueChangeMutableState = spaceAfterCountryFlagMutableState
+        Text(text = "Selected Country Settings:- ", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 16.dp)) {
+            TextWidthHeightRow(selectedCountryFlagWidthState, selectedCountryFlagHeightState)
+            SpacerHeight4()
+            TextSwitchRow(text = "Show Country Flag", showSelectedCountryFlagState)
+            SpacerHeight4()
+            TextSwitchRow(text = "Show Country Phone Code", showSelectedCountryPhoneCodeState)
+            SpacerHeight4()
+            TextSwitchRow(text = "Show Country Name", showSelectedCountryNameState)
+            SpacerHeight4()
+            TextSwitchRow(text = "Show Country Code", showSelectedCountryCodeState)
+            SpacerHeight4()
+            TextProgressRow(
+                text = "Space After Country Flag",
+                valueChangeMutableState = spaceAfterSelectedCountryFlagMutableState
+            )
+            SpacerHeight4()
+            TextProgressRow(
+                text = "Space After Country Phone Code",
+                valueChangeMutableState = spaceAfterSelectedCountryPhoneCode
+            )
+            SpacerHeight4()
+            TextProgressRow(
+                text = "Space After Country Name",
+                valueChangeMutableState = spaceAfterSelectedCountryName
+            )
+            SpacerHeight4()
+            TextProgressRow(
+                text = "Space After Country Code",
+                valueChangeMutableState = spaceAfterSelectedCountryCode
+            )
+        }
+        Text(
+            text = "Countries List Dialog Settings:- ",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
         )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Phone Code",
-            valueChangeMutableState = spaceAfterCountryPhoneCode
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Name",
-            valueChangeMutableState = spaceAfterCountryName
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Code",
-            valueChangeMutableState = spaceAfterCountryCode
-        )
+        Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 16.dp)) {
+            TextWidthHeightRow(countryListFlagWidthState, countryListFlagHeightState)
+            SpacerHeight4()
+            TextSwitchRow(text = "Show Country Code", countryListShowCountryCode)
+        }
     }
 }
 
@@ -411,7 +449,7 @@ private fun TextProgressRow(text: String, valueChangeMutableState: MutableState<
         Slider(value = valueChangeMutableState.value.value, onValueChange = {
             valueChangeMutableState.value = it.dp
 
-        }, valueRange = 1f..100f, modifier = Modifier.width(90.dp))
+        }, valueRange = 1f..100f, modifier = Modifier.width(70.dp))
     }
 }
 
