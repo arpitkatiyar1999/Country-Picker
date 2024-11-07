@@ -46,8 +46,6 @@ dependencies {
     // google phone number
     implementation(libs.libPhoneNumber)
 
-    // test implementation
-    testImplementation(libs.junit)
 }
 
 

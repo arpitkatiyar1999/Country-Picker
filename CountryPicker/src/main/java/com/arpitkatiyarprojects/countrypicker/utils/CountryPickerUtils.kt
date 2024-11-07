@@ -65,8 +65,8 @@ object CountryPickerUtils {
      * Formats a given phone number object into the national format,
      * removing any leading zeros.
      *
-     * @receiver PhoneNumberUtil The PhoneNumberUtil instance used to format the number.
-     * @param phoneNumber The phone number to be formatted, represented as a phone number.PhoneNumber object.
+     * @receiver PhoneNumberUtil The [PhoneNumberUtil] instance used to format the number.
+     * @param phoneNumber The phone number to be formatted, represented as a phone [Phonenumber.PhoneNumber] object.
      * @return A formatted string representation of the phone number in national format,
      *         with leading zeros removed.
      */
@@ -99,4 +99,5 @@ object CountryPickerUtils {
             mobileNumber
         }
     }
+
 }

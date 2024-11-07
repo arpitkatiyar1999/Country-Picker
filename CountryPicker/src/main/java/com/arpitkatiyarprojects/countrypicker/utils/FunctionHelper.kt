@@ -11,6 +11,7 @@ internal object FunctionHelper {
     /**
      * Searches for countries in the list of [CountryDetails] based on the specified search string.
      *
+     * @receiver List<CountryDetails> The list of [CountryDetails] being filtered.
      * @param searchStr The search string to match against country names, phone number codes, and country codes.
      * @return A list of [CountryDetails] matching the search criteria.
      */
@@ -26,7 +27,7 @@ internal object FunctionHelper {
     /**
      * Retrieves the default selected country based on the provided parameters.
      *
-     * @param context The context used for retrieving default country code if countryCode is null.
+     * @param context The [Context] used for retrieving default country code if countryCode is null.
      * @param countryCode The country code of the selected country.
      * @param countriesList The list of [CountryDetails] containing country information.
      * @return The default selected [CountryDetails].
@@ -86,7 +87,7 @@ internal object FunctionHelper {
     /**
      * Retrieves the details of all countries.
      *
-     * @param context The context used for accessing country name from string file to provide multilanguage feature.
+     * @param context The [Context] used for accessing country name from string file to provide multilanguage feature.
      * @return The list of [CountryDetails] containing details of all countries.
      */
     fun getAllCountries(context: Context): List<CountryDetails> = listOf(

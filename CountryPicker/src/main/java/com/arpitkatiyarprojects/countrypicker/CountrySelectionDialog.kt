@@ -43,23 +43,28 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
-import com.arpitkatiyarprojects.countrypicker.models.Dimensions
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
+/**
+ * Composable function for displaying a country selection dialog.
+ * @param countriesList List of country details to be displayed in the dialog.
+ * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
+ * @param onDismissRequest Callback triggered when the dialog is dismissed.
+ * @param onSelected Callback triggered when a country is selected from the dialog.
+ * @param properties Properties for customizing the behavior of the dialog.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CountrySelectionDialog(
     countriesList: List<CountryDetails>,
-    countriesListDialogProperties: CountriesListDialogProperties,
-    countriesListDialogFlagDimensions: Dimensions,
-    countriesListDialogTextStyles: CountryPickerDialogTextStyles,
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit,
     properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false)
@@ -178,10 +183,8 @@ internal fun CountrySelectionDialog(
                         } else {
                             items(countriesData, key = { it.countryCode }) { countryItem ->
                                 CountriesListItem(
-                                    countryItem,
-                                    countriesListDialogProperties,
-                                    countriesListDialogFlagDimensions,
-                                    countriesListDialogTextStyles
+                                    countryItem = countryItem,
+                                    countriesListDialogDisplayProperties = countriesListDialogDisplayProperties
                                 ) {
                                     onSelected(countryItem)
                                 }
@@ -195,47 +198,57 @@ internal fun CountrySelectionDialog(
 }
 
 
+/**
+ * Composable function that displays a list item for a country in the country selection dialog.
+ * The list item shows the country flag, country name, country code (optional), and country phone code.
+ *
+ * @param countryItem The [CountryDetails] object containing the data for the country to be displayed.
+ * @param countriesListDialogDisplayProperties A [CountriesListDialogDisplayProperties] object that provides the flag dimensions and text styles for the list item.
+ * @param onCountrySelected A lambda function that is called when the country list item is clicked, which selects the country.
+ */
 @Composable
 private fun CountriesListItem(
     countryItem: CountryDetails,
-    countriesListDialogProperties: CountriesListDialogProperties,
-    countriesListDialogFlagDimensions: Dimensions,
-    countriesListDialogTextStyles: CountryPickerDialogTextStyles,
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
     onCountrySelected: () -> Unit
 ) {
-    ListItem(modifier = Modifier
-        .fillMaxWidth()
-        .clickable {
-            onCountrySelected()
-        },
-        leadingContent = {
-            Image(
-                modifier = Modifier
-                    .width(countriesListDialogFlagDimensions.width)
-                    .height(countriesListDialogFlagDimensions.height),
-                painter = painterResource(id = countryItem.countryFlag),
-                contentDescription = countryItem.countryName,
-            )
-        },
-        headlineContent = {
-            Text(text = buildAnnotatedString {
-                withStyle(style = countriesListDialogTextStyles.countryNameTextStyle.toSpanStyle()) {
-                    append(countryItem.countryName)
-                }
-                if (countriesListDialogProperties.showCountryCode) {
-                    append("  ")
-                    append("(")
-                    withStyle(style = countriesListDialogTextStyles.countryCodeTextStyle.toSpanStyle()) {
-                        append(countryItem.countryCode.uppercase())
+    with(countriesListDialogDisplayProperties) {
+        val countriesListDialogTextStyles =
+            textStyles ?: CountryPickerDialogTextStyles.defaultTextStyles()
+        ListItem(modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onCountrySelected()
+            },
+            leadingContent = {
+                Image(
+                    modifier = Modifier
+                        .width(flagDimensions.width)
+                        .height(flagDimensions.height),
+                    painter = painterResource(id = countryItem.countryFlag),
+                    contentDescription = countryItem.countryName,
+                )
+            },
+            headlineContent = {
+                Text(text = buildAnnotatedString {
+                    withStyle(style = countriesListDialogTextStyles.countryNameTextStyle.toSpanStyle()) {
+                        append(countryItem.countryName)
                     }
-                    append(")")
-                }
+                    if (properties.showCountryCode) {
+                        append("  ")
+                        append("(")
+                        withStyle(style = countriesListDialogTextStyles.countryCodeTextStyle.toSpanStyle()) {
+                            append(countryItem.countryCode.uppercase())
+                        }
+                        append(")")
+                    }
+                })
+            },
+            trailingContent = {
+                Text(
+                    text = countryItem.countryPhoneNumberCode,
+                    style = countriesListDialogTextStyles.countryPhoneCodeTextStyle,
+                )
             })
-        },
-        trailingContent = {
-            Text(
-                text = countryItem.countryPhoneNumberCode,
-                style = countriesListDialogTextStyles.countryPhoneCodeTextStyle,
-            )
-        })
+    }
 }

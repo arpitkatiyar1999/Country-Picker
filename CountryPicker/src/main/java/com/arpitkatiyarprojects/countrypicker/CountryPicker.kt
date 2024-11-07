@@ -25,25 +25,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
-import com.arpitkatiyarprojects.countrypicker.models.Dimensions
-import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
-import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryTextStyles
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
 
 
 /**
  * Displays the country picker without any text field.
- * @param modifier the Modifier to be applied to this text field.
- * @param defaultPaddingValues The spacing values to apply internally between the container and the content
- * @param selectedCountryProperties Defines the configurations for the selected country.
- * @param selectedCountryFlagDimensions Specifies the dimensions of the selected country's flag.
- * @param selectedCountryTextStyles  Defines the text styles for selected country.
- * @param countriesListDialogProperties Defines the configurations for countries list dialog.
- * @param countriesListDialogFlagDimensions Specifies the dimensions of the country's flag within countries list dialog.
- * @param countriesListDialogTextStyles Defines the text styles for countries list dialog.
+ * @param modifier the [Modifier] to be applied to this text field.
+ * @param defaultPaddingValues The The [PaddingValues] to apply internally between the container and the content.
+ * @param selectedCountryDisplayProperties The [SelectedCountryDisplayProperties] properties related to the selected country display, including flag dimensions and text styles.
+ * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
  * @param defaultCountryCode  Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
  * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
@@ -52,12 +45,8 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
 fun CountryPicker(
     modifier: Modifier = Modifier,
     defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
-    selectedCountryProperties: SelectedCountryProperties = SelectedCountryProperties(),
-    selectedCountryFlagDimensions: Dimensions = Dimensions(width = 28.dp, height = 18.dp),
-    selectedCountryTextStyles: SelectedCountryTextStyles = SelectedCountryTextStyles(),
-    countriesListDialogProperties: CountriesListDialogProperties = CountriesListDialogProperties(),
-    countriesListDialogFlagDimensions: Dimensions = Dimensions(width = 30.dp, height = 20.dp),
-    countriesListDialogTextStyles: CountryPickerDialogTextStyles = CountryPickerDialogTextStyles.defaultTextStyles(),
+    selectedCountryDisplayProperties: SelectedCountryDisplayProperties = SelectedCountryDisplayProperties(),
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
     onCountrySelected: (country: CountryDetails) -> Unit
@@ -87,9 +76,7 @@ fun CountryPicker(
     if (openCountrySelectionDialog) {
         CountrySelectionDialog(
             countriesList = applicableCountriesList,
-            countriesListDialogProperties = countriesListDialogProperties,
-            countriesListDialogFlagDimensions = countriesListDialogFlagDimensions,
-            countriesListDialogTextStyles = countriesListDialogTextStyles,
+            countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
             onDismissRequest = {
                 openCountrySelectionDialog = false
             },
@@ -103,9 +90,7 @@ fun CountryPicker(
     SelectedCountrySection(
         defaultPaddingValues = defaultPaddingValues,
         selectedCountry = selectedCountry,
-        selectedCountryProperties = selectedCountryProperties,
-        selectedCountryFlagDimensions = selectedCountryFlagDimensions,
-        selectedCountryTextStyles = selectedCountryTextStyles,
+        selectedCountryDisplayProperties = selectedCountryDisplayProperties,
         modifier = modifier
     ) {
         openCountrySelectionDialog = !openCountrySelectionDialog
@@ -116,13 +101,9 @@ fun CountryPicker(
 /**
  * A composable function that displays information about the selected country in a row format,
  * with options to show or hide various country attributes like the flag, phone code, name, and ISO code.
- *
+ * @param selectedCountryDisplayProperties The [SelectedCountryDisplayProperties] properties related to the selected country display, including flag dimensions and text styles.
  * @param defaultPaddingValues Padding values applied to the Row container for the section.
  * @param selectedCountry The details of the selected country, encapsulated in a `CountryDetails` object.
- * @param selectedCountryProperties Properties controlling the visibility and spacing of the country details,
- *                                such as whether to show the flag, phone code, name, and country code.
- * @param selectedCountryFlagDimensions Specifies the width and height for the country flag image, encapsulated in a `Dimensions` object.
- * @param selectedCountryTextStyles Text styles for displaying different country details, encapsulated in a `PickerTextStyles` object.
  * @param modifier Modifier applied to the Row, allowing for customization of its appearance and behavior.
  * @param onSelectCountry A callback function triggered when the user clicks on the Row, used to handle the selection event.
  */
@@ -130,9 +111,7 @@ fun CountryPicker(
 private fun SelectedCountrySection(
     defaultPaddingValues: PaddingValues,
     selectedCountry: CountryDetails,
-    selectedCountryProperties: SelectedCountryProperties,
-    selectedCountryFlagDimensions: Dimensions,
-    selectedCountryTextStyles: SelectedCountryTextStyles,
+    selectedCountryDisplayProperties: SelectedCountryDisplayProperties,
     modifier: Modifier = Modifier,
     onSelectCountry: () -> Unit,
 ) {
@@ -145,41 +124,43 @@ private fun SelectedCountrySection(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (selectedCountryProperties.showCountryFlag) {
-            Image(
-                modifier = Modifier
-                    .width(selectedCountryFlagDimensions.width)
-                    .height(selectedCountryFlagDimensions.height),
-                painter = painterResource(selectedCountry.countryFlag),
-                contentScale = ContentScale.Crop,
-                contentDescription = selectedCountry.countryName
+        with(selectedCountryDisplayProperties) {
+            if (properties.showCountryFlag) {
+                Image(
+                    modifier = Modifier
+                        .width(flagDimensions.width)
+                        .height(flagDimensions.height),
+                    painter = painterResource(selectedCountry.countryFlag),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = selectedCountry.countryName
+                )
+                Spacer(modifier = Modifier.width(properties.spaceAfterCountryFlag))
+            }
+            if (properties.showCountryPhoneCode) {
+                Text(
+                    text = selectedCountry.countryPhoneNumberCode,
+                    style = textStyles.countryPhoneCodeTextStyle
+                )
+                Spacer(modifier = Modifier.width(properties.spaceAfterCountryPhoneCode))
+            }
+            if (properties.showCountryName) {
+                Text(
+                    text = selectedCountry.countryName,
+                    style = textStyles.countryNameTextStyle
+                )
+                Spacer(modifier = Modifier.width(properties.spaceAfterCountryName))
+            }
+            if (properties.showCountryCode) {
+                Text(
+                    text = selectedCountry.countryCode.uppercase(),
+                    style = textStyles.countryCodeTextStyle
+                )
+                Spacer(modifier = Modifier.width(properties.spaceAfterCountryCode))
+            }
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = stringResource(R.string.select_country_dropdown)
             )
-            Spacer(modifier = Modifier.width(selectedCountryProperties.spaceAfterCountryFlag))
         }
-        if (selectedCountryProperties.showCountryPhoneCode) {
-            Text(
-                text = selectedCountry.countryPhoneNumberCode,
-                style = selectedCountryTextStyles.countryPhoneCodeTextStyle
-            )
-            Spacer(modifier = Modifier.width(selectedCountryProperties.spaceAfterCountryPhoneCode))
-        }
-        if (selectedCountryProperties.showCountryName) {
-            Text(
-                text = selectedCountry.countryName,
-                style = selectedCountryTextStyles.countryNameTextStyle
-            )
-            Spacer(modifier = Modifier.width(selectedCountryProperties.spaceAfterCountryName))
-        }
-        if (selectedCountryProperties.showCountryCode) {
-            Text(
-                text = selectedCountry.countryCode.uppercase(),
-                style = selectedCountryTextStyles.countryCodeTextStyle
-            )
-            Spacer(modifier = Modifier.width(selectedCountryProperties.spaceAfterCountryCode))
-        }
-        Icon(
-            imageVector = Icons.Default.ArrowDropDown,
-            contentDescription = stringResource(R.string.select_country_dropdown)
-        )
     }
 }

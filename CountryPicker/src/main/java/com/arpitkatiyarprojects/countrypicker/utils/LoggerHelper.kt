@@ -8,7 +8,7 @@ internal object LoggerHelper {
 
     /**
      * Logs an error message along with the exception details to the console.
-     * @param exception The `Exception` instance that contains the error details to be logged.
+     * @param exception The [Exception] instance that contains the error details to be logged.
      */
     fun logError(exception: Exception) {
         Log.e(LOG_TAG, exception.message, exception)

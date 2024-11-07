@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPicker
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.Dimensions
+import com.arpitkatiyarprojects.countrypicker.models.FlagDimensions
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
@@ -28,7 +30,7 @@ import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextWidthHeightRo
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComposable
 
 @Composable
-fun CountryPickerWithoutOutlinedText() {
+fun CountryPickerWithoutTextField() {
     val showSelectedCountryFlagState = remember {
         mutableStateOf(true)
     }
@@ -84,25 +86,31 @@ fun CountryPickerWithoutOutlinedText() {
         CountryPicker(
             modifier = Modifier
                 .padding(16.dp),
-            selectedCountryProperties = SelectedCountryProperties(
-                showSelectedCountryFlagState.value,
-                showSelectedCountryPhoneCodeState.value,
-                showSelectedCountryNameState.value,
-                showSelectedCountryCodeState.value,
-                spaceAfterSelectedCountryFlagMutableState.value,
-                spaceAfterSelectedCountryPhoneCode.value,
-                spaceAfterSelectedCountryName.value,
-                spaceAfterSelectedCountryCode.value
+            selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+                properties = SelectedCountryProperties(
+                    showSelectedCountryFlagState.value,
+                    showSelectedCountryPhoneCodeState.value,
+                    showSelectedCountryNameState.value,
+                    showSelectedCountryCodeState.value,
+                    spaceAfterSelectedCountryFlagMutableState.value,
+                    spaceAfterSelectedCountryPhoneCode.value,
+                    spaceAfterSelectedCountryName.value,
+                    spaceAfterSelectedCountryCode.value
+                ),
+                flagDimensions = FlagDimensions(
+                    selectedCountryFlagWidthState.value,
+                    selectedCountryFlagHeightState.value
+                )
             ),
-            selectedCountryFlagDimensions = Dimensions(
-                selectedCountryFlagWidthState.value,
-                selectedCountryFlagHeightState.value
+            countriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(
+                properties = CountriesListDialogProperties(
+                    countryListShowCountryCode.value
+                ),
+                flagDimensions = FlagDimensions(
+                    countryListFlagWidthState.value,
+                    countryListFlagHeightState.value
+                )
             ),
-            countriesListDialogProperties = CountriesListDialogProperties(countryListShowCountryCode.value),
-            countriesListDialogFlagDimensions = Dimensions(
-                countryListFlagWidthState.value,
-                countryListFlagHeightState.value
-            )
         ) {
             selectedCountryState.value = it
         }

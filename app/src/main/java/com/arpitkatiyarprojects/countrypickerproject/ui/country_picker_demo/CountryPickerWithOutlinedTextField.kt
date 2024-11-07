@@ -111,16 +111,16 @@ fun CountryPickerWithOutlinedText() {
             onCountrySelected = {
                 selectedCountryState.value = it
             },
-            selectedCountryProperties = SelectedCountryProperties(
-                showCountryFlagState.value,
-                showCountryPhoneCodeState.value,
-                showCountryNameState.value,
-                showCountryCodeState.value,
-                spaceAfterCountryFlagMutableState.value,
-                spaceAfterCountryPhoneCode.value,
-                spaceAfterCountryName.value,
-                spaceAfterCountryCode.value
-            ),
+//            selectedCountryProperties = SelectedCountryProperties(
+//                showCountryFlagState.value,
+//                showCountryPhoneCodeState.value,
+//                showCountryNameState.value,
+//                showCountryCodeState.value,
+//                spaceAfterCountryFlagMutableState.value,
+//                spaceAfterCountryPhoneCode.value,
+//                spaceAfterCountryName.value,
+//                spaceAfterCountryCode.value
+//            ),
             //countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value),
             borderThickness = BorderThickness(
                 focusedBorderThickness.value,
