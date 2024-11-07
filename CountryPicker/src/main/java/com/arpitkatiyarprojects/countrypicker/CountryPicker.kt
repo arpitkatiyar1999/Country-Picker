@@ -60,28 +60,29 @@ fun CountryPicker(
 ) {
     val context = LocalContext.current
     var openCountrySelectionDialog by remember { mutableStateOf(false) }
-    val countryList = remember {
+    val applicableCountriesList = remember {
+        val allCountriesList = FunctionHelper.getAllCountries(context)
         if (countriesList.isNullOrEmpty()) {
-            FunctionHelper.getAllCountries(context)
+            allCountriesList
         } else {
             val updatedCountriesList = countriesList.map { it.lowercase() }
-            FunctionHelper.getAllCountries(context)
-                .filter { updatedCountriesList.contains(it.countryCode) }
+            allCountriesList.filter { it.countryCode in updatedCountriesList }
         }
     }
     var selectedCountry by remember {
-        val selectedCountry =
+        mutableStateOf(
             FunctionHelper.getDefaultSelectedCountry(
                 context,
                 defaultCountryCode?.lowercase(),
-                countryList
-            )
-        onCountrySelected(selectedCountry)
-        mutableStateOf(selectedCountry)
+                applicableCountriesList
+            ).also {
+                onCountrySelected(it)
+            }
+        )
     }
     if (openCountrySelectionDialog) {
         CountrySelectionDialog(
-            countriesList = countryList,
+            countriesList = applicableCountriesList,
             countriesListDialogProperties = countriesListDialogProperties,
             countriesListDialogFlagDimensions = countriesListDialogFlagDimensions,
             countriesListDialogTextStyles = countriesListDialogTextStyles,
