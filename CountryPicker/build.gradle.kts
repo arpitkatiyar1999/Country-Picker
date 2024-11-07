@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("maven-publish")
-    id("kotlin-parcelize")
 }
 
 android {
@@ -42,9 +41,13 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     //compose
-    implementation(libs.androidx.material3WithVersion)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.material3)
     // google phone number
     implementation(libs.libPhoneNumber)
+
+    // test implementation
+    testImplementation(libs.junit)
 }
 
 

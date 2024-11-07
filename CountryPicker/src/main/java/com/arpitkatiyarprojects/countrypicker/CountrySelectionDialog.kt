@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerTextStyles
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +59,7 @@ internal fun CountrySelectionDialog(
     countriesList: List<CountryDetails>,
     countriesListDialogProperties: CountriesListDialogProperties,
     countriesListDialogFlagDimensions: Dimensions,
-    countriesListDialogTextStyles: CountryPickerTextStyles,
+    countriesListDialogTextStyles: CountryPickerDialogTextStyles,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit,
     properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false)
@@ -200,7 +200,7 @@ private fun CountriesListItem(
     countryItem: CountryDetails,
     countriesListDialogProperties: CountriesListDialogProperties,
     countriesListDialogFlagDimensions: Dimensions,
-    countriesListDialogTextStyles: CountryPickerTextStyles,
+    countriesListDialogTextStyles: CountryPickerDialogTextStyles,
     onCountrySelected: () -> Unit
 ) {
     ListItem(modifier = Modifier

@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
@@ -14,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
@@ -22,9 +20,10 @@ import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerTextStyles
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.models.Dimensions
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryTextStyles
 
 @Composable
 fun CountryPickerOutlinedTextField(
@@ -35,18 +34,10 @@ fun CountryPickerOutlinedTextField(
     defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
     selectedCountryProperties: SelectedCountryProperties = SelectedCountryProperties(),
     selectedCountryFlagDimensions: Dimensions = Dimensions(width = 28.dp, height = 18.dp),
-    selectedCountryTextStyles: CountryPickerTextStyles = CountryPickerTextStyles(
-        countryPhoneCodeTextStyle = TextStyle(fontWeight = FontWeight.Bold),
-        countryNameTextStyle = TextStyle(),
-        countryCodeTextStyle = TextStyle()
-    ),
+    selectedCountryTextStyles: SelectedCountryTextStyles = SelectedCountryTextStyles(),
     countriesListDialogProperties: CountriesListDialogProperties = CountriesListDialogProperties(),
     countriesListDialogFlagDimensions: Dimensions = Dimensions(width = 30.dp, height = 20.dp),
-    countriesListDialogTextStyles: CountryPickerTextStyles = CountryPickerTextStyles(
-        countryPhoneCodeTextStyle = MaterialTheme.typography.bodyMedium,
-        countryNameTextStyle = MaterialTheme.typography.bodyMedium,
-        countryCodeTextStyle = MaterialTheme.typography.bodyMedium
-    ),
+    countriesListDialogTextStyles: CountryPickerDialogTextStyles = CountryPickerDialogTextStyles.defaultTextStyles(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
     enabled: Boolean = true,
