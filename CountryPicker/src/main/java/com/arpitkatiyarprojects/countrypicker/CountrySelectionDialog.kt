@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -213,8 +212,6 @@ private fun CountriesListItem(
     onCountrySelected: () -> Unit
 ) {
     with(countriesListDialogDisplayProperties) {
-        val countriesListDialogTextStyles =
-            textStyles ?: CountryPickerDialogTextStyles.defaultTextStyles()
         ListItem(modifier = Modifier
             .fillMaxWidth()
             .clickable {
@@ -231,13 +228,19 @@ private fun CountriesListItem(
             },
             headlineContent = {
                 Text(text = buildAnnotatedString {
-                    withStyle(style = countriesListDialogTextStyles.countryNameTextStyle.toSpanStyle()) {
+                    withStyle(
+                        style = (textStyles.countryNameTextStyle
+                            ?: MaterialTheme.typography.bodyMedium).toSpanStyle()
+                    ) {
                         append(countryItem.countryName)
                     }
                     if (properties.showCountryCode) {
                         append("  ")
                         append("(")
-                        withStyle(style = countriesListDialogTextStyles.countryCodeTextStyle.toSpanStyle()) {
+                        withStyle(
+                            style = (textStyles.countryCodeTextStyle
+                                ?: MaterialTheme.typography.bodyMedium).toSpanStyle()
+                        ) {
                             append(countryItem.countryCode.uppercase())
                         }
                         append(")")
@@ -247,7 +250,8 @@ private fun CountriesListItem(
             trailingContent = {
                 Text(
                     text = countryItem.countryPhoneNumberCode,
-                    style = countriesListDialogTextStyles.countryPhoneCodeTextStyle,
+                    style = textStyles.countryPhoneCodeTextStyle
+                        ?: MaterialTheme.typography.bodyMedium,
                 )
             })
     }

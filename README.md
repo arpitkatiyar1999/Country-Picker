@@ -2,7 +2,7 @@
 
 Jetpack Compose Country Code Picker is a simple, lightweight library built for Android using Jetpack
 Compose, designed to provide an easy-to-use country code selection functionality within your Android
-app. It seamlessly integrates with Material 3 design, offering a modern and consistent
+app. It seamlessly integrates with Material 3 design principles, offering a modern and consistent
 user experience. It effortlessly adapts to your application's theme, facilitating seamless
 integration with the visual identity of your application.
 
@@ -61,7 +61,7 @@ dependencies {
 
 This library provides two composable functions for country code selection:
 
-1. **CountryPicker**: This function displays the country picker without any outlined text field.
+1. **CountryPicker**: This function displays the country picker without any text field.
 
 ```kotlin
 @Composable
@@ -111,10 +111,10 @@ fun CountryPicker(
     - `width: Dp` - Width of the flag. Default is `30.dp`.
     - `height: Dp` - Height of the flag. Default is `20.dp`.
 
-  - `textStyles: CountryPickerDialogTextStyles?`: Optional text style settings for list items in the dialog. If provided, defines the following styles:
-    - `countryPhoneCodeTextStyle: TextStyle` - Style for displaying the country phone code in the list.
-    - `countryNameTextStyle: TextStyle` - Style for displaying the country name in the list.
-    - `countryCodeTextStyle: TextStyle` - Style for displaying the country code in the list.
+  - `textStyles: CountryPickerDialogTextStyles`: Sets text style settings for country list dialog.
+    - `countryPhoneCodeTextStyle: TextStyle?` - Style for displaying the country phone code in the list. Default is `null`.
+    - `countryNameTextStyle: TextStyle?` - Style for displaying the country name in the list. Default is `null`.
+    - `countryCodeTextStyle: TextStyle?` - Style for displaying the country code in the list. Default is `null`.
 
 - `defaultCountryCode`: `String?`-   Specifies the default country code to be pre-selected in the
   picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If
