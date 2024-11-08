@@ -14,9 +14,10 @@ fun SpacerHeight16() {
 }
 
 @Composable
-fun SpacerHeight4() {
-    Spacer(modifier = Modifier.height(4.dp))
+fun SpacerHeight8() {
+    Spacer(modifier = Modifier.height(8.dp))
 }
+
 
 @Composable
 fun SpacerWidth4() {

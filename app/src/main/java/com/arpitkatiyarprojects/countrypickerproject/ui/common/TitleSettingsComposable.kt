@@ -39,7 +39,7 @@ fun TitleSettingsComposable(
                 .clickable {
                     whetherShowSettingsSection = !whetherShowSettingsSection
                 }
-                .padding(vertical = 12.dp, horizontal = 16.dp),
+                .padding(vertical = 6.dp, horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

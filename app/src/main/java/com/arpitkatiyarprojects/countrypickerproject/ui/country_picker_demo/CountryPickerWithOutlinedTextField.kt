@@ -10,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,17 +20,14 @@ import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
-import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.FlagDimensions
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
-import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SelectedCountrySettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
-import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight4
+import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight8
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextProgressRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextSwitchRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComposable
@@ -39,69 +35,34 @@ import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComp
 
 @Composable
 fun CountryPickerWithOutlinedText() {
-    val showSelectedCountryFlagState = remember {
-        mutableStateOf(true)
-    }
-    val showSelectedCountryPhoneCodeState = remember {
-        mutableStateOf(true)
-    }
-    val showSelectedCountryNameState = remember {
-        mutableStateOf(false)
-    }
-    val showSelectedCountryCodeState = remember {
-        mutableStateOf(false)
-    }
-    val spaceAfterSelectedCountryFlagMutableState = remember {
-        mutableStateOf(8.dp)
-    }
-    val spaceAfterSelectedCountryPhoneCode = remember {
-        mutableStateOf(6.dp)
-    }
-    val spaceAfterSelectedCountryName = remember {
-        mutableStateOf(6.dp)
-    }
-    val spaceAfterSelectedCountryCode = remember {
-        mutableStateOf(6.dp)
+    var selectedCountryDisplayProperties by remember {
+        mutableStateOf(SelectedCountryDisplayProperties())
     }
 
-    val selectedCountryFlagWidthState = remember {
-        mutableStateOf(28.dp)
-    }
-    val selectedCountryFlagHeightState = remember {
-        mutableStateOf(18.dp)
-    }
-    val selectedCountryState: MutableState<CountryDetails?> = remember {
-        mutableStateOf(null)
+    var countriesListDialogDisplayProperties by remember {
+        mutableStateOf(CountriesListDialogDisplayProperties())
     }
 
-    val countryListFlagWidthState = remember {
-        mutableStateOf(30.dp)
+    var borderThickness by remember {
+        mutableStateOf(BorderThickness())
     }
-    val countryListFlagHeightState = remember {
-        mutableStateOf(20.dp)
+
+    var selectedCountryState by remember {
+        mutableStateOf<CountryDetails?>(null)
     }
-    val countryListShowCountryCode = remember {
+
+    var formatExampleMobileNumber by remember {
         mutableStateOf(false)
     }
 
     var enteredMobileNumber by remember {
         mutableStateOf("")
     }
-    val unfocusedBorderThickness = remember {
-        mutableStateOf(2.dp)
-    }
-
-    val focusedBorderThickness = remember {
-        mutableStateOf(1.dp)
-    }
 
     var isMobileNumberValidationError by remember {
         mutableStateOf(false)
     }
 
-    val formatExampleMobileNumberState = remember {
-        mutableStateOf(false)
-    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -111,113 +72,77 @@ fun CountryPickerWithOutlinedText() {
         ) {
             CountryPickerOutlinedTextField(
                 isError = isMobileNumberValidationError,
-                supportingText = {
-                    if (isMobileNumberValidationError) {
-                        Text(text = "Invalid mobile number")
-                    } else if (enteredMobileNumber.isNotBlank()) {
-                        Text(text = "Valid mobile number")
+                supportingText = if (isMobileNumberValidationError || enteredMobileNumber.isNotBlank()) {
+                    {
+                        Text(text = if (isMobileNumberValidationError) "Invalid mobile number" else "Valid mobile number")
                     }
-                },
+                } else null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
                 mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
-                    enteredMobileNumber, selectedCountryState.value?.countryCode ?: "IN",
+                    enteredMobileNumber, selectedCountryState?.countryCode ?: "IN",
                 ),
                 onMobileNumberChange = {
                     enteredMobileNumber = it
                     isMobileNumberValidationError = !CountryPickerUtils.isMobileNumberValid(
                         enteredMobileNumber,
-                        selectedCountryState.value?.countryCode ?: "IN"
+                        selectedCountryState?.countryCode ?: "IN"
                     )
                 },
                 placeholder = {
                     Text(
                         text = "for eg. ${
                             CountryPickerUtils.getExampleMobileNumber(
-                                selectedCountryState.value?.countryCode ?: "IN",
-                                formatExampleMobileNumberState.value
+                                selectedCountryState?.countryCode ?: "IN",
+                                formatExampleMobileNumber
                             )
                         }"
                     )
                 },
                 onCountrySelected = {
-                    selectedCountryState.value = it
+                    selectedCountryState = it
                 },
-                selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
-                    properties = SelectedCountryProperties(
-                        showSelectedCountryFlagState.value,
-                        showSelectedCountryPhoneCodeState.value,
-                        showSelectedCountryNameState.value,
-                        showSelectedCountryCodeState.value,
-                        spaceAfterSelectedCountryFlagMutableState.value,
-                        spaceAfterSelectedCountryPhoneCode.value,
-                        spaceAfterSelectedCountryName.value,
-                        spaceAfterSelectedCountryCode.value
-                    ),
-                    flagDimensions = FlagDimensions(
-                        selectedCountryFlagWidthState.value,
-                        selectedCountryFlagHeightState.value
-                    )
-                ),
-                countriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(
-                    properties = CountriesListDialogProperties(
-                        countryListShowCountryCode.value
-                    ),
-                    flagDimensions = FlagDimensions(
-                        countryListFlagWidthState.value,
-                        countryListFlagHeightState.value
-                    )
-                ),
-                borderThickness = BorderThickness(
-                    focusedBorderThickness.value,
-                    unfocusedBorderThickness.value
-                ),
+                selectedCountryDisplayProperties = selectedCountryDisplayProperties,
+                countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+                borderThickness = borderThickness,
                 colors = TextFieldDefaults.colors(focusedSupportingTextColor = Color(0xFF2eb82e))
             )
-            CountryDetailsSectionRow(
-                selectedCountryState.value,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            SpacerHeight16()
+            CountryDetailsSectionRow(selectedCountryState)
             TitleSettingsComposable("Selected Country Settings:- ") {
                 Column {
-                    SelectedCountrySettings(
-                        selectedCountryFlagWidthState,
-                        selectedCountryFlagHeightState,
-                        showSelectedCountryFlagState,
-                        showSelectedCountryPhoneCodeState,
-                        showSelectedCountryNameState,
-                        showSelectedCountryCodeState,
-                        spaceAfterSelectedCountryFlagMutableState,
-                        spaceAfterSelectedCountryPhoneCode,
-                        spaceAfterSelectedCountryName,
-                        spaceAfterSelectedCountryCode
-                    )
-                    SpacerHeight4()
+                    SelectedCountrySettings(selectedCountryDisplayProperties) {
+                        selectedCountryDisplayProperties = it
+                    }
+
                     TextSwitchRow(
                         text = "Format Example Mobile Number",
-                        formatExampleMobileNumberState
-                    )
-                    SpacerHeight4()
+                        formatExampleMobileNumber
+                    ) {
+                        formatExampleMobileNumber = it
+                    }
+
                     TextProgressRow(
                         text = "Unfocused Border Thickness",
-                        valueChangeMutableState = unfocusedBorderThickness
-                    )
-                    SpacerHeight4()
+                        currentProgress = borderThickness.unfocusedBorderThickness
+                    ) {
+                        borderThickness = borderThickness.copy(unfocusedBorderThickness = it)
+                    }
+
                     TextProgressRow(
                         text = "Focused Border Thickness",
-                        valueChangeMutableState = focusedBorderThickness
-                    )
+                        currentProgress = borderThickness.focusedBorderThickness
+                    ) {
+                        borderThickness = borderThickness.copy(focusedBorderThickness = it)
+                    }
                 }
 
             }
+            SpacerHeight8()
             TitleSettingsComposable("Countries List Dialog Settings:- ") {
-                CountriesListDialogSettings(
-                    countryListFlagWidthState,
-                    countryListFlagHeightState,
-                    countryListShowCountryCode
-                )
+                CountriesListDialogSettings(countriesListDialogDisplayProperties) {
+                    countriesListDialogDisplayProperties = it
+                }
             }
         }
     }
