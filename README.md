@@ -80,9 +80,9 @@ fun CountryPicker(
 
 - `defaultPaddingValues: PaddingValues`   Specifies padding within the picker container, providing spacing between the  container and its content.
 
-- `selectedCountryDisplayProperties: SelectedCountryDisplayProperties`: Configures display properties for the selected country in the picker.
+- `selectedCountryDisplayProperties: SelectedCountryDisplayProperties`: Configures display properties for the selected country in the picker. The properties include:-
 
-  - `properties: SelectedCountryProperties`: Defines the visibility and spacing options for different country details.
+  - `properties: SelectedCountryProperties`: Defines the visibility and spacing options for different country details. It has following options:- 
     - `showCountryFlag: Boolean` - Determines if the country flag is displayed. Default is `true`.
     - `showCountryPhoneCode: Boolean` - Determines if the country phone code is displayed. Default is `true`.
     - `showCountryName: Boolean` - Determines if the country name is displayed. Default is `false`.
@@ -92,26 +92,26 @@ fun CountryPicker(
     - `spaceAfterCountryName: Dp` - Specifies spacing after the country name. Default is `6.dp`.
     - `spaceAfterCountryCode: Dp` - Specifies spacing after the country code. Default is `6.dp`.
 
-  - `flagDimensions: FlagDimensions`: Configures the dimensions for the selected country flag.
+  - `flagDimensions: FlagDimensions`: Sets the dimensions for the selected country flag, including the following:-
     - `width: Dp` - Width of the flag. Default is `28.dp`.
     - `height: Dp` - Height of the flag. Default is `18.dp`.
 
-  - `textStyles: SelectedCountryTextStyles`: Sets text styles for displaying selected country details.
+  - `textStyles: SelectedCountryTextStyles`: Defines text styles for displaying selected country details, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle` - Style for the country phone code text. Default is `Bold`.
     - `countryNameTextStyle: TextStyle` - Style for the country name text. Default is `TextStyle()`.
     - `countryCodeTextStyle: TextStyle` - Style for the country code text. Default is `TextStyle()`.
 
 
-- `countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties`-  Configures the display properties for the country selection dialog.
+- `countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties`-  Configures the display properties for the country selection dialog. The properties include:-
 
-  - `properties: CountriesListDialogProperties`: Configures visibility options for the country code in the dialog list.
+  - `properties: CountriesListDialogProperties`: Configures visibility options for the country code in the dialog list. It has following options:-
     - `showCountryCode: Boolean` - Specifies if the country code (e.g., "IN") should be shown in the dialog list. Default is `false`.
 
-  - `flagDimensions: FlagDimensions`: Sets the dimensions for flags displayed in the dialog.
+  - `flagDimensions: FlagDimensions`: Sets the dimensions for flags displayed in the dialog, including the following:
     - `width: Dp` - Width of the flag. Default is `30.dp`.
     - `height: Dp` - Height of the flag. Default is `20.dp`.
 
-  - `textStyles: CountryPickerDialogTextStyles`: Sets text style settings for country list dialog.
+  - `textStyles: CountryPickerDialogTextStyles`: Sets text style settings for country list dialog, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle?` - Style for displaying the country phone code in the list. Default is `null`.
     - `countryNameTextStyle: TextStyle?` - Style for displaying the country name in the list. Default is `null`.
     - `countryCodeTextStyle: TextStyle?` - Style for displaying the country code in the list. Default is `null`.
