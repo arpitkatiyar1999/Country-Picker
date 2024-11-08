@@ -31,15 +31,12 @@ object CountryPickerUtils {
      * Retrieves an example mobile number for a given country code.
      *
      * @param countryCode The ISO 3166-1 alpha-2 country code (e.g., "IN" for India).
-     * @param whetherGetFormattedMobileNumber A boolean indicating whether to format
-     *         the phone number. Defaults to true.
+     * @param formatNumber A boolean indicating whether to format
+     *         the phone number. Defaults to false.
      * @return A string representation of the example mobile number,
      *         or an empty string if an error occurs or no example number is found.
      */
-    fun getExampleMobileNumber(
-        countryCode: String,
-        whetherGetFormattedMobileNumber: Boolean = true,
-    ): String {
+    fun getExampleMobileNumber(countryCode: String, formatNumber: Boolean = false): String {
         return try {
             val phoneUtil = PhoneNumberUtil.getInstance()
             val exampleMobileNumber =
@@ -48,7 +45,7 @@ object CountryPickerUtils {
                     PhoneNumberUtil.PhoneNumberType.MOBILE
                 )
             exampleMobileNumber?.let {
-                if (whetherGetFormattedMobileNumber) {
+                if (formatNumber) {
                     phoneUtil.getFormattedNumberFromPhoneNumber(it)
                 } else {
                     it.nationalNumber.toString()
@@ -76,15 +73,11 @@ object CountryPickerUtils {
 
     /**
      * Formats a given phone number to the specified format (Use it only when the full mobile number is entered).
-     *
-     * @param countryCode The ISO 3166-1 alpha-2 country code (e.g., "IN" for India).
      * @param mobileNumber The national phone number as a string.
+     * @param countryCode The ISO 3166-1 alpha-2 country code (e.g., "IN" for India).
      * @return A formatted phone number as a string, or an empty string if the number cannot be formatted.
      */
-    fun getFormattedMobileNumber(
-        countryCode: String,
-        mobileNumber: String,
-    ): String {
+    fun getFormattedMobileNumber(mobileNumber: String, countryCode: String): String {
         return try {
             if (isMobileNumberValid(mobileNumber, countryCode)) {
                 val phoneUtil = PhoneNumberUtil.getInstance()

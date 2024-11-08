@@ -94,7 +94,6 @@ fun CountryPickerOutlinedTextField(
         placeholder = placeholder,
         leadingIcon = {
             CountryPicker(
-                modifier = modifier,
                 defaultPaddingValues = defaultPaddingValues,
                 selectedCountryDisplayProperties = selectedCountryDisplayProperties,
                 countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,

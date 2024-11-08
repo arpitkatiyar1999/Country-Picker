@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
@@ -92,7 +91,7 @@ fun CountryPickerWithOutlinedText() {
             },
             modifier = Modifier.fillMaxWidth(),
             mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
-                selectedCountryState.value?.countryCode ?: "IN", mobileNumber
+                mobileNumber, selectedCountryState.value?.countryCode ?: "IN",
             ),
             onMobileNumberChange = {
                 mobileNumber = it
@@ -104,7 +103,8 @@ fun CountryPickerWithOutlinedText() {
             placeholder = {
                 Text(
                     text = CountryPickerUtils.getExampleMobileNumber(
-                        selectedCountryState.value?.countryCode ?: "IN"
+                        selectedCountryState.value?.countryCode ?: "IN",
+                        true
                     )
                 )
             },

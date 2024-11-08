@@ -17,7 +17,8 @@ class MainActivity : ComponentActivity() {
             CountryPickerProjectTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(modifier = Modifier.padding(innerPadding)) {
-                        CountryPickerWithoutTextField()
+                       // CountryPickerWithoutTextField()
+                        CountryPickerWithOutlinedText()
                     }
                 }
             }
