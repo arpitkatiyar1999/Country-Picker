@@ -57,7 +57,7 @@ dependencies {
 }
 ```
 
-## Usage
+## Overview
 
 This library provides two composable functions for country code selection:
 
@@ -82,7 +82,7 @@ fun CountryPicker(
 
 - `selectedCountryDisplayProperties: SelectedCountryDisplayProperties`: Configures display properties for the selected country in the picker. The properties include:-
 
-  - `properties: SelectedCountryProperties`: Defines the visibility and spacing options for different country details. It has following options:- 
+  - `properties: SelectedCountryProperties`: Defines the visibility and spacing options for different country details. It has following options:-
     - `showCountryFlag: Boolean` - Determines if the country flag is displayed. Default is `true`.
     - `showCountryPhoneCode: Boolean` - Determines if the country phone code is displayed. Default is `true`.
     - `showCountryName: Boolean` - Determines if the country name is displayed. Default is `false`.
@@ -133,34 +133,34 @@ fun CountryPicker(
 ```kotlin
 @Composable
 fun CountryPickerOutlinedTextField(
-    mobileNumber: String,
-    onMobileNumberChange: (String) -> Unit,
-    onCountrySelected: (country: CountryDetails) -> Unit,
-    modifier: Modifier = Modifier,
-    defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
-    selectedCountryDisplayProperties: SelectedCountryDisplayProperties = SelectedCountryDisplayProperties(),
-    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
-    defaultCountryCode: String? = null,
-    countriesList: List<String>? = null,
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    textStyle: TextStyle = LocalTextStyle.current,
-    label: @Composable (() -> Unit)? = null,
-    placeholder: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    prefix: @Composable (() -> Unit)? = null,
-    suffix: @Composable (() -> Unit)? = null,
-    supportingText: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    singleLine: Boolean = false,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    minLines: Int = 1,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = RoundedCornerShape(12.dp),
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
-    borderThickness: BorderThickness = BorderThickness(),
-    onDone: (() -> Unit)? = null,
+  mobileNumber: String,
+  onMobileNumberChange: (String) -> Unit,
+  onCountrySelected: (country: CountryDetails) -> Unit,
+  modifier: Modifier = Modifier,
+  defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
+  selectedCountryDisplayProperties: SelectedCountryDisplayProperties = SelectedCountryDisplayProperties(),
+  countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
+  defaultCountryCode: String? = null,
+  countriesList: List<String>? = null,
+  enabled: Boolean = true,
+  readOnly: Boolean = false,
+  textStyle: TextStyle = LocalTextStyle.current,
+  label: @Composable (() -> Unit)? = null,
+  placeholder: @Composable (() -> Unit)? = null,
+  trailingIcon: @Composable (() -> Unit)? = null,
+  prefix: @Composable (() -> Unit)? = null,
+  suffix: @Composable (() -> Unit)? = null,
+  supportingText: @Composable (() -> Unit)? = null,
+  isError: Boolean = false,
+  visualTransformation: VisualTransformation = VisualTransformation.None,
+  singleLine: Boolean = false,
+  maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+  minLines: Int = 1,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  shape: Shape = RoundedCornerShape(12.dp),
+  colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+  borderThickness: BorderThickness = BorderThickness(),
+  onDone: (() -> Unit)? = null,
 )
 ```
 ##### Parameters
@@ -196,7 +196,7 @@ fun CountryPickerOutlinedTextField(
 > **Note**:  For all the above functions, the country code must follow the 2-letter ISO standard (e.g., "IN" for India). For a full list of country codes, please refer to the [ISO 3166-1 alpha-2 country codes Wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 
-#### Example Usage:
+## Example Usage
 
 ```kotlin
 // Example for isMobileNumberValid
@@ -211,6 +211,12 @@ println(exampleNumber) // Output: Example formatted number, like "81234 56789"
 val formattedNumber = CountryPickerUtils.getFormattedMobileNumber("8123456789", "IN")
 println(formattedNumber) // Output: Formatted number, like "81234 56789"
 ```
+
+For detailed examples of implementing `CountryPicker` and `CountryPickerOutlinedTextField`:
+
+- **CountryPicker**: Refer to the [CountryPicker example code](https://github.com/arpitkatiyar1999/Country-Picker/blob/2.0.0/app/src/main/java/com/arpitkatiyarprojects/countrypickerproject/ui/country_picker_demo/CountryPickerWithoutTextField.kt) to explore configuration options and usage examples for general country selection.
+
+- **CountryPickerOutlinedTextField**: Check out the [CountryPickerOutlinedTextField example code](https://github.com/arpitkatiyar1999/Country-Picker/blob/2.0.0/app/src/main/java/com/arpitkatiyarprojects/countrypickerproject/ui/country_picker_demo/CountryPickerWithOutlinedTextField.kt) for a practical implementation of country selection within an outlined text field, showcasing display options and customizations.
 
 ## Versioning Format
 

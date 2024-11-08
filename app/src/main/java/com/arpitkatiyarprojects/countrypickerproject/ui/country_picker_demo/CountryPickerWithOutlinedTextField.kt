@@ -26,7 +26,6 @@ import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SelectedCountrySettings
-import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight8
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextProgressRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextSwitchRow
