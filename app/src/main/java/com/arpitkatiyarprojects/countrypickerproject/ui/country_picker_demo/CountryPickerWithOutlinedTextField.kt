@@ -3,9 +3,12 @@ package com.arpitkatiyarprojects.countrypickerproject.ui.country_picker_demo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -13,56 +16,75 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.FlagDimensions
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
+import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryProperties
 import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils
+import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
+import com.arpitkatiyarprojects.countrypickerproject.ui.common.SelectedCountrySettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight4
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextProgressRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextSwitchRow
-import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextWidthHeightRow
+import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComposable
 
 
 @Composable
 fun CountryPickerWithOutlinedText() {
-    val showCountryFlagState = remember {
+    val showSelectedCountryFlagState = remember {
         mutableStateOf(true)
     }
-    val showCountryPhoneCodeState = remember {
+    val showSelectedCountryPhoneCodeState = remember {
         mutableStateOf(true)
     }
-    val showCountryNameState = remember {
+    val showSelectedCountryNameState = remember {
         mutableStateOf(false)
     }
-    val showCountryCodeState = remember {
+    val showSelectedCountryCodeState = remember {
         mutableStateOf(false)
     }
-    val spaceAfterCountryFlagMutableState = remember {
+    val spaceAfterSelectedCountryFlagMutableState = remember {
         mutableStateOf(8.dp)
     }
-    val spaceAfterCountryPhoneCode = remember {
+    val spaceAfterSelectedCountryPhoneCode = remember {
         mutableStateOf(6.dp)
     }
-    val spaceAfterCountryName = remember {
+    val spaceAfterSelectedCountryName = remember {
         mutableStateOf(6.dp)
     }
-    val spaceAfterCountryCode = remember {
+    val spaceAfterSelectedCountryCode = remember {
         mutableStateOf(6.dp)
     }
 
-    val flagWidthState = remember {
+    val selectedCountryFlagWidthState = remember {
         mutableStateOf(28.dp)
     }
-    val flagHeightState = remember {
+    val selectedCountryFlagHeightState = remember {
         mutableStateOf(18.dp)
     }
     val selectedCountryState: MutableState<CountryDetails?> = remember {
         mutableStateOf(null)
     }
-    var mobileNumber by remember {
+
+    val countryListFlagWidthState = remember {
+        mutableStateOf(30.dp)
+    }
+    val countryListFlagHeightState = remember {
+        mutableStateOf(20.dp)
+    }
+    val countryListShowCountryCode = remember {
+        mutableStateOf(false)
+    }
+
+    var enteredMobileNumber by remember {
         mutableStateOf("")
     }
     val unfocusedBorderThickness = remember {
@@ -77,98 +99,126 @@ fun CountryPickerWithOutlinedText() {
         mutableStateOf(false)
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        CountryPickerOutlinedTextField(
-            isError = isMobileNumberValidationError,
-            supportingText = {
-                if (isMobileNumberValidationError) {
-                    Text(text = "Invalid mobile number")
-                }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
-                mobileNumber, selectedCountryState.value?.countryCode ?: "IN",
-            ),
-            onMobileNumberChange = {
-                mobileNumber = it
-                isMobileNumberValidationError = !CountryPickerUtils.isMobileNumberValid(
-                    mobileNumber,
-                    selectedCountryState.value?.countryCode ?: "IN"
-                )
-            },
-            placeholder = {
-                Text(
-                    text = CountryPickerUtils.getExampleMobileNumber(
-                        selectedCountryState.value?.countryCode ?: "IN",
-                        true
+    val formatExampleMobileNumberState = remember {
+        mutableStateOf(false)
+    }
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+        ) {
+            CountryPickerOutlinedTextField(
+                isError = isMobileNumberValidationError,
+                supportingText = {
+                    if (isMobileNumberValidationError) {
+                        Text(text = "Invalid mobile number")
+                    } else if (enteredMobileNumber.isNotBlank()) {
+                        Text(text = "Valid mobile number")
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
+                    enteredMobileNumber, selectedCountryState.value?.countryCode ?: "IN",
+                ),
+                onMobileNumberChange = {
+                    enteredMobileNumber = it
+                    isMobileNumberValidationError = !CountryPickerUtils.isMobileNumberValid(
+                        enteredMobileNumber,
+                        selectedCountryState.value?.countryCode ?: "IN"
                     )
-                )
-            },
-            onCountrySelected = {
-                selectedCountryState.value = it
-            },
-//            selectedCountryProperties = SelectedCountryProperties(
-//                showCountryFlagState.value,
-//                showCountryPhoneCodeState.value,
-//                showCountryNameState.value,
-//                showCountryCodeState.value,
-//                spaceAfterCountryFlagMutableState.value,
-//                spaceAfterCountryPhoneCode.value,
-//                spaceAfterCountryName.value,
-//                spaceAfterCountryCode.value
-//            ),
-            //countryFlagDimensions = Dimensions(flagWidthState.value, flagHeightState.value),
-            borderThickness = BorderThickness(
-                focusedBorderThickness.value,
-                unfocusedBorderThickness.value
+                },
+                placeholder = {
+                    Text(
+                        text = "for eg. ${
+                            CountryPickerUtils.getExampleMobileNumber(
+                                selectedCountryState.value?.countryCode ?: "IN",
+                                formatExampleMobileNumberState.value
+                            )
+                        }"
+                    )
+                },
+                onCountrySelected = {
+                    selectedCountryState.value = it
+                },
+                selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+                    properties = SelectedCountryProperties(
+                        showSelectedCountryFlagState.value,
+                        showSelectedCountryPhoneCodeState.value,
+                        showSelectedCountryNameState.value,
+                        showSelectedCountryCodeState.value,
+                        spaceAfterSelectedCountryFlagMutableState.value,
+                        spaceAfterSelectedCountryPhoneCode.value,
+                        spaceAfterSelectedCountryName.value,
+                        spaceAfterSelectedCountryCode.value
+                    ),
+                    flagDimensions = FlagDimensions(
+                        selectedCountryFlagWidthState.value,
+                        selectedCountryFlagHeightState.value
+                    )
+                ),
+                countriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(
+                    properties = CountriesListDialogProperties(
+                        countryListShowCountryCode.value
+                    ),
+                    flagDimensions = FlagDimensions(
+                        countryListFlagWidthState.value,
+                        countryListFlagHeightState.value
+                    )
+                ),
+                borderThickness = BorderThickness(
+                    focusedBorderThickness.value,
+                    unfocusedBorderThickness.value
+                ),
+                colors = TextFieldDefaults.colors(focusedSupportingTextColor = Color(0xFF2eb82e))
             )
-        )
-        SpacerHeight16()
-        CountryDetailsSectionRow(selectedCountryState.value)
-        SpacerHeight16()
-        TextWidthHeightRow(flagWidthState, flagHeightState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Flag", showCountryFlagState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Phone Code", showCountryPhoneCodeState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Name", showCountryNameState)
-        SpacerHeight4()
-        TextSwitchRow(text = "Show Country Code", showCountryCodeState)
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Flag",
-            valueChangeMutableState = spaceAfterCountryFlagMutableState
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Phone Code",
-            valueChangeMutableState = spaceAfterCountryPhoneCode
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Name",
-            valueChangeMutableState = spaceAfterCountryName
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Space After Country Code",
-            valueChangeMutableState = spaceAfterCountryCode
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Unfocused Border Thickness",
-            valueChangeMutableState = unfocusedBorderThickness
-        )
-        SpacerHeight4()
-        TextProgressRow(
-            text = "Focused Border Thickness",
-            valueChangeMutableState = focusedBorderThickness
-        )
+            CountryDetailsSectionRow(
+                selectedCountryState.value,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            SpacerHeight16()
+            TitleSettingsComposable("Selected Country Settings:- ") {
+                Column {
+                    SelectedCountrySettings(
+                        selectedCountryFlagWidthState,
+                        selectedCountryFlagHeightState,
+                        showSelectedCountryFlagState,
+                        showSelectedCountryPhoneCodeState,
+                        showSelectedCountryNameState,
+                        showSelectedCountryCodeState,
+                        spaceAfterSelectedCountryFlagMutableState,
+                        spaceAfterSelectedCountryPhoneCode,
+                        spaceAfterSelectedCountryName,
+                        spaceAfterSelectedCountryCode
+                    )
+                    SpacerHeight4()
+                    TextSwitchRow(
+                        text = "Format Example Mobile Number",
+                        formatExampleMobileNumberState
+                    )
+                    SpacerHeight4()
+                    TextProgressRow(
+                        text = "Unfocused Border Thickness",
+                        valueChangeMutableState = unfocusedBorderThickness
+                    )
+                    SpacerHeight4()
+                    TextProgressRow(
+                        text = "Focused Border Thickness",
+                        valueChangeMutableState = focusedBorderThickness
+                    )
+                }
 
+            }
+            TitleSettingsComposable("Countries List Dialog Settings:- ") {
+                CountriesListDialogSettings(
+                    countryListFlagWidthState,
+                    countryListFlagHeightState,
+                    countryListShowCountryCode
+                )
+            }
+        }
     }
 }
