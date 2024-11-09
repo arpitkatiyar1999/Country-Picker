@@ -17,7 +17,7 @@ integration with the visual identity of your application.
 
 |  <div style="width:50%;">CountryPicker</div>                                                                          | <div style="width:50%;">CountryPickerOutlinedTextField</div>   |
 |:---------------------------------------------------------------------------------------------------------------------:|:------------------------------:|
-| <video src="https://github.com/user-attachments/assets/2eee0727-257d-4e04-95c5-b1fad292de93"> | <video src="https://github.com/user-attachments/assets/f403831c-3eab-4932-b0fd-c7af7df315dc">        |                                                                                            |
+| <video src="https://github.com/user-attachments/assets/2eee0727-257d-4e04-95c5-b1fad292de93"> | <video src="https://github.com/user-attachments/assets/b53c7717-44ea-462f-99b1-06789cf0a865">        |                                                                                            |
 
 ## Requirement
 
