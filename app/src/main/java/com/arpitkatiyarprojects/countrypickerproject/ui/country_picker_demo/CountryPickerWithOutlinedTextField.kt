@@ -16,6 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
@@ -91,7 +93,7 @@ fun CountryPickerWithOutlinedText() {
                 },
                 placeholder = {
                     Text(
-                        text = "for eg. ${
+                        text = "eg. ${
                             CountryPickerUtils.getExampleMobileNumber(
                                 selectedCountryState?.countryCode ?: "IN",
                                 formatExampleMobileNumber
@@ -105,7 +107,17 @@ fun CountryPickerWithOutlinedText() {
                 selectedCountryDisplayProperties = selectedCountryDisplayProperties,
                 countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
                 borderThickness = borderThickness,
-                colors = TextFieldDefaults.colors(focusedSupportingTextColor = Color(0xFF2eb82e))
+                colors = TextFieldDefaults.colors(
+                    focusedSupportingTextColor = Color(0xFF2eb82e),
+                    unfocusedPlaceholderColor = Color.Gray,
+                    focusedPlaceholderColor = Color.Gray,
+                    errorPlaceholderColor = Color.Gray,
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    errorContainerColor = Color.Transparent,
+                    focusedTextColor = Color.Black,
+                ),
+                textStyle = TextStyle.Default.copy(fontWeight = FontWeight.SemiBold),
             )
             CountryDetailsSectionRow(selectedCountryState)
             TitleSettingsComposable("Selected Country Settings:- ") {
