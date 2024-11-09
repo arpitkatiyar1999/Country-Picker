@@ -11,6 +11,7 @@ internal object FunctionHelper {
     /**
      * Searches for countries in the list of [CountryDetails] based on the specified search string.
      *
+     * @receiver List<CountryDetails> The list of [CountryDetails] being filtered.
      * @param searchStr The search string to match against country names, phone number codes, and country codes.
      * @return A list of [CountryDetails] matching the search criteria.
      */
@@ -26,7 +27,7 @@ internal object FunctionHelper {
     /**
      * Retrieves the default selected country based on the provided parameters.
      *
-     * @param context The context used for retrieving default country code if countryCode is null.
+     * @param context The [Context] used for retrieving default country code if countryCode is null.
      * @param countryCode The country code of the selected country.
      * @param countriesList The list of [CountryDetails] containing country information.
      * @return The default selected [CountryDetails].
@@ -43,6 +44,7 @@ internal object FunctionHelper {
                 getDefaultCountryCode(context, countriesList)
             }
         } catch (exception: Exception) {
+            LoggerHelper.logError(exception)
             countriesList[0]
         }
     }
@@ -75,21 +77,17 @@ internal object FunctionHelper {
         context: Context,
         countriesList: List<CountryDetails>
     ): CountryDetails {
-        return try {
-            val localeCode: TelephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            val countryCode = localeCode.networkCountryIso
-            getCountryForCountryCode(countriesList, countryCode.lowercase())
-        } catch (e: Exception) {
-            countriesList[0]
-        }
+        val localeCode: TelephonyManager =
+            context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val countryCode = localeCode.networkCountryIso
+        return getCountryForCountryCode(countriesList, countryCode.lowercase())
     }
 
 
     /**
      * Retrieves the details of all countries.
      *
-     * @param context The context used for accessing country name from string file to provide multilanguage feature.
+     * @param context The [Context] used for accessing country name from string file to provide multilanguage feature.
      * @return The list of [CountryDetails] containing details of all countries.
      */
     fun getAllCountries(context: Context): List<CountryDetails> = listOf(

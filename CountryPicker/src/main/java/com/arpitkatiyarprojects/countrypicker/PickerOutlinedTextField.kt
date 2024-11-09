@@ -36,7 +36,7 @@ import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
  *
  * @param value The current value of the text field.
  * @param onValueChange Callback triggered when the value of the text field changes.
- * @param modifier Modifier for customizing the layout and appearance of the text field.
+ * @param modifier [Modifier] for customizing the layout and appearance of the text field.
  * @param enabled Whether the text field is enabled for user interaction.
  * @param readOnly Whether the text field is read-only.
  * @param textStyle The style of the text displayed in the text field.
@@ -152,6 +152,14 @@ internal fun PickerOutlinedTextField(
     }
 }
 
+/**
+ * Composable function that returns the text color state based on the text field's enabled state, error state, and focus interaction.
+ *
+ * @param enabled A Boolean value indicating whether the text field is enabled. If false, the text color will be set to the disabled color.
+ * @param isError A Boolean value indicating whether an error state is present. If true, the text color will be set to the error color.
+ * @param interactionSource An [InteractionSource] used to collect focus state. The text color will change based on whether the text field is focused or not.
+ * @return A [State] object containing the color for the text, which is determined by the enabled, error, and focus states.
+ */
 @Composable
 internal fun TextFieldColors.textColor(
     enabled: Boolean,
@@ -169,6 +177,12 @@ internal fun TextFieldColors.textColor(
     return rememberUpdatedState(targetValue)
 }
 
+/**
+ * Composable function that returns the cursor color state based on the error condition.
+ *
+ * @param isError A Boolean value indicating whether an error is present. If true, the cursor color will be set to the error color.
+ * @return A [State] object containing the color for the cursor, either the default color or the error color depending on the [isError] flag.
+ */
 @Composable
 internal fun TextFieldColors.cursorColor(
     isError: Boolean

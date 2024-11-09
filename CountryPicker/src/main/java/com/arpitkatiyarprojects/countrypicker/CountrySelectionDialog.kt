@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -30,6 +31,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -37,16 +39,22 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /**
  * Composable function for displaying a country selection dialog.
- * @param modifier Modifier for customizing the layout and appearance of the dialog.
- * @param countryList List of country details to be displayed in the dialog.
+ * @param countriesList List of country details to be displayed in the dialog.
+ * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
  * @param onDismissRequest Callback triggered when the dialog is dismissed.
  * @param onSelected Callback triggered when a country is selected from the dialog.
  * @param properties Properties for customizing the behavior of the dialog.
@@ -54,15 +62,16 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCoun
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CountrySelectionDialog(
-    modifier: Modifier = Modifier,
-    countryList: List<CountryDetails>,
+    countriesList: List<CountryDetails>,
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit,
     properties: DialogProperties = DialogProperties(usePlatformDefaultWidth = false)
 ) {
     var searchValue by remember { mutableStateOf("") }
     var isSearchEnabled by remember { mutableStateOf(false) }
-    var filteredCountries by remember { mutableStateOf(countryList) }
+    var filteredCountries by remember { mutableStateOf(countriesList) }
+    val coroutineScope = rememberCoroutineScope()
     BasicAlertDialog(
         modifier = Modifier
             .fillMaxSize(),
@@ -86,12 +95,19 @@ internal fun CountrySelectionDialog(
                             title = {
                                 if (isSearchEnabled) {
                                     TextField(
-                                        modifier = Modifier.focusRequester(focusRequester),
+                                        modifier = Modifier
+                                            .focusRequester(focusRequester)
+                                            .fillMaxWidth(),
                                         value = searchValue,
                                         onValueChange = { searchStr ->
                                             searchValue = searchStr
-                                            filteredCountries =
-                                                countryList.searchForCountry(searchStr)
+                                            coroutineScope.launch(Dispatchers.Default) {
+                                                val filteredCountryList =
+                                                    countriesList.searchForCountry(searchStr)
+                                                withContext(Dispatchers.Main) {
+                                                    filteredCountries = filteredCountryList
+                                                }
+                                            }
                                         },
                                         placeholder = {
                                             Text(
@@ -131,6 +147,9 @@ internal fun CountrySelectionDialog(
                             actions = {
                                 IconButton(onClick = {
                                     isSearchEnabled = !isSearchEnabled
+                                    if (!isSearchEnabled) {
+                                        searchValue = ""
+                                    }
                                 }) {
                                     Icon(
                                         imageVector = if (isSearchEnabled) Icons.Default.Clear else Icons.Default.Search,
@@ -148,41 +167,92 @@ internal fun CountrySelectionDialog(
                     ) {
                         val countriesData =
                             if (searchValue.isEmpty()) {
-                                countryList
+                                countriesList
                             } else {
                                 filteredCountries
                             }
-                        items(countriesData) { countryItem ->
-                            ListItem(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        onSelected(countryItem)
-                                    },
-                                leadingContent = {
-                                    Image(
-                                        modifier = modifier.width(30.dp),
-                                        painter = painterResource(id = countryItem.countryFlag),
-                                        contentDescription = null,
-                                    )
-                                },
-                                trailingContent = {
-                                    Text(
-                                        text = countryItem.countryPhoneNumberCode,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                },
-                                headlineContent = {
-                                    Text(
-                                        text = countryItem.countryName,
-                                        style = MaterialTheme.typography.bodyMedium,
-                                    )
-                                },
-                            )
+                        if (countriesData.isEmpty()) {
+                            item {
+                                Text(
+                                    text = stringResource(R.string.no_country_found),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                                )
+                            }
+                        } else {
+                            items(countriesData, key = { it.countryCode }) { countryItem ->
+                                CountriesListItem(
+                                    countryItem = countryItem,
+                                    countriesListDialogDisplayProperties = countriesListDialogDisplayProperties
+                                ) {
+                                    onSelected(countryItem)
+                                }
+                            }
                         }
                     }
                 }
             }
         },
     )
+}
+
+
+/**
+ * Composable function that displays a list item for a country in the country selection dialog.
+ * The list item shows the country flag, country name, country code (optional), and country phone code.
+ *
+ * @param countryItem The [CountryDetails] object containing the data for the country to be displayed.
+ * @param countriesListDialogDisplayProperties A [CountriesListDialogDisplayProperties] object that provides the flag dimensions and text styles for the list item.
+ * @param onCountrySelected A lambda function that is called when the country list item is clicked, which selects the country.
+ */
+@Composable
+private fun CountriesListItem(
+    countryItem: CountryDetails,
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
+    onCountrySelected: () -> Unit
+) {
+    with(countriesListDialogDisplayProperties) {
+        ListItem(modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onCountrySelected()
+            },
+            leadingContent = {
+                Image(
+                    modifier = Modifier
+                        .width(flagDimensions.width)
+                        .height(flagDimensions.height),
+                    painter = painterResource(id = countryItem.countryFlag),
+                    contentDescription = countryItem.countryName,
+                )
+            },
+            headlineContent = {
+                Text(text = buildAnnotatedString {
+                    withStyle(
+                        style = (textStyles.countryNameTextStyle
+                            ?: MaterialTheme.typography.bodyMedium).toSpanStyle()
+                    ) {
+                        append(countryItem.countryName)
+                    }
+                    if (properties.showCountryCode) {
+                        append("  ")
+                        append("(")
+                        withStyle(
+                            style = (textStyles.countryCodeTextStyle
+                                ?: MaterialTheme.typography.bodyMedium).toSpanStyle()
+                        ) {
+                            append(countryItem.countryCode.uppercase())
+                        }
+                        append(")")
+                    }
+                })
+            },
+            trailingContent = {
+                Text(
+                    text = countryItem.countryPhoneNumberCode,
+                    style = textStyles.countryPhoneCodeTextStyle
+                        ?: MaterialTheme.typography.bodyMedium,
+                )
+            })
+    }
 }

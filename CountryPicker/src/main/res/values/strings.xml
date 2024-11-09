@@ -242,4 +242,6 @@
     <string name="chad">Chad</string>
     <string name="search_country">Search Country...</string>
     <string name="select_country">Select Country</string>
+    <string name="no_country_found">No country found...</string>
+    <string name="select_country_dropdown">Select Country DropDown</string>
 </resources>
