@@ -14,7 +14,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
@@ -72,9 +72,7 @@ internal fun CountrySelectionDialog(
     var isSearchEnabled by remember { mutableStateOf(false) }
     var filteredCountries by remember { mutableStateOf(countriesList) }
     val coroutineScope = rememberCoroutineScope()
-    BasicAlertDialog(
-        modifier = Modifier
-            .fillMaxSize(),
+    Dialog(
         onDismissRequest = onDismissRequest,
         properties = properties,
         content = {
@@ -195,7 +193,6 @@ internal fun CountrySelectionDialog(
         },
     )
 }
-
 
 /**
  * Composable function that displays a list item for a country in the country selection dialog.
