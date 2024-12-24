@@ -81,9 +81,7 @@ fun CountryPickerWithOutlinedText() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                mobileNumber = CountryPickerUtils.getFormattedMobileNumber(
-                    enteredMobileNumber, selectedCountryState?.countryCode ?: "IN",
-                ),
+                mobileNumber = enteredMobileNumber,
                 onMobileNumberChange = {
                     enteredMobileNumber = it
                     isMobileNumberValidationError = !CountryPickerUtils.isMobileNumberValid(

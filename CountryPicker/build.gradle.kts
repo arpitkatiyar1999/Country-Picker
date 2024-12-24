@@ -41,8 +41,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     //compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.library)
     // google phone number
     implementation(libs.libPhoneNumber)
 
