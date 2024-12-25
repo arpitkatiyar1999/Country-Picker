@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -30,11 +31,11 @@ import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComp
 fun CountryPickerWithoutTextField() {
 
     var selectedCountryDisplayProperties by remember {
-        mutableStateOf(SelectedCountryDisplayProperties())
+        mutableStateOf(SelectedCountryDisplayProperties(flagShape = RoundedCornerShape(4.dp)))
     }
 
     var countriesListDialogDisplayProperties by remember {
-        mutableStateOf(CountriesListDialogDisplayProperties())
+        mutableStateOf(CountriesListDialogDisplayProperties(flagShape = RoundedCornerShape(8.dp)))
     }
 
     var selectedCountryState by remember {

@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -35,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -148,7 +150,11 @@ private fun CountrySelectionList(
     var filteredCountries by remember { mutableStateOf(countriesList) }
     val coroutineScope = rememberCoroutineScope()
     Scaffold(topBar = {
-        CountriesListTopBarSection(searchValue, onDismissRequest) { searchStr ->
+        CountriesListTopBarSection(
+            searchValue,
+            countriesListDialogDisplayProperties,
+            onDismissRequest
+        ) { searchStr ->
             searchValue = searchStr
             coroutineScope.launch(Dispatchers.Default) {
                 val filteredCountryList =
@@ -175,6 +181,7 @@ private fun CountrySelectionList(
 @Composable
 private fun CountriesListTopBarSection(
     searchValue: String,
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
     onDismissRequest: () -> Unit,
     onSearchChanged: (searchStr: String) -> Unit
 ) {
@@ -206,6 +213,8 @@ private fun CountriesListTopBarSection(
                         Text(
                             text = stringResource(R.string.search_country),
                             color = MaterialTheme.colorScheme.onSurface,
+                            style = countriesListDialogDisplayProperties.textStyles.searchBarHintTextStyle
+                                ?: LocalTextStyle.current
                         )
                     },
                     colors = TextFieldDefaults.colors(
@@ -308,7 +317,8 @@ private fun CountriesListItem(
                 Image(
                     modifier = Modifier
                         .width(flagDimensions.width)
-                        .height(flagDimensions.height),
+                        .height(flagDimensions.height)
+                        .clip(flagShape),
                     painter = painterResource(id = countryItem.countryFlag),
                     contentDescription = countryItem.countryName,
                 )

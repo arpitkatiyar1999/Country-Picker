@@ -11,5 +11,6 @@ import androidx.compose.ui.text.TextStyle
 data class CountryPickerDialogTextStyles(
     val countryPhoneCodeTextStyle: TextStyle? = null,
     val countryNameTextStyle: TextStyle? = null,
-    val countryCodeTextStyle: TextStyle? = null
+    val countryCodeTextStyle: TextStyle? = null,
+    val searchBarHintTextStyle: TextStyle? = null
 )

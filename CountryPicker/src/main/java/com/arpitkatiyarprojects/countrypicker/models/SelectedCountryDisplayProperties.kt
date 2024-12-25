@@ -1,5 +1,7 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 
 
@@ -18,5 +20,6 @@ import androidx.compose.ui.unit.dp
 data class SelectedCountryDisplayProperties(
     val properties: SelectedCountryProperties = SelectedCountryProperties(),
     val flagDimensions: FlagDimensions = FlagDimensions(width = 28.dp, height = 18.dp),
-    val textStyles: SelectedCountryTextStyles = SelectedCountryTextStyles()
+    val textStyles: SelectedCountryTextStyles = SelectedCountryTextStyles(),
+    val flagShape: Shape = RectangleShape
 )
