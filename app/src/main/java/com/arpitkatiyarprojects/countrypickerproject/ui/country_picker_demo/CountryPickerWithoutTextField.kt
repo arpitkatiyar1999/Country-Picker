@@ -13,11 +13,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.CountryPicker
 import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
@@ -35,7 +38,17 @@ fun CountryPickerWithoutTextField() {
     }
 
     var countriesListDialogDisplayProperties by remember {
-        mutableStateOf(CountriesListDialogDisplayProperties(flagShape = RoundedCornerShape(8.dp)))
+        mutableStateOf(
+            CountriesListDialogDisplayProperties(
+                flagShape = RoundedCornerShape(8.dp),
+                textStyles = CountryPickerDialogTextStyles(
+                    searchBarHintTextStyle = TextStyle(
+                        fontWeight = FontWeight.Black
+                    ),
+
+                    )
+            )
+        )
     }
 
     var selectedCountryState by remember {

@@ -190,77 +190,78 @@ private fun CountriesListTopBarSection(
     var isFocusRequested by remember {
         mutableStateOf(false)
     }
-    CenterAlignedTopAppBar(
-        windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
-        title = {
-            if (isSearchEnabled) {
-                TextField(
-                    singleLine = true,
-                    modifier = Modifier
-                        .focusRequester(focusRequester)
-                        .fillMaxWidth()
-                        .onPlaced {
-                            if (!isFocusRequested) {
-                                focusRequester.requestFocus()
-                                isFocusRequested = true
-                            }
+    with(countriesListDialogDisplayProperties) {
+        CenterAlignedTopAppBar(
+            windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
+            title = {
+                if (isSearchEnabled) {
+                    TextField(
+                        singleLine = true,
+                        modifier = Modifier
+                            .focusRequester(focusRequester)
+                            .fillMaxWidth()
+                            .onPlaced {
+                                if (!isFocusRequested) {
+                                    focusRequester.requestFocus()
+                                    isFocusRequested = true
+                                }
+                            },
+                        value = searchValue,
+                        onValueChange = { searchStr ->
+                            onSearchChanged(searchStr)
                         },
-                    value = searchValue,
-                    onValueChange = { searchStr ->
-                        onSearchChanged(searchStr)
-                    },
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.search_country),
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = countriesListDialogDisplayProperties.textStyles.searchBarHintTextStyle
-                                ?: LocalTextStyle.current
-                        )
-                    },
-                    colors = TextFieldDefaults.colors(
-                        disabledContainerColor = Color.Transparent,
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                    ),
-                    textStyle = MaterialTheme.typography.labelLarge,
-                )
-            } else {
-                Text(
-                    modifier = Modifier.offset(y = (-2).dp),
-                    text = stringResource(R.string.select_country),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-            }
-        },
-        navigationIcon = {
-            IconButton(onClick = {
-                onDismissRequest()
-            }) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                    contentDescription = null,
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = {
-                isSearchEnabled = !isSearchEnabled
-                if (isFocusRequested) isFocusRequested = false
-                if (!isSearchEnabled) {
-                    onSearchChanged("")
+                        placeholder = {
+                            Text(
+                                text = stringResource(R.string.search_country),
+                                color = MaterialTheme.colorScheme.onSurface,
+                                style = textStyles.searchBarHintTextStyle ?: LocalTextStyle.current
+                            )
+                        },
+                        colors = TextFieldDefaults.colors(
+                            disabledContainerColor = Color.Transparent,
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                        ),
+                        textStyle = MaterialTheme.typography.labelLarge,
+                    )
+                } else {
+                    Text(
+                        modifier = Modifier.offset(y = (-2).dp),
+                        text = stringResource(R.string.select_country),
+                        style = textStyles.titleTextStyle ?: MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
                 }
-            }) {
-                Icon(
-                    imageVector = if (isSearchEnabled) Icons.Default.Clear else Icons.Default.Search,
-                    contentDescription = null,
-                )
-            }
-        },
-    )
+            },
+            navigationIcon = {
+                IconButton(onClick = {
+                    onDismissRequest()
+                }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                        contentDescription = null,
+                    )
+                }
+            },
+            actions = {
+                IconButton(onClick = {
+                    isSearchEnabled = !isSearchEnabled
+                    if (isFocusRequested) isFocusRequested = false
+                    if (!isSearchEnabled) {
+                        onSearchChanged("")
+                    }
+                }) {
+                    Icon(
+                        imageVector = if (isSearchEnabled) Icons.Default.Clear else Icons.Default.Search,
+                        contentDescription = null,
+                    )
+                }
+            },
+        )
+    }
 }
 
 
