@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
@@ -49,10 +50,11 @@ fun CountryPicker(
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
+    countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
     val context = LocalContext.current
-    var openCountrySelectionDialog by remember { mutableStateOf(false) }
+    var openCountrySelectionList by remember { mutableStateOf(false) }
     val applicableCountriesList = remember {
         val allCountriesList = FunctionHelper.getAllCountries(context)
         if (countriesList.isNullOrEmpty()) {
@@ -73,16 +75,17 @@ fun CountryPicker(
             }
         )
     }
-    if (openCountrySelectionDialog) {
-        CountrySelectionDialog(
+    if (openCountrySelectionList) {
+        CountrySelectionList(
             countriesList = applicableCountriesList,
             countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+            countryListDisplayType = countryListDisplayType,
             onDismissRequest = {
-                openCountrySelectionDialog = false
+                openCountrySelectionList = false
             },
             onSelected = { country ->
                 selectedCountry = country
-                openCountrySelectionDialog = false
+                openCountrySelectionList = false
                 onCountrySelected(country)
             },
         )
@@ -93,7 +96,7 @@ fun CountryPicker(
         selectedCountryDisplayProperties = selectedCountryDisplayProperties,
         modifier = modifier
     ) {
-        openCountrySelectionDialog = !openCountrySelectionDialog
+        openCountrySelectionList = !openCountrySelectionList
     }
 }
 
