@@ -41,6 +41,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
  * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
  * @param defaultCountryCode  Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
  * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
+ * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  */
 @Composable

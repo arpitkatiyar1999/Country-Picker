@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
  * @param textStyles Defines the styles for text elements associated with the selected country,
  *   represented by [SelectedCountryTextStyles]. This includes the text styles for
  *   country code, country name, and phone code.
+ * @param flagShape Shape of the country flag (e.g., rectangle , rounded etc).
  */
 data class SelectedCountryDisplayProperties(
     val properties: SelectedCountryProperties = SelectedCountryProperties(),

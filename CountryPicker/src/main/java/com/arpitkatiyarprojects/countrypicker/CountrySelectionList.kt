@@ -61,6 +61,7 @@ import kotlinx.coroutines.withContext
  * Composable function for displaying a country selection dialog.
  * @param countriesList List of country details to be displayed in the dialog.
  * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
+ * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param onDismissRequest Callback triggered when the dialog is dismissed.
  * @param onSelected Callback triggered when a country is selected from the dialog.
  */
@@ -88,9 +89,15 @@ internal fun CountrySelectionList(
             onSelected
         )
     }
-
 }
 
+/**
+ * Composable function to display a list of countries in a dialog.
+ * @param countriesList The list of countries to display in the dialog.
+ * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors of the list.
+ * @param onDismissRequest Callback invoked when the dialog is dismissed.
+ * @param onSelected Callback invoked when a country is selected from the list.
+ */
 @Composable
 private fun CountryListDialog(
     countriesList: List<CountryDetails>,
@@ -113,6 +120,13 @@ private fun CountryListDialog(
 }
 
 
+/**
+ * Composable function to display a list of countries in a modal bottom sheet.
+ * @param countriesList The list of countries to display in the bottom sheet.
+ * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors of the list.
+ * @param onDismissRequest Callback invoked when the bottom sheet is dismissed.
+ * @param onSelected Callback invoked when a country is selected from the list.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CountryListBottomSheet(
@@ -139,6 +153,13 @@ private fun CountryListBottomSheet(
 }
 
 
+/**
+ * Composable function to display the country selection list with a search bar and filtered results.
+ * @param countriesList The complete list of country details to display.
+ * @param countriesListDialogDisplayProperties Properties for customizing the display style and behavior of the country list.
+ * @param onDismissRequest Callback invoked when the dismiss action (e.g., back button) is triggered.
+ * @param onSelected Callback invoked when a country is selected from the list.
+ */
 @Composable
 private fun CountrySelectionList(
     countriesList: List<CountryDetails>,
@@ -176,7 +197,19 @@ private fun CountrySelectionList(
     }
 }
 
-
+/**
+ * Composable function that displays a top bar for the country list screen.
+ *
+ * Features:
+ * - Displays a title or a search bar based on the state.
+ * - Provides navigation and search action icons.
+ * - Manages focus and search interactions.
+ *
+ * @param searchValue The current search query string.
+ * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors.
+ * @param onDismissRequest Callback invoked when the dismiss action (e.g., back button) is triggered.
+ * @param onSearchChanged Callback invoked whenever the search query changes.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CountriesListTopBarSection(
@@ -264,7 +297,14 @@ private fun CountriesListTopBarSection(
     }
 }
 
-
+/**
+ * Composable function to display a list of countries in a scrollable section.
+ *
+ * @param countriesList The list of country details to display.
+ * @param countriesListDialogDisplayProperties Properties that define the display style and behavior of the country list items.
+ * @param modifier Modifier to customize the appearance and layout of the LazyColumn.
+ * @param onSelected Callback function invoked when a country item is selected.
+ */
 @Composable
 private fun CountriesListSection(
     countriesList: List<CountryDetails>,
@@ -272,22 +312,25 @@ private fun CountriesListSection(
     modifier: Modifier = Modifier,
     onSelected: (item: CountryDetails) -> Unit
 ) {
-    LazyColumn(modifier = modifier) {
-        if (countriesList.isEmpty()) {
-            item {
-                Text(
-                    text = stringResource(R.string.no_country_found),
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-                )
-            }
-        } else {
-            items(countriesList, key = { it.countryCode }) { countryItem ->
-                CountriesListItem(
-                    countryItem = countryItem,
-                    countriesListDialogDisplayProperties = countriesListDialogDisplayProperties
-                ) {
-                    onSelected(countryItem)
+    with(countriesListDialogDisplayProperties) {
+        LazyColumn(modifier = modifier) {
+            if (countriesList.isEmpty()) {
+                item {
+                    Text(
+                        text = stringResource(R.string.no_country_found),
+                        style = textStyles.noSearchedCountryAvailableTextStyle
+                            ?: MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                    )
+                }
+            } else {
+                items(countriesList, key = { it.countryCode }) { countryItem ->
+                    CountriesListItem(
+                        countryItem = countryItem,
+                        countriesListDialogDisplayProperties = this@with
+                    ) {
+                        onSelected(countryItem)
+                    }
                 }
             }
         }
