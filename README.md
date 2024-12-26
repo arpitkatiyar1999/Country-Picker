@@ -22,9 +22,9 @@ integration with the visual identity of your application.
 ## Requirement
 
 
-Jetpack Compose Country Code Picker requires Material 3 version **1.2.1** or later to work properly.
+Jetpack Compose Country Code Picker requires Material 3 version **1.3.0** or later to work properly.
 To
-ensure compatibility, please make sure your project includes Material 3 version **1.2.1** or later.
+ensure compatibility, please make sure your project includes Material 3 version **1.3.0** or later.
 
 If you are using the Compose BOM to manage dependencies, you can check your current Material
 3 version by referring to
@@ -72,6 +72,7 @@ fun CountryPicker(
   countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
   defaultCountryCode: String? = null,
   countriesList: List<String>? = null,
+  countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
   onCountrySelected: (country: CountryDetails) -> Unit
 )
 ```
@@ -100,6 +101,8 @@ fun CountryPicker(
     - `countryPhoneCodeTextStyle: TextStyle` - Style for the country phone code text. Default is `Bold`.
     - `countryNameTextStyle: TextStyle` - Style for the country name text. Default is `TextStyle()`.
     - `countryCodeTextStyle: TextStyle` - Style for the country code text. Default is `TextStyle()`.
+  
+  - `flagShape: Shape`: Shape of the country flag (e.g., rectangle , rounded etc). Default is `RectangleShape`.
 
 
 - `countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties`-  Configures the display properties for the country selection dialog. The properties include:-
@@ -115,6 +118,12 @@ fun CountryPicker(
     - `countryPhoneCodeTextStyle: TextStyle?` - Style for displaying the country phone code in the list. Default is `null`.
     - `countryNameTextStyle: TextStyle?` - Style for displaying the country name in the list. Default is `null`.
     - `countryCodeTextStyle: TextStyle?` - Style for displaying the country code in the list. Default is `null`.
+    - `searchBarHintTextStyle: TextStyle?` - Text style for the placeholder/hint text in the search bar. Default is `null`.
+    - `titleTextStyle: TextStyle?` - Text style for the dialog title (e.g., "Select a Country"). Default is `null`.
+    - `noSearchedCountryAvailableTextStyle: TextStyle?` - Text style for the message displayed when no countries match the search. Default is `null`.
+
+  - `flagShape: Shape`: Shape of the country flag (e.g., rectangle , rounded etc). Default is `RectangleShape`.
+
 
 - `defaultCountryCode`: `String?`-   Specifies the default country code to be pre-selected in the
   picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If
@@ -123,6 +132,8 @@ fun CountryPicker(
   the [ISO 3166-1 alpha-2 country codes Wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 - `countriesList: List<String>?`-  Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
+ 
+- `countryListDisplayType: CountryListDisplayType`- The type of UI to use for displaying the list (BottomSheet or Dialog).
 
 - `onCountrySelected: (country: CountryDetails) -> Unit`- The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
 
@@ -160,6 +171,7 @@ fun CountryPickerOutlinedTextField(
   shape: Shape = RoundedCornerShape(12.dp),
   colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
   borderThickness: BorderThickness = BorderThickness(),
+  countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
   onDone: (() -> Unit)? = null,
 )
 ```
@@ -177,6 +189,8 @@ fun CountryPickerOutlinedTextField(
 
   - `focusedBorderThickness: Dp` - The thickness of the border when focused.
   - `unfocusedBorderThickness: Dp` - The thickness of the border when unfocused.
+
+- `countryListDisplayType: CountryListDisplayType`- The type of UI to use for displaying the list (BottomSheet or Dialog).
 
 
 - `onDone: () -> Unit` - The callback is triggered when the user clicks the `Done` button on the

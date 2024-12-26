@@ -41,13 +41,20 @@ fun CountryPickerWithoutTextField() {
     var countriesListDialogDisplayProperties by remember {
         mutableStateOf(
             CountriesListDialogDisplayProperties(
-                flagShape = RoundedCornerShape(8.dp),
+                flagShape = RoundedCornerShape(6.dp),
                 textStyles = CountryPickerDialogTextStyles(
-                    searchBarHintTextStyle = TextStyle(
-                        fontWeight = FontWeight.Black
+                    titleTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
                     ),
-                    noSearchedCountryAvailableTextStyle = TextStyle(fontSize = 80.sp)
-
+                    searchBarHintTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    noSearchedCountryAvailableTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 )
             )
         )
