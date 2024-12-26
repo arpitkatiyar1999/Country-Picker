@@ -1,5 +1,7 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 
 /**
@@ -12,9 +14,11 @@ import androidx.compose.ui.unit.dp
  *   represented by [FlagDimensions]. Default dimensions are set to 30.dp width and 20.dp height.
  * @param textStyles Text styling for the dialog, represented by [CountryPickerDialogTextStyles].
  *   This parameter allows customization of font styles and appearance for text elements in the dialog.
+ * @param flagShape Shape of the country flag (e.g., rectangle , rounded etc).
  */
 data class CountriesListDialogDisplayProperties(
     val properties: CountriesListDialogProperties = CountriesListDialogProperties(),
     val flagDimensions: FlagDimensions = FlagDimensions(width = 30.dp, height = 20.dp),
-    val textStyles: CountryPickerDialogTextStyles = CountryPickerDialogTextStyles()
+    val textStyles: CountryPickerDialogTextStyles = CountryPickerDialogTextStyles(),
+    val flagShape: Shape = RectangleShape
 )

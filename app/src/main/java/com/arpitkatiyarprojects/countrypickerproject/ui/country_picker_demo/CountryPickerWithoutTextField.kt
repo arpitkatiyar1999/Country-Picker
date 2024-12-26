@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,31 +13,59 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.arpitkatiyarprojects.countrypicker.CountryPicker
+import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SelectedCountrySettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight16
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SpacerHeight8
+import com.arpitkatiyarprojects.countrypickerproject.ui.common.TextSwitchRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComposable
 
 @Composable
 fun CountryPickerWithoutTextField() {
 
     var selectedCountryDisplayProperties by remember {
-        mutableStateOf(SelectedCountryDisplayProperties())
+        mutableStateOf(SelectedCountryDisplayProperties(flagShape = RoundedCornerShape(4.dp)))
     }
 
     var countriesListDialogDisplayProperties by remember {
-        mutableStateOf(CountriesListDialogDisplayProperties())
+        mutableStateOf(
+            CountriesListDialogDisplayProperties(
+                flagShape = RoundedCornerShape(6.dp),
+                textStyles = CountryPickerDialogTextStyles(
+                    titleTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    searchBarHintTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    noSearchedCountryAvailableTextStyle = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                )
+            )
+        )
     }
 
     var selectedCountryState by remember {
         mutableStateOf<CountryDetails?>(null)
+    }
+
+    var showCountryListInBottomSheet by remember {
+        mutableStateOf(false)
     }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -52,6 +81,7 @@ fun CountryPickerWithoutTextField() {
                     .padding(horizontal = 16.dp),
                 selectedCountryDisplayProperties = selectedCountryDisplayProperties,
                 countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+                countryListDisplayType = if (showCountryListInBottomSheet) CountryListDisplayType.BottomSheet else CountryListDisplayType.Dialog
             ) {
                 selectedCountryState = it
             }
@@ -66,6 +96,10 @@ fun CountryPickerWithoutTextField() {
                 CountriesListDialogSettings(countriesListDialogDisplayProperties) {
                     countriesListDialogDisplayProperties = it
                 }
+            }
+            SpacerHeight8()
+            TextSwitchRow("Show Country List in BottomSheet", showCountryListInBottomSheet) {
+                showCountryListInBottomSheet = it
             }
         }
     }

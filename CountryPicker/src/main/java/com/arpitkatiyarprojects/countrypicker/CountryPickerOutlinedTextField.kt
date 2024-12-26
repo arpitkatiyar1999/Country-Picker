@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
@@ -52,6 +53,7 @@ import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayPrope
  * @param shape defines the shape of this text field's border.
  * @param colors [TextFieldColors] that will be used to resolve the colors used for this text field in different.
  * @param borderThickness Represents the border thickness for focused and unfocused states.
+ * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param onDone The callback is triggered when the user clicks the Done button on the keyboard, as the default IME action is set to Done.
  */
 @Composable
@@ -83,6 +85,7 @@ fun CountryPickerOutlinedTextField(
     shape: Shape = RoundedCornerShape(12.dp),
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
     borderThickness: BorderThickness = BorderThickness(),
+    countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     onDone: (() -> Unit)? = null,
 ) {
     PickerOutlinedTextField(
@@ -104,6 +107,7 @@ fun CountryPickerOutlinedTextField(
                 countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
                 defaultCountryCode = defaultCountryCode,
                 countriesList = countriesList,
+                countryListDisplayType = countryListDisplayType,
                 onCountrySelected = onCountrySelected
             )
         },

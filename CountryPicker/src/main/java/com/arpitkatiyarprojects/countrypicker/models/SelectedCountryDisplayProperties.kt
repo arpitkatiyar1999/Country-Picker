@@ -1,5 +1,7 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 
 
@@ -14,9 +16,11 @@ import androidx.compose.ui.unit.dp
  * @param textStyles Defines the styles for text elements associated with the selected country,
  *   represented by [SelectedCountryTextStyles]. This includes the text styles for
  *   country code, country name, and phone code.
+ * @param flagShape Shape of the country flag (e.g., rectangle , rounded etc).
  */
 data class SelectedCountryDisplayProperties(
     val properties: SelectedCountryProperties = SelectedCountryProperties(),
     val flagDimensions: FlagDimensions = FlagDimensions(width = 28.dp, height = 18.dp),
-    val textStyles: SelectedCountryTextStyles = SelectedCountryTextStyles()
+    val textStyles: SelectedCountryTextStyles = SelectedCountryTextStyles(),
+    val flagShape: Shape = RectangleShape
 )

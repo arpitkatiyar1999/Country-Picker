@@ -20,11 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
@@ -39,6 +41,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
  * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
  * @param defaultCountryCode  Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
  * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
+ * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  */
 @Composable
@@ -49,10 +52,11 @@ fun CountryPicker(
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
+    countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
     val context = LocalContext.current
-    var openCountrySelectionDialog by remember { mutableStateOf(false) }
+    var openCountrySelectionList by remember { mutableStateOf(false) }
     val applicableCountriesList = remember {
         val allCountriesList = FunctionHelper.getAllCountries(context)
         if (countriesList.isNullOrEmpty()) {
@@ -73,16 +77,17 @@ fun CountryPicker(
             }
         )
     }
-    if (openCountrySelectionDialog) {
-        CountrySelectionDialog(
+    if (openCountrySelectionList) {
+        CountrySelectionList(
             countriesList = applicableCountriesList,
             countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+            countryListDisplayType = countryListDisplayType,
             onDismissRequest = {
-                openCountrySelectionDialog = false
+                openCountrySelectionList = false
             },
             onSelected = { country ->
                 selectedCountry = country
-                openCountrySelectionDialog = false
+                openCountrySelectionList = false
                 onCountrySelected(country)
             },
         )
@@ -93,7 +98,7 @@ fun CountryPicker(
         selectedCountryDisplayProperties = selectedCountryDisplayProperties,
         modifier = modifier
     ) {
-        openCountrySelectionDialog = !openCountrySelectionDialog
+        openCountrySelectionList = !openCountrySelectionList
     }
 }
 
@@ -129,7 +134,8 @@ private fun SelectedCountrySection(
                 Image(
                     modifier = Modifier
                         .width(flagDimensions.width)
-                        .height(flagDimensions.height),
+                        .height(flagDimensions.height)
+                        .clip(flagShape),
                     painter = painterResource(selectedCountry.countryFlag),
                     contentScale = ContentScale.Crop,
                     contentDescription = selectedCountry.countryName
