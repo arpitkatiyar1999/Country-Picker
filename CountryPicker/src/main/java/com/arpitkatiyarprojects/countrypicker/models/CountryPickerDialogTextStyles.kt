@@ -1,5 +1,6 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
 
 /**
@@ -11,6 +12,7 @@ import androidx.compose.ui.text.TextStyle
  * @param titleTextStyle Text style for the dialog title (e.g., "Select a Country").
  * @param noSearchedCountryAvailableTextStyle Text style for the message displayed when no countries match the search.
  */
+@Immutable
 data class CountryPickerDialogTextStyles(
     val countryPhoneCodeTextStyle: TextStyle? = null,
     val countryNameTextStyle: TextStyle? = null,

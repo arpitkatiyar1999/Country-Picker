@@ -1,6 +1,7 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Immutable
 
 
 /**
@@ -10,8 +11,9 @@ import androidx.annotation.DrawableRes
  * @property countryName The name of the country.
  * @property countryFlag The drawable resource ID of the country flag.
  */
+@Immutable
 data class CountryDetails(
-    var countryCode: String,
+    val countryCode: String,
     val countryPhoneNumberCode: String,
     val countryName: String,
     @DrawableRes val countryFlag: Int

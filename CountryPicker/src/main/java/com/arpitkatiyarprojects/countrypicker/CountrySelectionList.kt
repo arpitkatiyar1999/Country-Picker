@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -28,6 +29,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,6 +53,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerColors
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper.searchForCountry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -62,6 +65,7 @@ import kotlinx.coroutines.withContext
  * @param countriesList List of country details to be displayed in the dialog.
  * @param countriesListDialogDisplayProperties The [CountriesListDialogDisplayProperties] properties related to the country selection dialog, including flag dimensions and text styles.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDismissRequest Callback triggered when the dialog is dismissed.
  * @param onSelected Callback triggered when a country is selected from the dialog.
  */
@@ -70,6 +74,7 @@ internal fun CountrySelectionList(
     countriesList: List<CountryDetails>,
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
     countryListDisplayType: CountryListDisplayType,
+    countryPickerColors: CountryPickerColors,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit,
 ) {
@@ -78,6 +83,7 @@ internal fun CountrySelectionList(
         CountryListDisplayType.BottomSheet -> CountryListBottomSheet(
             countriesList,
             countriesListDialogDisplayProperties,
+            countryPickerColors,
             onDismissRequest,
             onSelected
         )
@@ -85,6 +91,7 @@ internal fun CountrySelectionList(
         CountryListDisplayType.Dialog -> CountryListDialog(
             countriesList,
             countriesListDialogDisplayProperties,
+            countryPickerColors,
             onDismissRequest,
             onSelected
         )
@@ -95,6 +102,7 @@ internal fun CountrySelectionList(
  * Composable function to display a list of countries in a dialog.
  * @param countriesList The list of countries to display in the dialog.
  * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors of the list.
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDismissRequest Callback invoked when the dialog is dismissed.
  * @param onSelected Callback invoked when a country is selected from the list.
  */
@@ -102,6 +110,7 @@ internal fun CountrySelectionList(
 private fun CountryListDialog(
     countriesList: List<CountryDetails>,
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
+    countryPickerColors: CountryPickerColors,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit
 ) {
@@ -112,6 +121,7 @@ private fun CountryListDialog(
             CountrySelectionList(
                 countriesList = countriesList,
                 countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+                countryPickerColors = countryPickerColors,
                 onSelected = onSelected,
                 onDismissRequest = onDismissRequest
             )
@@ -124,6 +134,7 @@ private fun CountryListDialog(
  * Composable function to display a list of countries in a modal bottom sheet.
  * @param countriesList The list of countries to display in the bottom sheet.
  * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors of the list.
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDismissRequest Callback invoked when the bottom sheet is dismissed.
  * @param onSelected Callback invoked when a country is selected from the list.
  */
@@ -132,6 +143,7 @@ private fun CountryListDialog(
 private fun CountryListBottomSheet(
     countriesList: List<CountryDetails>,
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
+    countryPickerColors: CountryPickerColors,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit
 ) {
@@ -146,6 +158,7 @@ private fun CountryListBottomSheet(
         CountrySelectionList(
             countriesList = countriesList,
             countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
+            countryPickerColors = countryPickerColors,
             onSelected = onSelected,
             onDismissRequest = onDismissRequest
         )
@@ -157,6 +170,7 @@ private fun CountryListBottomSheet(
  * Composable function to display the country selection list with a search bar and filtered results.
  * @param countriesList The complete list of country details to display.
  * @param countriesListDialogDisplayProperties Properties for customizing the display style and behavior of the country list.
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDismissRequest Callback invoked when the dismiss action (e.g., back button) is triggered.
  * @param onSelected Callback invoked when a country is selected from the list.
  */
@@ -164,6 +178,7 @@ private fun CountryListBottomSheet(
 private fun CountrySelectionList(
     countriesList: List<CountryDetails>,
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
+    countryPickerColors: CountryPickerColors,
     onDismissRequest: () -> Unit,
     onSelected: (item: CountryDetails) -> Unit
 ) {
@@ -174,6 +189,7 @@ private fun CountrySelectionList(
         CountriesListTopBarSection(
             searchValue,
             countriesListDialogDisplayProperties,
+            countryPickerColors,
             onDismissRequest
         ) { searchStr ->
             searchValue = searchStr
@@ -185,7 +201,7 @@ private fun CountrySelectionList(
                 }
             }
         }
-    }) {
+    }, containerColor = countryPickerColors.countriesListContainerColor) {
         CountriesListSection(
             countriesList = if (searchValue.isEmpty()) countriesList else filteredCountries,
             countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
@@ -207,6 +223,7 @@ private fun CountrySelectionList(
  *
  * @param searchValue The current search query string.
  * @param countriesListDialogDisplayProperties Properties for customizing the display styles and behaviors.
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDismissRequest Callback invoked when the dismiss action (e.g., back button) is triggered.
  * @param onSearchChanged Callback invoked whenever the search query changes.
  */
@@ -215,6 +232,7 @@ private fun CountrySelectionList(
 private fun CountriesListTopBarSection(
     searchValue: String,
     countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties,
+    countryPickerColors: CountryPickerColors,
     onDismissRequest: () -> Unit,
     onSearchChanged: (searchStr: String) -> Unit
 ) {
@@ -225,6 +243,7 @@ private fun CountriesListTopBarSection(
     }
     with(countriesListDialogDisplayProperties) {
         CenterAlignedTopAppBar(
+            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = countryPickerColors.countriesListContainerColor),
             windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
             title = {
                 if (isSearchEnabled) {
@@ -257,6 +276,7 @@ private fun CountriesListTopBarSection(
                             disabledIndicatorColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
                             unfocusedIndicatorColor = Color.Transparent,
+                            cursorColor = countryPickerColors.searchCursorColor
                         ),
                         textStyle = MaterialTheme.typography.labelLarge,
                     )
@@ -276,6 +296,7 @@ private fun CountriesListTopBarSection(
                     Icon(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         contentDescription = null,
+                        tint = countryPickerColors.backIconColor
                     )
                 }
             },
@@ -290,6 +311,7 @@ private fun CountriesListTopBarSection(
                     Icon(
                         imageVector = if (isSearchEnabled) Icons.Default.Clear else Icons.Default.Search,
                         contentDescription = null,
+                        tint = if (isSearchEnabled) countryPickerColors.cancelIconColor else countryPickerColors.searchIconColor
                     )
                 }
             },
@@ -352,11 +374,13 @@ private fun CountriesListItem(
     onCountrySelected: () -> Unit
 ) {
     with(countriesListDialogDisplayProperties) {
-        ListItem(modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                onCountrySelected()
-            },
+        ListItem(
+            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onCountrySelected()
+                },
             leadingContent = {
                 Image(
                     modifier = Modifier
