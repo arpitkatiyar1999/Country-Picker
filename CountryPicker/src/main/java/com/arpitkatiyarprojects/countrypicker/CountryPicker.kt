@@ -1,6 +1,7 @@
 package com.arpitkatiyarprojects.countrypicker
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,7 +30,9 @@ import androidx.compose.ui.unit.dp
 import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerColors
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
+import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerDefault
 import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
 
 
@@ -42,6 +45,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
  * @param defaultCountryCode  Specifies the default country code to be pre-selected in the picker. The code must adhere to the 2-letter ISO standard. For example, "in" represents India. If not explicitly provided, the picker will automatically detect the user's country.
  * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  */
 @Composable
@@ -53,6 +57,7 @@ fun CountryPicker(
     defaultCountryCode: String? = null,
     countriesList: List<String>? = null,
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
+    countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
     val context = LocalContext.current
@@ -82,6 +87,7 @@ fun CountryPicker(
             countriesList = applicableCountriesList,
             countriesListDialogDisplayProperties = countriesListDialogDisplayProperties,
             countryListDisplayType = countryListDisplayType,
+            countryPickerColors = countryPickerColors,
             onDismissRequest = {
                 openCountrySelectionList = false
             },
@@ -96,6 +102,7 @@ fun CountryPicker(
         defaultPaddingValues = defaultPaddingValues,
         selectedCountry = selectedCountry,
         selectedCountryDisplayProperties = selectedCountryDisplayProperties,
+        countryPickerColors = countryPickerColors,
         modifier = modifier
     ) {
         openCountrySelectionList = !openCountrySelectionList
@@ -109,6 +116,7 @@ fun CountryPicker(
  * @param selectedCountryDisplayProperties The [SelectedCountryDisplayProperties] properties related to the selected country display, including flag dimensions and text styles.
  * @param defaultPaddingValues Padding values applied to the Row container for the section.
  * @param selectedCountry The details of the selected country, encapsulated in a `CountryDetails` object.
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param modifier Modifier applied to the Row, allowing for customization of its appearance and behavior.
  * @param onSelectCountry A callback function triggered when the user clicks on the Row, used to handle the selection event.
  */
@@ -117,11 +125,13 @@ private fun SelectedCountrySection(
     defaultPaddingValues: PaddingValues,
     selectedCountry: CountryDetails,
     selectedCountryDisplayProperties: SelectedCountryDisplayProperties,
+    countryPickerColors: CountryPickerColors,
     modifier: Modifier = Modifier,
     onSelectCountry: () -> Unit,
 ) {
     Row(
         modifier = modifier
+            .background(countryPickerColors.selectedCountryContainerColor)
             .clickable {
                 onSelectCountry()
             }
@@ -165,7 +175,8 @@ private fun SelectedCountrySection(
             }
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = stringResource(R.string.select_country_dropdown)
+                contentDescription = stringResource(R.string.select_country_dropdown),
+                tint = countryPickerColors.dropDownIconColor
             )
         }
     }

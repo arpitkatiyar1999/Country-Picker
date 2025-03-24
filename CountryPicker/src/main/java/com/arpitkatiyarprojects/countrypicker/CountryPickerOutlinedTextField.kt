@@ -23,7 +23,9 @@ import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
 import com.arpitkatiyarprojects.countrypicker.models.BorderThickness
 import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayProperties
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.models.CountryPickerColors
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
+import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerDefault
 
 /**
  * @param mobileNumber The mobile number to be shown in the text field.
@@ -54,6 +56,7 @@ import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayPrope
  * @param colors [TextFieldColors] that will be used to resolve the colors used for this text field in different.
  * @param borderThickness Represents the border thickness for focused and unfocused states.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
+ * @param countryPickerColors Colors used to style various components of the country picker
  * @param onDone The callback is triggered when the user clicks the Done button on the keyboard, as the default IME action is set to Done.
  */
 @Composable
@@ -86,6 +89,7 @@ fun CountryPickerOutlinedTextField(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
     borderThickness: BorderThickness = BorderThickness(),
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
+    countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
     onDone: (() -> Unit)? = null,
 ) {
     PickerOutlinedTextField(
@@ -108,6 +112,7 @@ fun CountryPickerOutlinedTextField(
                 defaultCountryCode = defaultCountryCode,
                 countriesList = countriesList,
                 countryListDisplayType = countryListDisplayType,
+                countryPickerColors = countryPickerColors,
                 onCountrySelected = onCountrySelected
             )
         },

@@ -1,5 +1,6 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -14,6 +15,7 @@ import androidx.compose.ui.unit.dp
  * @param spaceAfterCountryName Defines the spacing after the country name, iff showCountryName = true , represented as [Dp].
  * @param spaceAfterCountryCode Defines the spacing after the country code, iff showCountryCode = true , represented as [Dp].
  */
+@Immutable
 data class SelectedCountryProperties(
     val showCountryFlag: Boolean = true,
     val showCountryPhoneCode: Boolean = true,
