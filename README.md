@@ -137,13 +137,13 @@ fun CountryPicker(
 - `countryListDisplayType: CountryListDisplayType`- The type of UI to use for displaying the list (BottomSheet or Dialog).
 
 - `countryPickerColors: CountryPickerColors`- Colors used to style various components of the country picker,including the following:-
-   - `dropDownIconColor: Color`- Color for the dropdown icon. Default is `LocalContentColor.current`.
-   - `backIconColor: Color`- Color for the back icon. Default is `LocalContentColor.current`.
-   - `searchIconColor: Color`- Color for the search icon. Default is `LocalContentColor.current`.
-   - `cancelIconColor: Color`- Color for the cancel (clear) icon. Default is `LocalContentColor.current`.
-   - `searchCursorColor: Color`- Color for the search field cursor. Default is `Color.Unspecified`.
-   - `selectedCountryContainerColor: Color`- Background color for the selected country container. Default is `Color.Transparent`.
-   - `countriesListContainerColor: Color`- Background color for the countries list container. Default is `MaterialTheme.colorScheme.background`.
+    - `dropDownIconColor: Color`- Color for the dropdown icon. Default is `LocalContentColor.current`.
+    - `backIconColor: Color`- Color for the back icon. Default is `LocalContentColor.current`.
+    - `searchIconColor: Color`- Color for the search icon. Default is `LocalContentColor.current`.
+    - `cancelIconColor: Color`- Color for the cancel (clear) icon. Default is `LocalContentColor.current`.
+    - `searchCursorColor: Color`- Color for the search field cursor. Default is `Color.Unspecified`.
+    - `selectedCountryContainerColor: Color`- Background color for the selected country container. Default is `Color.Transparent`.
+    - `countriesListContainerColor: Color`- Background color for the countries list container. Default is `MaterialTheme.colorScheme.background`.
 
 - `onCountrySelected: (country: CountryDetails) -> Unit`- The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
 
