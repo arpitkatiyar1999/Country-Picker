@@ -1,5 +1,6 @@
 package com.arpitkatiyarprojects.countrypicker.utils
 
+import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.google.i18n.phonenumbers.Phonenumber
 
@@ -14,6 +15,7 @@ object CountryPickerUtils {
      */
     fun isMobileNumberValid(mobileNumber: String, countryCode: String): Boolean {
         return try {
+            PhoneNumberUtil.getInstance()
             val phoneNumber =
                 PhoneNumberUtil.getInstance().parse(
                     mobileNumber.trim(),
@@ -21,7 +23,9 @@ object CountryPickerUtils {
                 )
             PhoneNumberUtil.getInstance().isValidNumber(phoneNumber)
         } catch (exception: Exception) {
-            LoggerHelper.logError(exception)
+            if (exception !is NumberParseException) {
+                LoggerHelper.logError(exception)
+            }
             false
         }
     }
