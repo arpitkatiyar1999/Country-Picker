@@ -58,6 +58,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerDefault
  * @param borderThickness Represents the border thickness for focused and unfocused states.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param countryPickerColors Colors used to style various components of the country picker
+ * @param isPickerEnabled Determines whether the country picker can be interacted with.
  * @param onDone The callback is triggered when the user clicks the Done button on the keyboard, as the default IME action is set to Done.
  */
 @Composable
@@ -91,6 +92,7 @@ fun CountryPickerOutlinedTextField(
     borderThickness: BorderThickness = BorderThickness(),
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+    isPickerEnabled: Boolean = enabled,
     onDone: (() -> Unit)? = null,
 ) {
     PickerOutlinedTextField(
@@ -114,7 +116,8 @@ fun CountryPickerOutlinedTextField(
                 countriesList = countriesList,
                 countryListDisplayType = countryListDisplayType,
                 countryPickerColors = countryPickerColors,
-                onCountrySelected = onCountrySelected
+                onCountrySelected = onCountrySelected,
+                isPickerEnabled = isPickerEnabled
             )
         },
         trailingIcon = trailingIcon,
@@ -170,6 +173,7 @@ fun CountryPickerOutlinedTextField(
  * @param borderThickness Represents the border thickness for focused and unfocused states.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param countryPickerColors Colors used to style various components of the country picker
+ * @param isPickerEnabled Determines whether the country picker can be interacted with.
  * @param onDone The callback is triggered when the user clicks the Done button on the keyboard, as the default IME action is set to Done.
  */
 @Composable
@@ -203,6 +207,7 @@ fun CountryPickerOutlinedTextField(
     borderThickness: BorderThickness = BorderThickness(),
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+    isPickerEnabled: Boolean = enabled,
     onDone: (() -> Unit)? = null,
 ) {
     PickerOutlinedTextField(
@@ -226,7 +231,8 @@ fun CountryPickerOutlinedTextField(
                 countriesList = countriesList,
                 countryListDisplayType = countryListDisplayType,
                 countryPickerColors = countryPickerColors,
-                onCountrySelected = onCountrySelected
+                onCountrySelected = onCountrySelected,
+                isPickerEnabled = isPickerEnabled
             )
         },
         trailingIcon = trailingIcon,

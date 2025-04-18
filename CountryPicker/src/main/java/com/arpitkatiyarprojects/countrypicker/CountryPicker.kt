@@ -46,6 +46,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
  * @param countriesList Specifies a list of countries to populate in the picker. If not provided, the picker will use a predefined list of countries. It's essential that the provided countries list strictly adheres to the standard 2-letter ISO code format for each country.
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param countryPickerColors Colors used to style various components of the country picker
+ * @param isPickerEnabled Determines whether the country picker can be interacted with.
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  */
 @Composable
@@ -58,6 +59,7 @@ fun CountryPicker(
     countriesList: List<String>? = null,
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+    isPickerEnabled: Boolean = true,
     onCountrySelected: (country: CountryDetails) -> Unit
 ) {
     val context = LocalContext.current
@@ -103,6 +105,7 @@ fun CountryPicker(
         selectedCountry = selectedCountry,
         selectedCountryDisplayProperties = selectedCountryDisplayProperties,
         countryPickerColors = countryPickerColors,
+        isPickerEnabled = isPickerEnabled,
         modifier = modifier
     ) {
         openCountrySelectionList = !openCountrySelectionList
@@ -117,6 +120,7 @@ fun CountryPicker(
  * @param defaultPaddingValues Padding values applied to the Row container for the section.
  * @param selectedCountry The details of the selected country, encapsulated in a `CountryDetails` object.
  * @param countryPickerColors Colors used to style various components of the country picker
+ * @param isPickerEnabled Determines whether the country picker can be interacted with.
  * @param modifier Modifier applied to the Row, allowing for customization of its appearance and behavior.
  * @param onSelectCountry A callback function triggered when the user clicks on the Row, used to handle the selection event.
  */
@@ -126,13 +130,14 @@ private fun SelectedCountrySection(
     selectedCountry: CountryDetails,
     selectedCountryDisplayProperties: SelectedCountryDisplayProperties,
     countryPickerColors: CountryPickerColors,
+    isPickerEnabled: Boolean,
     modifier: Modifier = Modifier,
     onSelectCountry: () -> Unit,
 ) {
     Row(
         modifier = modifier
-            .background(countryPickerColors.selectedCountryContainerColor)
-            .clickable {
+            .background(if (isPickerEnabled) countryPickerColors.selectedCountryContainerColor else countryPickerColors.selectedCountryDisabledContainerColor)
+            .clickable(isPickerEnabled) {
                 onSelectCountry()
             }
             .padding(defaultPaddingValues),
@@ -173,11 +178,13 @@ private fun SelectedCountrySection(
                 )
                 Spacer(modifier = Modifier.width(properties.spaceAfterCountryCode))
             }
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = stringResource(R.string.select_country_dropdown),
-                tint = countryPickerColors.dropDownIconColor
-            )
+            if (properties.showDropDownIcon) {
+                Icon(
+                    imageVector = Icons.Default.ArrowDropDown,
+                    contentDescription = stringResource(R.string.select_country_dropdown),
+                    tint = if (isPickerEnabled) countryPickerColors.dropDownIconColor else countryPickerColors.dropDownDisabledIconColor
+                )
+            }
         }
     }
 }

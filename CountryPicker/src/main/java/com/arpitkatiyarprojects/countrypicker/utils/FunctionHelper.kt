@@ -2,6 +2,9 @@ package com.arpitkatiyarprojects.countrypicker.utils
 
 import android.content.Context
 import android.telephony.TelephonyManager
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.arpitkatiyarprojects.countrypicker.R
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 
@@ -1538,4 +1541,19 @@ internal object FunctionHelper {
             R.drawable.zw
         ),
     ).sortedBy { it.countryName }
+
+
+    /**
+     * Returns a color typically used for disabled content, based on the current theme's onSurface color.
+     *
+     * The color is derived by applying 38% opacity to `MaterialTheme.colorScheme.onSurface`,
+     * following Material Design guidelines for disabled states.
+     *
+     * @return A [Color] representing a disabled content color.
+     */
+
+    @Composable
+    internal fun getDisabledContentColor(): Color {
+        return MaterialTheme.colorScheme.onSurface.copy(0.38f)
+    }
 }
