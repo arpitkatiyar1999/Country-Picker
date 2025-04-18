@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
  * @param spaceAfterCountryPhoneCode Defines the spacing after the country phone code, iff showCountryPhoneCode = true , represented as [Dp].
  * @param spaceAfterCountryName Defines the spacing after the country name, iff showCountryName = true , represented as [Dp].
  * @param spaceAfterCountryCode Defines the spacing after the country code, iff showCountryCode = true , represented as [Dp].
+ * @param showDropDownIcon If true, shows the dropdown icon next to the selected country.
  */
 @Immutable
 data class SelectedCountryProperties(
@@ -25,4 +26,5 @@ data class SelectedCountryProperties(
     val spaceAfterCountryPhoneCode: Dp = 6.dp,
     val spaceAfterCountryName: Dp = 6.dp,
     val spaceAfterCountryCode: Dp = 6.dp,
+    val showDropDownIcon: Boolean = true
 )

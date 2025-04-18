@@ -74,6 +74,7 @@ fun CountryPicker(
   countriesList: List<String>? = null,
   countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
   countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+  isPickerEnabled: Boolean = enabled,
   onCountrySelected: (country: CountryDetails) -> Unit
 )
 ```
@@ -93,6 +94,8 @@ fun CountryPicker(
     - `spaceAfterCountryPhoneCode: Dp` - Specifies spacing after the country phone code. Default is `6.dp`.
     - `spaceAfterCountryName: Dp` - Specifies spacing after the country name. Default is `6.dp`.
     - `spaceAfterCountryCode: Dp` - Specifies spacing after the country code. Default is `6.dp`.
+    - `showDropDownIcon: Boolean`- If true, shows the dropdown icon next to the selected country. Default is `true`.
+
 
   - `flagDimensions: FlagDimensions`: Sets the dimensions for the selected country flag, including the following:-
     - `width: Dp` - Width of the flag. Default is `28.dp`.
@@ -144,6 +147,10 @@ fun CountryPicker(
     - `searchCursorColor: Color`- Color for the search field cursor. Default is `Color.Unspecified`.
     - `selectedCountryContainerColor: Color`- Background color for the selected country container. Default is `Color.Transparent`.
     - `countriesListContainerColor: Color`- Background color for the countries list container. Default is `MaterialTheme.colorScheme.background`.
+    - `selectedCountryDisabledContainerColor: Color`- Background color for a disabled selected country container. Default is `Color.Transparent`.
+    - `dropDownDisabledIconColor: Color`- Color for the dropdown icon when disabled.
+
+-  `isPickerEnabled: Boolean`- Determines whether the country picker can be interacted with.
 
 - `onCountrySelected: (country: CountryDetails) -> Unit`- The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
 
@@ -183,6 +190,7 @@ fun CountryPickerOutlinedTextField(
   borderThickness: BorderThickness = BorderThickness(),
   countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
   countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+  isPickerEnabled: Boolean = enabled,
   onDone: (() -> Unit)? = null,
 )
 ```

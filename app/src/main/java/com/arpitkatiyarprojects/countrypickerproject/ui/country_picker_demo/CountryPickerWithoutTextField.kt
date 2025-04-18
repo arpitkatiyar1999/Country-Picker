@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,6 +24,7 @@ import com.arpitkatiyarprojects.countrypicker.models.CountriesListDialogDisplayP
 import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
 import com.arpitkatiyarprojects.countrypicker.models.CountryPickerDialogTextStyles
 import com.arpitkatiyarprojects.countrypicker.models.SelectedCountryDisplayProperties
+import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerDefault
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountriesListDialogSettings
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.CountryDetailsSectionRow
 import com.arpitkatiyarprojects.countrypickerproject.ui.common.SelectedCountrySettings
@@ -35,7 +37,11 @@ import com.arpitkatiyarprojects.countrypickerproject.ui.common.TitleSettingsComp
 fun CountryPickerWithoutTextField() {
 
     var selectedCountryDisplayProperties by remember {
-        mutableStateOf(SelectedCountryDisplayProperties(flagShape = RoundedCornerShape(4.dp)))
+        mutableStateOf(
+            SelectedCountryDisplayProperties(
+                flagShape = RoundedCornerShape(4.dp)
+            )
+        )
     }
 
     var countriesListDialogDisplayProperties by remember {
@@ -68,6 +74,10 @@ fun CountryPickerWithoutTextField() {
         mutableStateOf(false)
     }
 
+    OutlinedTextField("", {
+
+    })
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -77,6 +87,8 @@ fun CountryPickerWithoutTextField() {
         ) {
             SpacerHeight16()
             CountryPicker(
+                isPickerEnabled = false,
+                countryPickerColors = CountryPickerDefault.colors(),
                 modifier = Modifier
                     .padding(horizontal = 16.dp),
                 selectedCountryDisplayProperties = selectedCountryDisplayProperties,

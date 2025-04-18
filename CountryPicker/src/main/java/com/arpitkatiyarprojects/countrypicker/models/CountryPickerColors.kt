@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
  * @param searchCursorColor Color for the search field cursor, defaults to unspecified.
  * @param selectedCountryContainerColor Background color for the selected country container, defaults to transparent.
  * @param countriesListContainerColor Background color for the countries list container, defaults to MaterialTheme background.
+ * @param selectedCountryDisabledContainerColor Background color for a disabled selected country container, defaults to transparent.
+ * @param dropDownDisabledIconColor Color for the dropdown icon when disabled.
  **/
 @Immutable
 data class CountryPickerColors(
@@ -23,5 +25,7 @@ data class CountryPickerColors(
     val cancelIconColor: Color,
     val searchCursorColor: Color,
     val selectedCountryContainerColor: Color,
-    val countriesListContainerColor: Color
+    val countriesListContainerColor: Color,
+    val selectedCountryDisabledContainerColor: Color,
+    val dropDownDisabledIconColor: Color
 )
