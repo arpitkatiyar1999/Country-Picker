@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -47,6 +48,7 @@ import com.arpitkatiyarprojects.countrypicker.utils.FunctionHelper
  * @param countryListDisplayType The type of UI to use for displaying the list (BottomSheet or Dialog).
  * @param countryPickerColors Colors used to style various components of the country picker
  * @param isPickerEnabled Determines whether the country picker can be interacted with.
+ * @param dropDownIcon Supply a custom dropDownIcon. If null, [DefaultDropDownIcon] will be used.
  * @param onCountrySelected The callback function is triggered each time a country is selected within the picker. Additionally, it is also invoked when the picker is first displayed on the screen with the default selected country.
  */
 @Composable
@@ -60,7 +62,10 @@ fun CountryPicker(
     countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
     countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
     isPickerEnabled: Boolean = true,
-    onCountrySelected: (country: CountryDetails) -> Unit
+    dropDownIcon: @Composable RowScope.(Boolean, CountryPickerColors) -> Unit = { isPickerEnabled, countryPickerColors ->
+        DefaultDropDownIcon(isPickerEnabled, countryPickerColors)
+    },
+    onCountrySelected: (country: CountryDetails) -> Unit,
 ) {
     val context = LocalContext.current
     var openCountrySelectionList by remember { mutableStateOf(false) }
@@ -106,7 +111,8 @@ fun CountryPicker(
         selectedCountryDisplayProperties = selectedCountryDisplayProperties,
         countryPickerColors = countryPickerColors,
         isPickerEnabled = isPickerEnabled,
-        modifier = modifier
+        dropDownIcon = dropDownIcon,
+        modifier = modifier,
     ) {
         openCountrySelectionList = !openCountrySelectionList
     }
@@ -132,6 +138,7 @@ private fun SelectedCountrySection(
     countryPickerColors: CountryPickerColors,
     isPickerEnabled: Boolean,
     modifier: Modifier = Modifier,
+    dropDownIcon: @Composable RowScope.(Boolean, CountryPickerColors) -> Unit,
     onSelectCountry: () -> Unit,
 ) {
     Row(
@@ -179,12 +186,28 @@ private fun SelectedCountrySection(
                 Spacer(modifier = Modifier.width(properties.spaceAfterCountryCode))
             }
             if (properties.showDropDownIcon) {
-                Icon(
-                    imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = stringResource(R.string.select_country_dropdown),
-                    tint = if (isPickerEnabled) countryPickerColors.dropDownIconColor else countryPickerColors.dropDownDisabledIconColor
+                dropDownIcon(
+                    isPickerEnabled,
+                    countryPickerColors,
                 )
             }
         }
     }
+}
+
+/**
+ * A composable function that displays the dropDownIcon from the [CountryPicker] when the dropDownIcon parameter is not overridden.
+ * @param countryPickerColors Colors used to style the dropDownIcon
+ * @param isPickerEnabled Determines whether the dropDownIcon.
+ */
+@Composable
+fun DefaultDropDownIcon(
+    isPickerEnabled: Boolean = true,
+    countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+) {
+    Icon(
+        imageVector = Icons.Default.ArrowDropDown,
+        contentDescription = stringResource(R.string.select_country_dropdown),
+        tint = if (isPickerEnabled) countryPickerColors.dropDownIconColor else countryPickerColors.dropDownDisabledIconColor,
+    )
 }
