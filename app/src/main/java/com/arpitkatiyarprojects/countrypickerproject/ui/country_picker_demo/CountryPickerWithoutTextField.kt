@@ -87,7 +87,7 @@ fun CountryPickerWithoutTextField() {
         ) {
             SpacerHeight16()
             CountryPicker(
-                isPickerEnabled = false,
+                isPickerEnabled = true,
                 countryPickerColors = CountryPickerDefault.colors(),
                 modifier = Modifier
                     .padding(horizontal = 16.dp),

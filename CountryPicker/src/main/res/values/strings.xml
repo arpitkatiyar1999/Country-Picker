@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="andorra">Andorra</string>
-    <string name="united_arab_emirates_uae">United Arab Emirates (UAE)</string>
+    <string name="united_arab_emirates_uae">United Arab Emirates</string>
     <string name="afghanistan">Afghanistan</string>
     <string name="antigua_and_barbuda">Antigua and Barbuda</string>
     <string name="anguilla">Anguilla</string>
@@ -49,7 +49,7 @@
     <string name="colombia">Colombia</string>
     <string name="costa_rica">Costa Rica</string>
     <string name="cuba">Cuba</string>
-    <string name="cape_verde">Cape Verde</string>
+    <string name="cabo_verde">Cabo Verde</string>
     <string name="cura_ao">Curaçao</string>
     <string name="christmas_island">Christmas Island</string>
     <string name="cyprus">Cyprus</string>
@@ -76,7 +76,7 @@
     <string name="united_kingdom">United Kingdom</string>
     <string name="grenada">Grenada</string>
     <string name="georgia">Georgia</string>
-    <string name="french_guyana">French Guyana</string>
+    <string name="french_guiana">French Guiana</string>
     <string name="ghana">Ghana</string>
     <string name="gibraltar">Gibraltar</string>
     <string name="greenland">Greenland</string>
@@ -111,7 +111,7 @@
     <string name="us_virgin_islands">US Virgin Islands</string>
     <string name="british_virgin_islands">British Virgin Islands</string>
     <string name="venezuela_bolivarian_republic_of">Venezuela, Bolivarian Republic Of</string>
-    <string name="saint_vincent_amp_the_grenadines"><![CDATA[Saint Vincent &amp; The Grenadines]]></string>
+    <string name="saint_vincent_amp_the_grenadines">Saint Vincent &amp; The Grenadines</string>
     <string name="holy_see_vatican_city_state">Holy See (vatican City State)</string>
     <string name="uzbekistan">Uzbekistan</string>
     <string name="uruguay">Uruguay</string>
@@ -121,8 +121,8 @@
     <string name="tanzania_united_republic_of">Tanzania, United Republic Of</string>
     <string name="taiwan">Taiwan</string>
     <string name="tuvalu">Tuvalu</string>
-    <string name="trinidad_amp_tobago"><![CDATA[Trinidad &amp; Tobago]]></string>
-    <string name="turkey">Turkey</string>
+    <string name="trinidad_amp_tobago">Trinidad &amp; Tobago</string>
+    <string name="turkiye">Türkiye</string>
     <string name="tonga">Tonga</string>
     <string name="tunisia">Tunisia</string>
     <string name="turkmenistan">Turkmenistan</string>
@@ -188,7 +188,7 @@
     <string name="namibia">Namibia</string>
     <string name="new_caledonia">New Caledonia</string>
     <string name="niger">Niger</string>
-    <string name="norfolk_islands">Norfolk Islands</string>
+    <string name="norfolk_island">Norfolk Island</string>
     <string name="nigeria">Nigeria</string>
     <string name="nicaragua">Nicaragua</string>
     <string name="netherlands">Netherlands</string>
@@ -237,7 +237,7 @@
     <string name="el_salvador">El Salvador</string>
     <string name="sint_maarten">Sint Maarten</string>
     <string name="syrian_arab_republic">Syrian Arab Republic</string>
-    <string name="swaziland">Swaziland</string>
+    <string name="eswatini">Eswatini</string>
     <string name="turks_and_caicos_islands">Turks and Caicos Islands</string>
     <string name="chad">Chad</string>
     <string name="search_country">Search Country...</string>

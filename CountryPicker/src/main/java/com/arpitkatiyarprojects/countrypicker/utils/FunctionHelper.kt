@@ -391,7 +391,7 @@ internal object FunctionHelper {
         CountryDetails(
             "cv",
             "+238",
-            context.getString(R.string.cape_verde),
+            context.getString(R.string.cabo_verde),
             R.drawable.cv
         ),
         CountryDetails(
@@ -553,7 +553,7 @@ internal object FunctionHelper {
         CountryDetails(
             "gf",
             "+594",
-            context.getString(R.string.french_guyana),
+            context.getString(R.string.french_guiana),
             R.drawable.gf
         ),
         CountryDetails(
@@ -1033,7 +1033,7 @@ internal object FunctionHelper {
         CountryDetails(
             "nf",
             "+672",
-            context.getString(R.string.norfolk_islands),
+            context.getString(R.string.norfolk_island),
             R.drawable.nf
         ),
         CountryDetails(
@@ -1327,7 +1327,7 @@ internal object FunctionHelper {
         CountryDetails(
             "sz",
             "+268",
-            context.getString(R.string.swaziland),
+            context.getString(R.string.eswatini),
             R.drawable.sz
         ),
         CountryDetails(
@@ -1393,7 +1393,7 @@ internal object FunctionHelper {
         CountryDetails(
             "tr",
             "+90",
-            context.getString(R.string.turkey),
+            context.getString(R.string.turkiye),
             R.drawable.tr
         ),
         CountryDetails(
