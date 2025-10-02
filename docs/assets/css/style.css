@@ -647,7 +647,7 @@ footer {
   background-color: var(--surface);
   border-top: 1px solid var(--border-color);
   padding: 2rem;
-  margin-top: 4rem;
+  margin-top: 1rem;
   text-align: center;
   color: var(--text-secondary);
 }
