@@ -64,45 +64,32 @@ document.querySelectorAll('.tab-button').forEach(button => {
     });
 });
 
-// Copy Code Button Functionality
+// Copy Code Button Functionality - Icon inside code block
 document.querySelectorAll('pre code').forEach((codeBlock) => {
     const pre = codeBlock.parentElement;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'code-wrapper';
 
-    const header = document.createElement('div');
-    header.className = 'code-header';
-
-    const language = codeBlock.className.replace('language-', '') || 'code';
-    const langLabel = document.createElement('span');
-    langLabel.className = 'code-language';
-    langLabel.textContent = language;
-
+    // Create copy button with icon
     const copyBtn = document.createElement('button');
-    copyBtn.className = 'copy-btn';
-    copyBtn.textContent = 'Copy';
+    copyBtn.className = 'copy-btn-icon';
+    copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    copyBtn.title = 'Copy code';
+
     copyBtn.addEventListener('click', async () => {
         try {
             await navigator.clipboard.writeText(codeBlock.textContent);
-            copyBtn.textContent = 'Copied!';
+            copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
             copyBtn.classList.add('copied');
             setTimeout(() => {
-                copyBtn.textContent = 'Copy';
+                copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
                 copyBtn.classList.remove('copied');
             }, 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
-            copyBtn.textContent = 'Error';
-            setTimeout(() => {
-                copyBtn.textContent = 'Copy';
-            }, 2000);
         }
     });
 
-    header.appendChild(langLabel);
-    header.appendChild(copyBtn);
-
-    pre.parentElement.insertBefore(header, pre);
+    pre.appendChild(copyBtn);
+    pre.style.position = 'relative';
 });
 
 // Smooth Scroll for Anchor Links

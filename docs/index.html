@@ -6,7 +6,7 @@
     <meta name="description" content="Country-Picker - A beautiful Jetpack Compose library for country code selection with phone number validation">
     <meta name="keywords" content="Android, Jetpack Compose, Country Picker, Phone Number, Kotlin, Material 3">
     <meta name="author" content="Arpit Katiyar">
-    <title>Country-Picker Documentation - Jetpack Compose Country Code Picker</title>
+    <title>Country-Picker - Beautiful Country Selection for Jetpack Compose</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -32,387 +32,356 @@
         </div>
     </header>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar">
-            <nav>
-                <div class="nav-section-title">On This Page</div>
-                <ul>
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#key-features">Key Features</a></li>
-                    <li><a href="#quick-start">Quick Start</a></li>
-                    <li><a href="#main-components">Main Components</a></li>
-                    <li><a href="#utility-functions">Utility Functions</a></li>
-                    <li><a href="#display-modes">Display Modes</a></li>
-                    <li><a href="#use-cases">Common Use Cases</a></li>
-                    <li><a href="#platform-support">Platform Support</a></li>
-                    <li><a href="#next-steps">Next Steps</a></li>
-                    <li><a href="#contributing">Contributing</a></li>
-                    <li><a href="#support">Support</a></li>
-                </ul>
+    <!-- Landing Page Container (Full-width, no sidebar) -->
+    <div class="landing-container">
+        <main class="landing-content">
 
-                <div class="nav-section">
-                    <div class="nav-section-title">Navigation</div>
-                    <ul>
-                        <li><a href="getting-started.html">Getting Started →</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
             <!-- Hero Section -->
-            <section class="hero">
-                <div style="margin-bottom: 1rem;">
-                    <span class="badge badge-primary" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">Version 2.1.5</span>
-                    <span class="badge badge-success" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">Material 3</span>
-                    <span class="badge badge-warning" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">API 21+</span>
-                    <span class="badge" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">193+ Countries</span>
+            <section class="hero-landing">
+                <div class="hero-badges-container">
+                    <span class="hero-badge">Version 2.1.5</span>
+                    <span class="hero-badge">Material 3</span>
+                    <span class="hero-badge">API 21+</span>
+                    <span class="hero-badge">193+ Countries</span>
                 </div>
-                <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 800;">Country-Picker</h1>
-                <p style="font-size: 1.35rem; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    A beautiful, customizable Jetpack Compose library for country code selection with phone number validation
+
+                <h1 class="hero-landing-title">Beautiful Country Selection<br>for Jetpack Compose</h1>
+
+                <p class="hero-landing-subtitle">
+                    Drop-in country picker with phone number validation. Zero configuration needed.
                 </p>
-                <p style="font-size: 1rem; opacity: 0.9; margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto;">
-                    ⚡ Lightweight • 🎨 Highly Customizable • ✅ Built-in Validation • 🔍 Smart Search
-                </p>
+
                 <div class="hero-buttons">
-                    <a href="getting-started.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                        🚀 Get Started
+                    <a href="getting-started.html" class="btn btn-primary" style="padding: 1.25rem 3rem; font-size: 1.25rem;">
+                        Get Started →
                     </a>
-                    <a href="https://github.com/arpitkatiyar1999/Country-Picker" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;" target="_blank">
+                    <a href="https://github.com/arpitkatiyar1999/Country-Picker" class="btn btn-secondary" style="padding: 1.25rem 3rem; font-size: 1.25rem;" target="_blank">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 0.5rem;">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                         View on GitHub
                     </a>
                 </div>
-            </section>
 
-            <!-- Overview -->
-            <section id="overview">
-                <h2>Overview</h2>
-                <p>
-                    Country-Picker is a lightweight, feature-rich Android library built with Jetpack Compose that provides
-                    an elegant solution for country code selection and phone number validation. It seamlessly integrates
-                    with Material 3 design principles and supports both Dialog and BottomSheet display modes.
-                </p>
-
-                <div class="alert alert-info">
-                    <strong>Requirements:</strong> This library requires Material 3 version <strong>1.4.0</strong> or later to work properly.
-                </div>
-            </section>
-
-            <!-- Key Features -->
-            <section id="key-features">
-                <h2>Key Features</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🌍</div>
-                        <h3>193+ Countries</h3>
-                        <p>Complete database of countries with flags, phone codes, and ISO codes</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">✅</div>
-                        <h3>Phone Validation</h3>
-                        <p>Built-in phone number validation using Google's libphonenumber</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🔍</div>
-                        <h3>Smart Search</h3>
-                        <p>Real-time filtering by country name, code, or phone code</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🎨</div>
-                        <h3>Highly Customizable</h3>
-                        <p>Full control over colors, text styles, dimensions, and shapes</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <h3>Auto-Detection</h3>
-                        <p>Automatically detects user's country from SIM card</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">💎</div>
-                        <h3>Material 3</h3>
-                        <p>Built with Material 3 components and theming support</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Lightweight</h3>
-                        <p>Minimal dependencies, optimized performance</p>
+                <!-- Hero Visual -->
+                <div class="hero-visual">
+                    <div class="demo-image">
+                        <img src="assets/images/hero-demo.png"
+                             alt="Country Picker Demo"
+                             style="max-width: 100%; height: auto; border-radius: 12px;"
+                             onerror="this.parentElement.innerHTML='<div style=\'color: rgba(255,255,255,0.8); font-size: 4rem;\'>📱</div><div style=\'color: rgba(255,255,255,0.9); margin-top: 1rem; font-size: 1.25rem;\'>Add hero-demo.png for visual demo</div>'">
                     </div>
                 </div>
             </section>
 
-            <!-- Quick Start -->
-            <section id="quick-start">
-                <h2>Quick Start</h2>
-                <h3>1. Add Dependency</h3>
-                <p>Add JitPack repository to your <code>settings.gradle</code>:</p>
+            <!-- Social Proof / Stats Section -->
+            <section class="section-white">
+                <div class="section-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">193+</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2.1.5</div>
+                            <div class="stat-label">Latest Version</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Kotlin</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">MIT</div>
+                            <div class="stat-label">Open Source</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <pre><code class="language-kotlin">dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven(url = "https://jitpack.io")
-    }
-}</code></pre>
+            <!-- Visual Demo Section -->
+            <section class="section-gray">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">See It in Action</h2>
+                        <p class="section-subtitle">Beautiful, intuitive country selection with two elegant display modes</p>
+                    </div>
 
-                <p>Add the dependency in your module-level <code>build.gradle</code>:</p>
+                    <div class="demo-showcase">
+                        <div class="demo-item">
+                            <div class="demo-image">
+                                <img src="assets/images/screenshots/dialog-mode.png"
+                                     alt="Dialog Mode"
+                                     style="max-width: 100%; height: auto;"
+                                     onerror="this.parentElement.innerHTML='📋<div style=\'margin-top: 1rem; font-size: 1rem; color: var(--text-secondary);\'>Add dialog-mode.png</div>'">
+                            </div>
+                            <h3 class="demo-title">Dialog Mode</h3>
+                            <p class="demo-description">Traditional modal dialog centered on screen with smooth animations</p>
+                        </div>
 
-                <pre><code class="language-kotlin">dependencies {
+                        <div class="demo-item">
+                            <div class="demo-image">
+                                <img src="assets/images/screenshots/bottomsheet-mode.png"
+                                     alt="BottomSheet Mode"
+                                     style="max-width: 100%; height: auto;"
+                                     onerror="this.parentElement.innerHTML='📱<div style=\'margin-top: 1rem; font-size: 1rem; color: var(--text-secondary);\'>Add bottomsheet-mode.png</div>'">
+                            </div>
+                            <h3 class="demo-title">BottomSheet Mode</h3>
+                            <p class="demo-description">Modern bottom sheet that slides up from the bottom</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section (Simplified to 6) -->
+            <section class="section-white">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Why Choose Country-Picker?</h2>
+                        <p class="section-subtitle">Everything you need for country selection and phone validation in one lightweight library</p>
+                    </div>
+
+                    <div class="features-grid-landing">
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">🌍</span>
+                            <h3 class="feature-title-landing">193+ Countries</h3>
+                            <p class="feature-description-landing">Complete database with flags, phone codes, and ISO codes for all countries</p>
+                        </div>
+
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">✅</span>
+                            <h3 class="feature-title-landing">Phone Validation</h3>
+                            <p class="feature-description-landing">Built-in validation using Google's libphonenumber for accurate results</p>
+                        </div>
+
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">🔍</span>
+                            <h3 class="feature-title-landing">Smart Search</h3>
+                            <p class="feature-description-landing">Real-time filtering by country name, code, or phone code</p>
+                        </div>
+
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">💎</span>
+                            <h3 class="feature-title-landing">Material 3 Native</h3>
+                            <p class="feature-description-landing">Built with Material 3 components, not a wrapper</p>
+                        </div>
+
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">🎨</span>
+                            <h3 class="feature-title-landing">Fully Customizable</h3>
+                            <p class="feature-description-landing">Control colors, text styles, dimensions, and shapes</p>
+                        </div>
+
+                        <div class="feature-card-landing">
+                            <span class="feature-icon-landing">⚡</span>
+                            <h3 class="feature-title-landing">Zero Config</h3>
+                            <p class="feature-description-landing">Works out of the box with sensible defaults</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Start Section -->
+            <section class="section-gray">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Get Started in Minutes</h2>
+                        <p class="section-subtitle">Just two steps to integrate Country-Picker into your app</p>
+                    </div>
+
+                    <div class="quick-start-grid">
+                        <!-- Step 1 -->
+                        <div class="code-step">
+                            <div class="step-number">1</div>
+                            <h3 class="step-title">Add the dependency</h3>
+                            <pre><code class="language-kotlin">dependencies {
     implementation("com.github.arpitkatiyar1999:Country-Picker:2.1.5")
 }</code></pre>
+                        </div>
 
-                <h3>2. Basic Usage</h3>
-                <p>Use CountryPicker in your Compose function:</p>
-
-                <pre><code class="language-kotlin">@Composable
+                        <!-- Step 2 -->
+                        <div class="code-step">
+                            <div class="step-number">2</div>
+                            <h3 class="step-title">Use it in your Compose function</h3>
+                            <pre><code class="language-kotlin">@Composable
 fun MyScreen() {
     var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
 
     CountryPicker(
         onCountrySelected = { country ->
             selectedCountry = country
-            println("Selected: ${country.countryName} (${country.countryPhoneNumberCode})")
         }
     )
 }</code></pre>
-
-                <h3>3. With Text Field</h3>
-                <p>For phone number input with validation:</p>
-
-                <pre><code class="language-kotlin">@Composable
-fun PhoneNumberInput() {
-    var phoneNumber by remember { mutableStateOf("") }
-    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-
-    CountryPickerOutlinedTextField(
-        mobileNumber = phoneNumber,
-        onMobileNumberChange = { phoneNumber = it },
-        onCountrySelected = { selectedCountry = it },
-        label = { Text("Phone Number") }
-    )
-}</code></pre>
-
-                <div class="alert alert-success">
-                    <strong>That's it!</strong> You now have a fully functional country picker with phone number validation.
-                </div>
-            </section>
-
-            <!-- Components Overview -->
-            <section id="main-components">
-                <h2>Main Components</h2>
-
-                <div class="card">
-                    <h3>CountryPicker</h3>
-                    <p>
-                        A standalone country picker that displays the selected country with its flag, phone code,
-                        and optional country name or code. Perfect for forms where you need country selection
-                        without a text field.
-                    </p>
-                    <a href="components.html#countrypicker">Learn more →</a>
-                </div>
-
-                <div class="card">
-                    <h3>CountryPickerOutlinedTextField</h3>
-                    <p>
-                        Combines the country picker with a Material 3 OutlinedTextField for phone number input.
-                        Includes built-in validation and formatting capabilities.
-                    </p>
-                    <a href="components.html#textfield">Learn more →</a>
-                </div>
-            </section>
-
-            <!-- Utility Functions -->
-            <section id="utility-functions">
-                <h2>Utility Functions</h2>
-                <p>The library provides powerful utility functions for phone number operations:</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Function</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>isMobileNumberValid()</code></td>
-                            <td>Validates a mobile number for a specific country</td>
-                        </tr>
-                        <tr>
-                            <td><code>getExampleMobileNumber()</code></td>
-                            <td>Returns an example number for a country (formatted or raw)</td>
-                        </tr>
-                        <tr>
-                            <td><code>getFormattedMobileNumber()</code></td>
-                            <td>Formats a mobile number according to country rules</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <a href="utilities.html">View all utilities →</a>
-            </section>
-
-            <!-- Display Modes -->
-            <section id="display-modes">
-                <h2>Display Modes</h2>
-                <p>Choose between two elegant display modes for the country list:</p>
-
-                <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="feature-card">
-                        <h4>Dialog</h4>
-                        <p>Traditional modal dialog centered on screen</p>
-                        <pre><code class="language-kotlin">CountryPicker(
-    countryListDisplayType = CountryListDisplayType.Dialog
-)</code></pre>
+                        </div>
                     </div>
 
-                    <div class="feature-card">
-                        <h4>BottomSheet</h4>
-                        <p>Modern bottom sheet that slides up from bottom</p>
-                        <pre><code class="language-kotlin">CountryPicker(
-    countryListDisplayType = CountryListDisplayType.BottomSheet
-)</code></pre>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Example Use Cases -->
-            <section id="use-cases">
-                <h2>Common Use Cases</h2>
-                <ul>
-                    <li>✅ Phone number input forms with validation</li>
-                    <li>✅ User registration with phone verification</li>
-                    <li>✅ Contact information collection</li>
-                    <li>✅ International calling apps</li>
-                    <li>✅ E-commerce checkout with phone requirements</li>
-                    <li>✅ Profile settings with country selection</li>
-                </ul>
-            </section>
-
-            <!-- Browser Compatibility -->
-            <section id="platform-support">
-                <h2>Platform Support</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Platform</th>
-                            <th>Requirement</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Android</td>
-                            <td>API Level 21+ (Android 5.0 Lollipop)</td>
-                        </tr>
-                        <tr>
-                            <td>Compile SDK</td>
-                            <td>API Level 36 (Android 14+)</td>
-                        </tr>
-                        <tr>
-                            <td>Jetpack Compose</td>
-                            <td>Material 3 version 1.4.0+</td>
-                        </tr>
-                        <tr>
-                            <td>Kotlin</td>
-                            <td>1.9.0+ (Recommended: 2.0.0+)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- Next Steps -->
-            <section id="next-steps">
-                <h2>Next Steps</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h4>📚 Getting Started</h4>
-                        <p>Complete installation guide and first steps</p>
-                        <a href="getting-started.html">Read Guide →</a>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>🧩 Components</h4>
-                        <p>Detailed documentation for all components</p>
-                        <a href="components.html">Explore Components →</a>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>🎨 Customization</h4>
-                        <p>Learn how to style and customize the picker</p>
-                        <a href="customization.html">Customize →</a>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>💡 Examples</h4>
-                        <p>Real-world examples and code snippets</p>
-                        <a href="examples.html">View Examples →</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contributing -->
-            <section id="contributing">
-                <h2>Contributing</h2>
-                <p>
-                    We welcome contributions! If you'd like to contribute to the Country-Picker library,
-                    please check out our
-                    <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub repository</a>.
-                </p>
-            </section>
-
-            <!-- Support -->
-            <section id="support">
-                <h2>Support</h2>
-                <p>Need help? Here are some resources:</p>
-                <ul>
-                    <li>
-                        <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">
-                            Report an issue on GitHub
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <p style="font-size: 1.25rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 1rem;">
+                            That's it! You're ready to go. 🎉
+                        </p>
+                        <a href="getting-started.html" style="color: var(--primary-color); font-weight: 600; font-size: 1.125rem;">
+                            View complete installation guide →
                         </a>
-                    </li>
-                    <li>
-                        <a href="examples.html">Browse examples</a> for common scenarios
-                    </li>
-                    <li>
-                        <a href="api-reference.html">Check the API reference</a> for detailed parameter information
-                    </li>
-                </ul>
-            </section>
-
-            <!-- License -->
-            <section>
-                <h2>License</h2>
-                <p>
-                    Country-Picker is released under the
-                    <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">
-                        Apache License 2.0
-                    </a>.
-                </p>
-            </section>
-
-            <!-- Page Navigation -->
-            <nav class="page-navigation">
-                <a href="getting-started.html" class="nav-button nav-button-next">
-                    <div class="nav-button-content">
-                        <span class="nav-button-label">Next</span>
-                        <span class="nav-button-title">Getting Started</span>
                     </div>
-                    <span class="nav-icon">→</span>
-                </a>
-            </nav>
+                </div>
+            </section>
+
+            <!-- Component Showcase -->
+            <section class="section-white">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Two Powerful Components</h2>
+                        <p class="section-subtitle">Choose the right component for your use case</p>
+                    </div>
+
+                    <div class="component-comparison">
+                        <!-- CountryPicker -->
+                        <div class="comparison-card">
+                            <div class="comparison-image">
+                                <img src="assets/images/screenshots/country-picker-component.png"
+                                     alt="CountryPicker"
+                                     style="max-width: 100%; height: auto;"
+                                     onerror="this.parentElement.innerHTML='🌍'">
+                            </div>
+                            <div class="comparison-content">
+                                <h3 class="comparison-title">CountryPicker</h3>
+                                <p class="comparison-description">
+                                    Standalone country selector perfect for forms, profile settings, and anywhere you need country selection without phone input.
+                                </p>
+                                <a href="components.html#countrypicker" class="comparison-link">
+                                    Learn more →
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CountryPickerOutlinedTextField -->
+                        <div class="comparison-card">
+                            <div class="comparison-image">
+                                <img src="assets/images/screenshots/textfield-component.png"
+                                     alt="CountryPickerOutlinedTextField"
+                                     style="max-width: 100%; height: auto;"
+                                     onerror="this.parentElement.innerHTML='📱'">
+                            </div>
+                            <div class="comparison-content">
+                                <h3 class="comparison-title">CountryPickerOutlinedTextField</h3>
+                                <p class="comparison-description">
+                                    Complete phone number input with integrated country picker, validation, and formatting. Perfect for registration and contact forms.
+                                </p>
+                                <a href="components.html#textfield" class="comparison-link">
+                                    Learn more →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Section -->
+            <section class="section-gray">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Built for Production</h2>
+                        <p class="section-subtitle">Why developers love Country-Picker</p>
+                    </div>
+
+                    <div class="why-choose-grid">
+                        <div class="why-item">
+                            <div class="why-icon">✓</div>
+                            <div class="why-content">
+                                <h4 class="why-title">Production-Tested Validation</h4>
+                                <p class="why-description">
+                                    Uses Google's libphonenumber library for accurate, reliable phone number validation across all countries.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="why-item">
+                            <div class="why-icon">✓</div>
+                            <div class="why-content">
+                                <h4 class="why-title">Zero Configuration Needed</h4>
+                                <p class="why-description">
+                                    Works perfectly out of the box with sensible defaults. Customize only when you need to.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="why-item">
+                            <div class="why-icon">✓</div>
+                            <div class="why-content">
+                                <h4 class="why-title">Actively Maintained</h4>
+                                <p class="why-description">
+                                    Regular updates with new features, bug fixes, and support for latest Android versions.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="why-item">
+                            <div class="why-icon">✓</div>
+                            <div class="why-content">
+                                <h4 class="why-title">Kotlin-First Design</h4>
+                                <p class="why-description">
+                                    Written in 100% Kotlin with Compose in mind. Not a Java wrapper or port.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="why-item">
+                            <div class="why-icon">✓</div>
+                            <div class="why-content">
+                                <h4 class="why-title">Lightweight & Fast</h4>
+                                <p class="why-description">
+                                    Minimal dependencies and optimized performance. Won't bloat your app.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Platform Support -->
+            <section class="section-white">
+                <div class="section-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Platform Requirements</h2>
+                    </div>
+
+                    <div class="platform-badges">
+                        <div class="platform-badge">
+                            <div class="platform-name">Android</div>
+                            <div class="platform-version">API 21+ (Lollipop)</div>
+                        </div>
+                        <div class="platform-badge">
+                            <div class="platform-name">Material 3</div>
+                            <div class="platform-version">1.4.0+</div>
+                        </div>
+                        <div class="platform-badge">
+                            <div class="platform-name">Kotlin</div>
+                            <div class="platform-version">1.9.0+ (Recommended: 2.0.0+)</div>
+                        </div>
+                        <div class="platform-badge">
+                            <div class="platform-name">Compile SDK</div>
+                            <div class="platform-version">36 (Android 14+)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <section class="final-cta">
+                <h2 class="final-cta-title">Ready to Get Started?</h2>
+                <p class="final-cta-subtitle">
+                    Join developers using Country-Picker in production apps worldwide
+                </p>
+                <div class="cta-buttons">
+                    <a href="getting-started.html" class="cta-button-large cta-primary">
+                        Get Started Now
+                    </a>
+                    <a href="examples.html" class="cta-button-large cta-secondary">
+                        View Examples
+                    </a>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -424,7 +393,8 @@ fun PhoneNumberInput() {
         <p>
             <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub</a> |
             <a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a> |
-            <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">License</a>
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">License</a> |
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">Report Issue</a>
         </p>
     </footer>
 
