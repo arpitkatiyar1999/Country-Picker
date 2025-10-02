@@ -15,7 +15,6 @@ object CountryPickerUtils {
      */
     fun isMobileNumberValid(mobileNumber: String, countryCode: String): Boolean {
         return try {
-            PhoneNumberUtil.getInstance()
             val phoneNumber =
                 PhoneNumberUtil.getInstance().parse(
                     mobileNumber.trim(),
