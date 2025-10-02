@@ -1,12 +1,15 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.compose.compiler)
     id("maven-publish")
 }
 
 android {
     namespace = "com.arpitkatiyarprojects.countrypicker"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
@@ -26,15 +29,14 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompilerVersion.get()
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
+        }
     }
 }
 
@@ -42,9 +44,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     //compose
     implementation(libs.androidx.material3.library)
+    implementation(libs.androidx.compose.material.icons.core)
     // google phone number
     implementation(libs.libPhoneNumber)
-
 }
 
 
@@ -54,7 +56,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.github.arpitkatiyar1999"
                 artifactId = "countrypicker"
-                version = "2.1.4"
+                version = "2.1.5"
                 from(components["release"])
             }
         }
