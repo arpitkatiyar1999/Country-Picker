@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Country-Picker Components - Detailed documentation for CountryPicker and CountryPickerOutlinedTextField">
+    <title>Components - Country-Picker Documentation</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">CP</div>
+                <span>Country-Picker</span>
+            </a>
+            <nav class="header-nav">
+                <a href="getting-started.html">Get Started</a>
+                <a href="components.html">Components</a>
+                <a href="examples.html">Examples</a>
+                <a href="api-reference.html">API Reference</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    ☰
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                </ul>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Components</div>
+                    <ul>
+                        <li><a href="#countrypicker">CountryPicker</a></li>
+                        <li><a href="#textfield">CountryPickerOutlinedTextField</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Guides</div>
+                    <ul>
+                        <li><a href="customization.html">Customization</a></li>
+                        <li><a href="utilities.html">Utility Functions</a></li>
+                        <li><a href="models.html">Data Models</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Reference</div>
+                    <ul>
+                        <li><a href="api-reference.html">API Reference</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Components</h1>
+            <p class="text-muted">
+                Detailed documentation for all Country-Picker components with parameters, examples, and usage guidelines.
+            </p>
+
+            <!-- CountryPicker Component -->
+            <section id="countrypicker">
+                <h2>CountryPicker</h2>
+                <p>
+                    A standalone composable that displays the country picker without any text field.
+                    Perfect for forms where you need country selection separate from input fields.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>Use Case:</strong> Profile settings, address forms, country selection dropdowns,
+                    or any scenario where you need a country selector without phone number input.
+                </div>
+
+                <h3>Function Signature</h3>
+                <pre><code class="language-kotlin">@Composable
+fun CountryPicker(
+    modifier: Modifier = Modifier,
+    defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
+    selectedCountryDisplayProperties: SelectedCountryDisplayProperties = SelectedCountryDisplayProperties(),
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
+    defaultCountryCode: String? = null,
+    countriesList: List<String>? = null,
+    countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
+    countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+    isPickerEnabled: Boolean = true,
+    onCountrySelected: (country: CountryDetails) -> Unit
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>modifier</code></td>
+                            <td>Modifier</td>
+                            <td><code>Modifier</code></td>
+                            <td>Modifier to be applied to the component</td>
+                        </tr>
+                        <tr>
+                            <td><code>defaultPaddingValues</code></td>
+                            <td>PaddingValues</td>
+                            <td><code>PaddingValues(4.dp, 6.dp)</code></td>
+                            <td>Internal padding between container and content</td>
+                        </tr>
+                        <tr>
+                            <td><code>selectedCountryDisplayProperties</code></td>
+                            <td>SelectedCountryDisplayProperties</td>
+                            <td><code>SelectedCountryDisplayProperties()</code></td>
+                            <td>Display properties for the selected country (flag, text styles, spacing)</td>
+                        </tr>
+                        <tr>
+                            <td><code>countriesListDialogDisplayProperties</code></td>
+                            <td>CountriesListDialogDisplayProperties</td>
+                            <td><code>CountriesListDialogDisplayProperties()</code></td>
+                            <td>Display properties for the country selection dialog/bottomsheet</td>
+                        </tr>
+                        <tr>
+                            <td><code>defaultCountryCode</code></td>
+                            <td>String?</td>
+                            <td><code>null</code></td>
+                            <td>Default country code (ISO 3166-1 alpha-2). Auto-detects if null</td>
+                        </tr>
+                        <tr>
+                            <td><code>countriesList</code></td>
+                            <td>List&lt;String&gt;?</td>
+                            <td><code>null</code></td>
+                            <td>Custom list of country codes. Uses all countries if null</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryListDisplayType</code></td>
+                            <td>CountryListDisplayType</td>
+                            <td><code>CountryListDisplayType.Dialog</code></td>
+                            <td>Display mode: <code>Dialog</code> or <code>BottomSheet</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>countryPickerColors</code></td>
+                            <td>CountryPickerColors</td>
+                            <td><code>CountryPickerDefault.colors()</code></td>
+                            <td>Color customization for icons and containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>isPickerEnabled</code></td>
+                            <td>Boolean</td>
+                            <td><code>true</code></td>
+                            <td>Whether the picker is interactive</td>
+                        </tr>
+                        <tr>
+                            <td><code>onCountrySelected</code></td>
+                            <td>(CountryDetails) -> Unit</td>
+                            <td>Required</td>
+                            <td>Callback invoked when a country is selected</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Basic Usage</h3>
+                <pre><code class="language-kotlin">@Composable
+fun BasicCountryPickerExample() {
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPicker(
+        onCountrySelected = { country ->
+            selectedCountry = country
+        }
+    )
+}</code></pre>
+
+                <h3>Customized Example</h3>
+                <pre><code class="language-kotlin">@Composable
+fun CustomizedCountryPicker() {
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPicker(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .border(1.dp, Color.Gray, RoundedCornerShape(8.dp))
+            .padding(12.dp),
+        defaultCountryCode = "US",
+        selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+            properties = SelectedCountryProperties(
+                showCountryFlag = true,
+                showCountryPhoneCode = true,
+                showCountryName = true,  // Show country name
+                showCountryCode = false,
+                showDropDownIcon = true
+            ),
+            flagDimensions = FlagDimensions(width = 32.dp, height = 22.dp),
+            flagShape = RoundedCornerShape(4.dp),
+            textStyles = SelectedCountryTextStyles(
+                countryPhoneCodeTextStyle = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                ),
+                countryNameTextStyle = TextStyle(
+                    fontSize = 14.sp
+                )
+            )
+        ),
+        countryListDisplayType = CountryListDisplayType.BottomSheet,
+        onCountrySelected = { country ->
+            selectedCountry = country
+        }
+    )
+}</code></pre>
+
+                <h3>Limited Countries Example</h3>
+                <pre><code class="language-kotlin">@Composable
+fun NorthAmericanCountryPicker() {
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPicker(
+        countriesList = listOf("US", "CA", "MX"),  // USA, Canada, Mexico only
+        defaultCountryCode = "US",
+        onCountrySelected = { country ->
+            selectedCountry = country
+        }
+    )
+}</code></pre>
+            </section>
+
+            <!-- CountryPickerOutlinedTextField Component -->
+            <section id="textfield">
+                <h2>CountryPickerOutlinedTextField</h2>
+                <p>
+                    A comprehensive composable that combines the country picker with a Material 3 OutlinedTextField
+                    for phone number input. Includes built-in validation and formatting capabilities.
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>Use Case:</strong> User registration forms, contact information, phone verification,
+                    or any scenario requiring phone number collection with validation.
+                </div>
+
+                <h3>Function Signature (String version)</h3>
+                <pre><code class="language-kotlin">@Composable
+fun CountryPickerOutlinedTextField(
+    mobileNumber: String,
+    onMobileNumberChange: (String) -> Unit,
+    onCountrySelected: (country: CountryDetails) -> Unit,
+    modifier: Modifier = Modifier,
+    defaultPaddingValues: PaddingValues = PaddingValues(4.dp, 6.dp),
+    selectedCountryDisplayProperties: SelectedCountryDisplayProperties = SelectedCountryDisplayProperties(),
+    countriesListDialogDisplayProperties: CountriesListDialogDisplayProperties = CountriesListDialogDisplayProperties(),
+    defaultCountryCode: String? = null,
+    countriesList: List<String>? = null,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    textStyle: TextStyle = LocalTextStyle.current,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    prefix: @Composable (() -> Unit)? = null,
+    suffix: @Composable (() -> Unit)? = null,
+    supportingText: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    singleLine: Boolean = false,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = RoundedCornerShape(12.dp),
+    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+    borderThickness: BorderThickness = BorderThickness(),
+    countryListDisplayType: CountryListDisplayType = CountryListDisplayType.Dialog,
+    countryPickerColors: CountryPickerColors = CountryPickerDefault.colors(),
+    isPickerEnabled: Boolean = enabled,
+    onDone: (() -> Unit)? = null
+)</code></pre>
+
+                <div class="alert alert-warning">
+                    <strong>Note:</strong> There's also a <code>TextFieldValue</code> version of this component
+                    for advanced text selection and cursor control. See <a href="api-reference.html">API Reference</a> for details.
+                </div>
+
+                <h3>Key Parameters (Additional to CountryPicker)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>mobileNumber</code></td>
+                            <td>String</td>
+                            <td><strong>Required.</strong> The mobile number to be shown in the text field</td>
+                        </tr>
+                        <tr>
+                            <td><code>onMobileNumberChange</code></td>
+                            <td>(String) -> Unit</td>
+                            <td><strong>Required.</strong> Callback when the mobile number changes</td>
+                        </tr>
+                        <tr>
+                            <td><code>enabled</code></td>
+                            <td>Boolean</td>
+                            <td>Controls if the text field responds to user input</td>
+                        </tr>
+                        <tr>
+                            <td><code>readOnly</code></td>
+                            <td>Boolean</td>
+                            <td>If true, the text field cannot be modified but can be copied</td>
+                        </tr>
+                        <tr>
+                            <td><code>label</code></td>
+                            <td>@Composable?</td>
+                            <td>Label displayed inside the text field container</td>
+                        </tr>
+                        <tr>
+                            <td><code>placeholder</code></td>
+                            <td>@Composable?</td>
+                            <td>Placeholder shown when field is empty and focused</td>
+                        </tr>
+                        <tr>
+                            <td><code>supportingText</code></td>
+                            <td>@Composable?</td>
+                            <td>Helper text displayed below the text field</td>
+                        </tr>
+                        <tr>
+                            <td><code>isError</code></td>
+                            <td>Boolean</td>
+                            <td>If true, displays error state with red colors</td>
+                        </tr>
+                        <tr>
+                            <td><code>borderThickness</code></td>
+                            <td>BorderThickness</td>
+                            <td>Customize border thickness for focused/unfocused states</td>
+                        </tr>
+                        <tr>
+                            <td><code>onDone</code></td>
+                            <td>(() -> Unit)?</td>
+                            <td>Callback when user presses Done button on keyboard</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Basic Usage</h3>
+                <pre><code class="language-kotlin">@Composable
+fun BasicPhoneInput() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { phoneNumber = it },
+        onCountrySelected = { selectedCountry = it },
+        label = { Text("Phone Number") }
+    )
+}</code></pre>
+
+                <h3>With Validation</h3>
+                <pre><code class="language-kotlin">@Composable
+fun ValidatedPhoneInput() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+    var isError by remember { mutableStateOf(false) }
+
+    // Validate on country or number change
+    LaunchedEffect(phoneNumber, selectedCountry) {
+        if (phoneNumber.isNotEmpty() && selectedCountry != null) {
+            isError = !CountryPickerUtils.isMobileNumberValid(
+                phoneNumber,
+                selectedCountry!!.countryCode
+            )
+        }
+    }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { phoneNumber = it },
+        onCountrySelected = { selectedCountry = it },
+        label = { Text("Phone Number") },
+        placeholder = {
+            selectedCountry?.let { country ->
+                Text(
+                    CountryPickerUtils.getExampleMobileNumber(
+                        country.countryCode,
+                        formatNumber = true
+                    )
+                )
+            }
+        },
+        isError = isError,
+        supportingText = {
+            Text(
+                text = when {
+                    isError -> "Invalid phone number"
+                    phoneNumber.isNotEmpty() -> "Valid phone number"
+                    else -> "Enter your phone number"
+                },
+                color = when {
+                    isError -> MaterialTheme.colorScheme.error
+                    phoneNumber.isNotEmpty() -> Color(0xFF10B981)
+                    else -> MaterialTheme.colorScheme.onSurfaceVariant
+                }
+            )
+        }
+    )
+}</code></pre>
+
+                <h3>With Auto-Formatting</h3>
+                <pre><code class="language-kotlin">@Composable
+fun FormattedPhoneInput() {
+    var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { newValue ->
+            selectedCountry?.let { country ->
+                // Format as user types
+                val formatted = CountryPickerUtils.getFormattedMobileNumber(
+                    newValue.text,
+                    country.countryCode
+                )
+                phoneNumber = newValue.copy(
+                    text = formatted,
+                    selection = TextRange(formatted.length)
+                )
+            } ?: run {
+                phoneNumber = newValue
+            }
+        },
+        onCountrySelected = { selectedCountry = it },
+        label = { Text("Phone Number") }
+    )
+}</code></pre>
+
+                <h3>Customized Styling</h3>
+                <pre><code class="language-kotlin">@Composable
+fun StyledPhoneInput() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { phoneNumber = it },
+        onCountrySelected = { selectedCountry = it },
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text("Mobile Number") },
+        shape = RoundedCornerShape(16.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color(0xFF2563EB),
+            unfocusedBorderColor = Color(0xFFE5E7EB),
+            focusedLabelColor = Color(0xFF2563EB),
+            cursorColor = Color(0xFF2563EB)
+        ),
+        borderThickness = BorderThickness(
+            focusedBorderThickness = 2.5.dp,
+            unfocusedBorderThickness = 1.5.dp
+        ),
+        textStyle = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium
+        ),
+        selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+            flagDimensions = FlagDimensions(width = 28.dp, height = 18.dp),
+            flagShape = RoundedCornerShape(4.dp)
+        )
+    )
+}</code></pre>
+            </section>
+
+            <!-- Common Patterns -->
+            <section>
+                <h2>Common Patterns</h2>
+
+                <h3>Disabled State</h3>
+                <pre><code class="language-kotlin">CountryPicker(
+    isPickerEnabled = false,
+    onCountrySelected = { /* ... */ }
+)
+
+// For TextField
+CountryPickerOutlinedTextField(
+    enabled = false,  // Disables both picker and text input
+    // OR
+    isPickerEnabled = false,  // Only disables the country picker
+    // ...
+)</code></pre>
+
+                <h3>Read-Only Phone Display</h3>
+                <pre><code class="language-kotlin">CountryPickerOutlinedTextField(
+    mobileNumber = savedPhoneNumber,
+    onMobileNumberChange = { /* no-op */ },
+    onCountrySelected = { /* no-op */ },
+    readOnly = true,
+    enabled = false
+)</code></pre>
+
+                <h3>Conditional Country List</h3>
+                <pre><code class="language-kotlin">val allowedCountries = remember {
+    if (userType == UserType.DOMESTIC) {
+        listOf("US")
+    } else {
+        null  // All countries
+    }
+}
+
+CountryPicker(
+    countriesList = allowedCountries,
+    onCountrySelected = { /* ... */ }
+)</code></pre>
+
+                <h3>With Callback on Done</h3>
+                <pre><code class="language-kotlin">CountryPickerOutlinedTextField(
+    mobileNumber = phoneNumber,
+    onMobileNumberChange = { phoneNumber = it },
+    onCountrySelected = { selectedCountry = it },
+    onDone = {
+        // Handle form submission
+        submitForm()
+    }
+)</code></pre>
+            </section>
+
+            <!-- Best Practices -->
+            <section>
+                <h2>Best Practices</h2>
+
+                <div class="card">
+                    <h4>✅ Always Provide Feedback</h4>
+                    <p>
+                        Use <code>supportingText</code> to show validation status, example numbers, or helpful hints.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Validate Before Submission</h4>
+                    <p>
+                        Use <code>CountryPickerUtils.isMobileNumberValid()</code> before submitting forms.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Show Example Numbers</h4>
+                    <p>
+                        Display country-specific example numbers in placeholders for better UX.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Handle Empty States</h4>
+                    <p>
+                        Don't validate when the field is empty - only when user has entered input.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>⚠️ Don't Include Country Code in Validation</h4>
+                    <p>
+                        Pass only the national number to validation functions, not the full international format.
+                    </p>
+                    <pre><code class="language-kotlin">// ✗ Wrong
+isMobileNumberValid("+1234567890", "US")
+
+// ✓ Correct
+isMobileNumberValid("234567890", "US")</code></pre>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section>
+                <h2>Next Steps</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎨 Customization</h4>
+                        <p>Learn how to customize colors, styles, and dimensions</p>
+                        <a href="customization.html">Customize →</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>📊 Data Models</h4>
+                        <p>Explore all data models and properties</p>
+                        <a href="models.html">View Models →</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>🔧 Utilities</h4>
+                        <p>Phone number validation and formatting functions</p>
+                        <a href="utilities.html">View Utilities →</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>💡 Examples</h4>
+                        <p>More real-world examples and use cases</p>
+                        <a href="examples.html">See Examples →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a>
+        </p>
+        <p>
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub</a> |
+            <a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a> |
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">License</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

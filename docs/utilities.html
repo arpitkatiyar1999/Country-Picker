@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Country-Picker Utility Functions - Phone number validation and formatting">
+    <title>Utility Functions - Country-Picker Documentation</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">CP</div>
+                <span>Country-Picker</span>
+            </a>
+            <nav class="header-nav">
+                <a href="getting-started.html">Get Started</a>
+                <a href="components.html">Components</a>
+                <a href="examples.html">Examples</a>
+                <a href="api-reference.html">API Reference</a>
+                <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="getting-started.html">Getting Started</a></li>
+                </ul>
+                <div class="nav-section">
+                    <div class="nav-section-title">Components</div>
+                    <ul>
+                        <li><a href="components.html#countrypicker">CountryPicker</a></li>
+                        <li><a href="components.html#textfield">CountryPickerOutlinedTextField</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Guides</div>
+                    <ul>
+                        <li><a href="customization.html">Customization</a></li>
+                        <li><a href="utilities.html" class="active">Utility Functions</a></li>
+                        <li><a href="models.html">Data Models</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Reference</div>
+                    <ul>
+                        <li><a href="api-reference.html">API Reference</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Utility Functions</h1>
+            <p class="text-muted">
+                CountryPickerUtils provides powerful functions for phone number validation, formatting, and example generation
+                using Google's libphonenumber library.
+            </p>
+
+            <div class="alert alert-info">
+                <strong>Import:</strong> <code>import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils</code>
+            </div>
+
+            <section id="validation">
+                <h2>isMobileNumberValid()</h2>
+                <p>Validates a mobile number for a specific country using Google's libphonenumber library.</p>
+
+                <h3>Signature</h3>
+                <pre><code class="language-kotlin">fun isMobileNumberValid(
+    mobileNumber: String,
+    countryCode: String
+): Boolean</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>mobileNumber</code></td><td>String</td><td>The mobile number to validate (without country phone code)</td></tr>
+                        <tr><td><code>countryCode</code></td><td>String</td><td>ISO 3166-1 alpha-2 country code (e.g., "US", "IN", "GB")</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Returns</h3>
+                <p><code>Boolean</code> - <code>true</code> if valid, <code>false</code> otherwise</p>
+
+                <h3>Examples</h3>
+                <pre><code class="language-kotlin">// Valid numbers
+val isValid1 = CountryPickerUtils.isMobileNumberValid("2025550123", "US")
+// Returns: true
+
+val isValid2 = CountryPickerUtils.isMobileNumberValid("7911123456", "GB")
+// Returns: true
+
+val isValid3 = CountryPickerUtils.isMobileNumberValid("9876543210", "IN")
+// Returns: true
+
+// Invalid numbers
+val isValid4 = CountryPickerUtils.isMobileNumberValid("123", "US")
+// Returns: false (too short)
+
+val isValid5 = CountryPickerUtils.isMobileNumberValid("12345678901234567890", "US")
+// Returns: false (too long)</code></pre>
+
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> Do NOT include the country phone code in the mobile number.
+                    <pre><code class="language-kotlin">// ✗ Wrong
+isMobileNumberValid("+1 202 555 0123", "US")
+
+// ✓ Correct
+isMobileNumberValid("2025550123", "US")</code></pre>
+                </div>
+
+                <h3>Use Cases</h3>
+                <ul>
+                    <li>✅ Form validation before submission</li>
+                    <li>✅ Real-time validation as user types</li>
+                    <li>✅ Verifying phone numbers from API responses</li>
+                    <li>✅ Checking phone number validity before SMS/call</li>
+                </ul>
+            </section>
+
+            <section id="example">
+                <h2>getExampleMobileNumber()</h2>
+                <p>Retrieves an example mobile number for a given country, optionally formatted.</p>
+
+                <h3>Signature</h3>
+                <pre><code class="language-kotlin">fun getExampleMobileNumber(
+    countryCode: String,
+    formatNumber: Boolean = false
+): String</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>countryCode</code></td><td>String</td><td>-</td><td>ISO 3166-1 alpha-2 country code</td></tr>
+                        <tr><td><code>formatNumber</code></td><td>Boolean</td><td><code>false</code></td><td>If true, returns formatted number; otherwise raw</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Returns</h3>
+                <p><code>String</code> - Example number, or empty string if unavailable</p>
+
+                <h3>Examples</h3>
+                <pre><code class="language-kotlin">// Raw format
+val rawUS = CountryPickerUtils.getExampleMobileNumber("US", formatNumber = false)
+// Returns: "2015550123"
+
+val rawGB = CountryPickerUtils.getExampleMobileNumber("GB", formatNumber = false)
+// Returns: "7400123456"
+
+// Formatted
+val formattedUS = CountryPickerUtils.getExampleMobileNumber("US", formatNumber = true)
+// Returns: "201 555 0123"
+
+val formattedGB = CountryPickerUtils.getExampleMobileNumber("GB", formatNumber = true)
+// Returns: "7400 123456"
+
+val formattedIN = CountryPickerUtils.getExampleMobileNumber("IN", formatNumber = true)
+// Returns: "99876 54321"</code></pre>
+
+                <h3>Use Cases</h3>
+                <ul>
+                    <li>✅ Showing placeholder examples in input fields</li>
+                    <li>✅ Displaying format hints to users</li>
+                    <li>✅ Testing phone validation logic</li>
+                    <li>✅ Generating sample data for UI previews</li>
+                </ul>
+
+                <h3>Practical Example</h3>
+                <pre><code class="language-kotlin">@Composable
+fun PhoneInputWithExample() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { phoneNumber = it },
+        onCountrySelected = { selectedCountry = it },
+        placeholder = {
+            selectedCountry?.let { country ->
+                Text(
+                    text = "e.g., ${CountryPickerUtils.getExampleMobileNumber(
+                        country.countryCode,
+                        formatNumber = true
+                    )}"
+                )
+            }
+        }
+    )
+}</code></pre>
+            </section>
+
+            <section id="formatting">
+                <h2>getFormattedMobileNumber()</h2>
+                <p>Formats a mobile number according to the country's specific formatting rules.</p>
+
+                <div class="alert alert-danger">
+                    <strong>Requirement:</strong> This function should only be called AFTER validating the number with
+                    <code>isMobileNumberValid()</code>. It will return the original number unchanged if invalid.
+                </div>
+
+                <h3>Signature</h3>
+                <pre><code class="language-kotlin">fun getFormattedMobileNumber(
+    mobileNumber: String,
+    countryCode: String
+): String</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>mobileNumber</code></td><td>String</td><td>The raw mobile number to format</td></tr>
+                        <tr><td><code>countryCode</code></td><td>String</td><td>ISO 3166-1 alpha-2 country code</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Returns</h3>
+                <p><code>String</code> - Formatted number if valid, original number if invalid or on error</p>
+
+                <h3>Examples</h3>
+                <pre><code class="language-kotlin">// US formatting
+val formatted1 = CountryPickerUtils.getFormattedMobileNumber("2025550123", "US")
+// Returns: "202 555 0123"
+
+// UK formatting
+val formatted2 = CountryPickerUtils.getFormattedMobileNumber("7911123456", "GB")
+// Returns: "7911 123456"
+
+// India formatting
+val formatted3 = CountryPickerUtils.getFormattedMobileNumber("9876543210", "IN")
+// Returns: "98765 43210"
+
+// Invalid number - returns as-is
+val formatted4 = CountryPickerUtils.getFormattedMobileNumber("123", "US")
+// Returns: "123" (unchanged)</code></pre>
+
+                <h3>Use Cases</h3>
+                <ul>
+                    <li>✅ Displaying phone numbers in UI after validation</li>
+                    <li>✅ Formatting numbers for database storage</li>
+                    <li>✅ Auto-formatting as user types (with TextFieldValue)</li>
+                    <li>✅ Preparing numbers for display in lists or profiles</li>
+                </ul>
+
+                <h3>Real-Time Formatting Example</h3>
+                <pre><code class="language-kotlin">@Composable
+fun AutoFormattingPhoneInput() {
+    var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { newValue ->
+            selectedCountry?.let { country ->
+                // Auto-format as user types
+                if (CountryPickerUtils.isMobileNumberValid(newValue.text, country.countryCode)) {
+                    val formatted = CountryPickerUtils.getFormattedMobileNumber(
+                        newValue.text,
+                        country.countryCode
+                    )
+                    phoneNumber = newValue.copy(
+                        text = formatted,
+                        selection = TextRange(formatted.length)
+                    )
+                } else {
+                    phoneNumber = newValue
+                }
+            } ?: run {
+                phoneNumber = newValue
+            }
+        },
+        onCountrySelected = { selectedCountry = it }
+    )
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Complete Validation Workflow</h2>
+                <p>Here's a comprehensive example combining all utility functions:</p>
+
+                <pre><code class="language-kotlin">@Composable
+fun CompletePhoneValidation() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+    var isValid by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(phoneNumber, selectedCountry) {
+        selectedCountry?.let { country ->
+            when {
+                phoneNumber.isEmpty() -> {
+                    isValid = false
+                    errorMessage = null
+                }
+                CountryPickerUtils.isMobileNumberValid(phoneNumber, country.countryCode) -> {
+                    isValid = true
+                    errorMessage = null
+                }
+                else -> {
+                    isValid = false
+                    errorMessage = "Invalid phone number for ${country.countryName}"
+                }
+            }
+        }
+    }
+
+    Column(modifier = Modifier.padding(16.dp)) {
+        CountryPickerOutlinedTextField(
+            mobileNumber = phoneNumber,
+            onMobileNumberChange = { phoneNumber = it },
+            onCountrySelected = { selectedCountry = it },
+            label = { Text("Phone Number") },
+            placeholder = {
+                selectedCountry?.let { country ->
+                    Text(
+                        "e.g., ${CountryPickerUtils.getExampleMobileNumber(
+                            country.countryCode,
+                            formatNumber = true
+                        )}"
+                    )
+                }
+            },
+            isError = phoneNumber.isNotEmpty() && !isValid,
+            supportingText = {
+                when {
+                    errorMessage != null -> Text(
+                        text = errorMessage!!,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    isValid -> Text(
+                        text = "✓ Valid phone number",
+                        color = Color(0xFF10B981)
+                    )
+                    else -> Text("Enter your phone number")
+                }
+            }
+        )
+
+        // Display formatted number
+        if (isValid && selectedCountry != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFEFF6FF)
+                )
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Formatted Number",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color(0xFF1E40AF)
+                    )
+                    Text(
+                        text = "${selectedCountry!!.countryPhoneNumberCode} ${
+                            CountryPickerUtils.getFormattedMobileNumber(
+                                phoneNumber,
+                                selectedCountry!!.countryCode
+                            )
+                        }",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF1E3A8A)
+                    )
+                }
+            }
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+
+                <div class="card">
+                    <h4>✅ Always Validate Before Formatting</h4>
+                    <pre><code class="language-kotlin">// ✓ Correct
+if (CountryPickerUtils.isMobileNumberValid(number, country)) {
+    val formatted = CountryPickerUtils.getFormattedMobileNumber(number, country)
+    // Use formatted number
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Use Example Numbers in Placeholders</h4>
+                    <pre><code class="language-kotlin">placeholder = {
+    Text("e.g., ${CountryPickerUtils.getExampleMobileNumber(countryCode, true)}")
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Handle Empty State</h4>
+                    <pre><code class="language-kotlin">LaunchedEffect(phoneNumber, selectedCountry) {
+    if (phoneNumber.isNotEmpty() && selectedCountry != null) {
+        // Validate only when both are available
+    }
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>⚠️ Don't Pass Country Phone Code to Validation</h4>
+                    <pre><code class="language-kotlin">// ✗ Wrong
+isMobileNumberValid("+1 202 555 0123", "US")
+isMobileNumberValid("1 202 555 0123", "US")
+
+// ✓ Correct
+isMobileNumberValid("2025550123", "US")</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Error Handling</h2>
+                <p>All utility functions handle errors gracefully:</p>
+
+                <table>
+                    <thead><tr><th>Function</th><th>On Error</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>isMobileNumberValid()</code></td><td>Returns <code>false</code></td></tr>
+                        <tr><td><code>getExampleMobileNumber()</code></td><td>Returns <code>""</code> (empty string)</td></tr>
+                        <tr><td><code>getFormattedMobileNumber()</code></td><td>Returns original <code>mobileNumber</code> unchanged</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info">
+                    <strong>Note:</strong> Errors are logged internally using <code>LoggerHelper</code> but won't crash your app.
+                </div>
+            </section>
+
+            <section>
+                <h2>Country Code Reference</h2>
+                <p>All functions use ISO 3166-1 alpha-2 country codes. Common examples:</p>
+
+                <table>
+                    <thead><tr><th>Country</th><th>Code</th><th>Phone Code</th></tr></thead>
+                    <tbody>
+                        <tr><td>United States</td><td>US</td><td>+1</td></tr>
+                        <tr><td>United Kingdom</td><td>GB</td><td>+44</td></tr>
+                        <tr><td>India</td><td>IN</td><td>+91</td></tr>
+                        <tr><td>Canada</td><td>CA</td><td>+1</td></tr>
+                        <tr><td>Australia</td><td>AU</td><td>+61</td></tr>
+                        <tr><td>Germany</td><td>DE</td><td>+49</td></tr>
+                        <tr><td>France</td><td>FR</td><td>+33</td></tr>
+                        <tr><td>Japan</td><td>JP</td><td>+81</td></tr>
+                        <tr><td>China</td><td>CN</td><td>+86</td></tr>
+                        <tr><td>Brazil</td><td>BR</td><td>+55</td></tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    View complete list:
+                    <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">
+                        ISO 3166-1 alpha-2 on Wikipedia
+                    </a>
+                </p>
+            </section>
+
+            <section>
+                <h2>Next Steps</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📋 Components</h4>
+                        <p>See how to use utilities with components</p>
+                        <a href="components.html">View Components →</a>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💡 Examples</h4>
+                        <p>Real-world validation examples</p>
+                        <a href="examples.html">See Examples →</a>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Models</h4>
+                        <p>Understand CountryDetails and other models</p>
+                        <a href="models.html">View Models →</a>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📖 API Reference</h4>
+                        <p>Complete API documentation</p>
+                        <a href="api-reference.html">View API →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a></p>
+        <p>
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub</a> |
+            <a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a> |
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">License</a>
+        </p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
