@@ -33,9 +33,7 @@
                     <li><a href="#validation">isMobileNumberValid()</a></li>
                     <li><a href="#example">getExampleMobileNumber()</a></li>
                     <li><a href="#formatting">getFormattedMobileNumber()</a></li>
-                    <li><a href="#workflow">Complete Workflow</a></li>
-                    <li><a href="#best-practices">Best Practices</a></li>
-                    <li><a href="#error-handling">Error Handling</a></li>
+                    <li><a href="#workflow">Complete Example</a></li>
                 </ul>
 
                 <div class="nav-section">
@@ -107,14 +105,6 @@ isMobileNumberValid("+1 202 555 0123", "US")
 // ✓ Correct
 isMobileNumberValid("2025550123", "US")</code></pre>
                 </div>
-
-                <h3>Use Cases</h3>
-                <ul>
-                    <li>✅ Form validation before submission</li>
-                    <li>✅ Real-time validation as user types</li>
-                    <li>✅ Verifying phone numbers from API responses</li>
-                    <li>✅ Checking phone number validity before SMS/call</li>
-                </ul>
             </section>
 
             <section id="example">
@@ -156,37 +146,6 @@ val formattedGB = CountryPickerUtils.getExampleMobileNumber("GB", formatNumber =
 
 val formattedIN = CountryPickerUtils.getExampleMobileNumber("IN", formatNumber = true)
 // Returns: "99876 54321"</code></pre>
-
-                <h3>Use Cases</h3>
-                <ul>
-                    <li>✅ Showing placeholder examples in input fields</li>
-                    <li>✅ Displaying format hints to users</li>
-                    <li>✅ Testing phone validation logic</li>
-                    <li>✅ Generating sample data for UI previews</li>
-                </ul>
-
-                <h3>Practical Example</h3>
-                <pre><code class="language-kotlin">@Composable
-fun PhoneInputWithExample() {
-    var phoneNumber by remember { mutableStateOf("") }
-    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-
-    CountryPickerOutlinedTextField(
-        mobileNumber = phoneNumber,
-        onMobileNumberChange = { phoneNumber = it },
-        onCountrySelected = { selectedCountry = it },
-        placeholder = {
-            selectedCountry?.let { country ->
-                Text(
-                    text = "e.g., ${CountryPickerUtils.getExampleMobileNumber(
-                        country.countryCode,
-                        formatNumber = true
-                    )}"
-                )
-            }
-        }
-    )
-}</code></pre>
             </section>
 
             <section id="formatting">
@@ -232,197 +191,111 @@ val formatted3 = CountryPickerUtils.getFormattedMobileNumber("9876543210", "IN")
 // Invalid number - returns as-is
 val formatted4 = CountryPickerUtils.getFormattedMobileNumber("123", "US")
 // Returns: "123" (unchanged)</code></pre>
-
-                <h3>Use Cases</h3>
-                <ul>
-                    <li>✅ Displaying phone numbers in UI after validation</li>
-                    <li>✅ Formatting numbers for database storage</li>
-                    <li>✅ Auto-formatting as user types (with TextFieldValue)</li>
-                    <li>✅ Preparing numbers for display in lists or profiles</li>
-                </ul>
-
-                <h3>Real-Time Formatting Example</h3>
-                <pre><code class="language-kotlin">@Composable
-fun AutoFormattingPhoneInput() {
-    var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
-    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-
-    CountryPickerOutlinedTextField(
-        mobileNumber = phoneNumber,
-        onMobileNumberChange = { newValue ->
-            selectedCountry?.let { country ->
-                // Auto-format as user types
-                if (CountryPickerUtils.isMobileNumberValid(newValue.text, country.countryCode)) {
-                    val formatted = CountryPickerUtils.getFormattedMobileNumber(
-                        newValue.text,
-                        country.countryCode
-                    )
-                    phoneNumber = newValue.copy(
-                        text = formatted,
-                        selection = TextRange(formatted.length)
-                    )
-                } else {
-                    phoneNumber = newValue
-                }
-            } ?: run {
-                phoneNumber = newValue
-            }
-        },
-        onCountrySelected = { selectedCountry = it }
-    )
-}</code></pre>
             </section>
 
             <section id="workflow">
-                <h2>Complete Validation Workflow</h2>
-                <p>Here's a comprehensive example combining all utility functions:</p>
+                <h2>Complete Example</h2>
+                <p>Combining all utility functions with phone number validation and formatting:</p>
 
+                <h3>Basic Usage</h3>
                 <pre><code class="language-kotlin">@Composable
-fun CompletePhoneValidation() {
+fun PhoneNumberForm() {
+    // 1. Store phone number and selected country
     var phoneNumber by remember { mutableStateOf("") }
     var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-    var isValid by remember { mutableStateOf(false) }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(phoneNumber, selectedCountry) {
-        selectedCountry?.let { country ->
-            when {
-                phoneNumber.isEmpty() -> {
-                    isValid = false
-                    errorMessage = null
-                }
-                CountryPickerUtils.isMobileNumberValid(phoneNumber, country.countryCode) -> {
-                    isValid = true
-                    errorMessage = null
-                }
-                else -> {
-                    isValid = false
-                    errorMessage = "Invalid phone number for ${country.countryName}"
-                }
-            }
-        }
-    }
-
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column {
+        // 2. Phone input with country picker
         CountryPickerOutlinedTextField(
             mobileNumber = phoneNumber,
             onMobileNumberChange = { phoneNumber = it },
             onCountrySelected = { selectedCountry = it },
-            label = { Text("Phone Number") },
-            placeholder = {
-                selectedCountry?.let { country ->
-                    Text(
-                        "e.g., ${CountryPickerUtils.getExampleMobileNumber(
-                            country.countryCode,
-                            formatNumber = true
-                        )}"
-                    )
-                }
-            },
-            isError = phoneNumber.isNotEmpty() && !isValid,
-            supportingText = {
-                when {
-                    errorMessage != null -> Text(
-                        text = errorMessage!!,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                    isValid -> Text(
-                        text = "✓ Valid phone number",
-                        color = Color(0xFF10B981)
-                    )
-                    else -> Text("Enter your phone number")
-                }
-            }
+            label = { Text("Phone Number") }
         )
 
-        // Display formatted number
-        if (isValid && selectedCountry != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFFEFF6FF)
-                )
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Formatted Number",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = Color(0xFF1E40AF)
+        // 3. Validate button
+        Button(
+            onClick = {
+                selectedCountry?.let { country ->
+                    // Validate the phone number
+                    val isValid = CountryPickerUtils.isMobileNumberValid(
+                        phoneNumber,
+                        country.countryCode
                     )
-                    Text(
-                        text = "${selectedCountry!!.countryPhoneNumberCode} ${
-                            CountryPickerUtils.getFormattedMobileNumber(
-                                phoneNumber,
-                                selectedCountry!!.countryCode
-                            )
-                        }",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF1E3A8A)
-                    )
+
+                    if (isValid) {
+                        // Get formatted number
+                        val formatted = CountryPickerUtils.getFormattedMobileNumber(
+                            phoneNumber,
+                            country.countryCode
+                        )
+                        println("Valid: ${country.countryPhoneNumberCode} $formatted")
+                    } else {
+                        println("Invalid phone number")
+                    }
                 }
             }
+        ) {
+            Text("Validate")
         }
     }
 }</code></pre>
-            </section>
 
-            <section id="best-practices">
-                <h2>Best Practices</h2>
+                <h3>With Placeholder Example</h3>
+                <pre><code class="language-kotlin">CountryPickerOutlinedTextField(
+    mobileNumber = phoneNumber,
+    onMobileNumberChange = { phoneNumber = it },
+    onCountrySelected = { selectedCountry = it },
+    placeholder = {
+        // Show example number for selected country
+        selectedCountry?.let { country ->
+            val example = CountryPickerUtils.getExampleMobileNumber(
+                country.countryCode,
+                formatNumber = true
+            )
+            Text("e.g., $example")
+        }
+    }
+)</code></pre>
 
-                <div class="card">
-                    <h4>✅ Always Validate Before Formatting</h4>
-                    <pre><code class="language-kotlin">// ✓ Correct
-if (CountryPickerUtils.isMobileNumberValid(number, country)) {
-    val formatted = CountryPickerUtils.getFormattedMobileNumber(number, country)
-    // Use formatted number
-}</code></pre>
-                </div>
+                <h3>With Real-Time Validation</h3>
+                <pre><code class="language-kotlin">@Composable
+fun PhoneWithValidation() {
+    var phoneNumber by remember { mutableStateOf("") }
+    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+    var isValid by remember { mutableStateOf(false) }
 
-                <div class="card">
-                    <h4>✅ Use Example Numbers in Placeholders</h4>
-                    <pre><code class="language-kotlin">placeholder = {
-    Text("e.g., ${CountryPickerUtils.getExampleMobileNumber(countryCode, true)}")
-}</code></pre>
-                </div>
+    // Validate whenever phone number or country changes
+    LaunchedEffect(phoneNumber, selectedCountry) {
+        isValid = selectedCountry?.let { country ->
+            phoneNumber.isNotEmpty() &&
+            CountryPickerUtils.isMobileNumberValid(phoneNumber, country.countryCode)
+        } ?: false
+    }
 
-                <div class="card">
-                    <h4>✅ Handle Empty State</h4>
-                    <pre><code class="language-kotlin">LaunchedEffect(phoneNumber, selectedCountry) {
-    if (phoneNumber.isNotEmpty() && selectedCountry != null) {
-        // Validate only when both are available
+    CountryPickerOutlinedTextField(
+        mobileNumber = phoneNumber,
+        onMobileNumberChange = { phoneNumber = it },
+        onCountrySelected = { selectedCountry = it },
+        isError = phoneNumber.isNotEmpty() && !isValid,
+        supportingText = {
+            when {
+                isValid -> Text("✓ Valid number", color = Color.Green)
+                phoneNumber.isNotEmpty() -> Text("Invalid number", color = Color.Red)
+                else -> Text("Enter phone number")
+            }
+        }
+    )
+
+    // Show formatted number when valid
+    if (isValid && selectedCountry != null) {
+        val formatted = CountryPickerUtils.getFormattedMobileNumber(
+            phoneNumber,
+            selectedCountry!!.countryCode
+        )
+        Text("Formatted: ${selectedCountry!!.countryPhoneNumberCode} $formatted")
     }
 }</code></pre>
-                </div>
-
-                <div class="card">
-                    <h4>⚠️ Don't Pass Country Phone Code to Validation</h4>
-                    <pre><code class="language-kotlin">// ✗ Wrong
-isMobileNumberValid("+1 202 555 0123", "US")
-isMobileNumberValid("1 202 555 0123", "US")
-
-// ✓ Correct
-isMobileNumberValid("2025550123", "US")</code></pre>
-                </div>
-            </section>
-
-            <section id="error-handling">
-                <h2>Error Handling</h2>
-                <p>All utility functions handle errors gracefully:</p>
-
-                <table>
-                    <thead><tr><th>Function</th><th>On Error</th></tr></thead>
-                    <tbody>
-                        <tr><td><code>isMobileNumberValid()</code></td><td>Returns <code>false</code></td></tr>
-                        <tr><td><code>getExampleMobileNumber()</code></td><td>Returns <code>""</code> (empty string)</td></tr>
-                        <tr><td><code>getFormattedMobileNumber()</code></td><td>Returns original <code>mobileNumber</code> unchanged</td></tr>
-                    </tbody>
-                </table>
-
-                <div class="alert alert-info">
-                    <strong>Note:</strong> Errors are logged internally using <code>LoggerHelper</code> but won't crash your app.
-                </div>
             </section>
 
             <section>
@@ -451,32 +324,6 @@ isMobileNumberValid("2025550123", "US")</code></pre>
                         ISO 3166-1 alpha-2 on Wikipedia
                     </a>
                 </p>
-            </section>
-
-            <section>
-                <h2>Next Steps</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h4>📋 Components</h4>
-                        <p>See how to use utilities with components</p>
-                        <a href="components.html">View Components →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h4>💡 Examples</h4>
-                        <p>Real-world validation examples</p>
-                        <a href="examples.html">See Examples →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h4>📊 Models</h4>
-                        <p>Understand CountryDetails and other models</p>
-                        <a href="models.html">View Models →</a>
-                    </div>
-                    <div class="feature-card">
-                        <h4>📖 API Reference</h4>
-                        <p>Complete API documentation</p>
-                        <a href="api-reference.html">View API →</a>
-                    </div>
-                </div>
             </section>
 
             <!-- Page Navigation -->

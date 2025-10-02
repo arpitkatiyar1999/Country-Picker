@@ -154,15 +154,15 @@ header {
 
 /* Sidebar */
 .sidebar {
-  width: 280px;
+  width: 240px;
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--border-color);
   padding: 2rem 0;
   position: sticky;
   top: 80px;
-  height: calc(100vh - 80px);
-  overflow-y: auto;
+  align-self: flex-start;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -189,6 +189,9 @@ header {
   text-decoration: none;
   transition: all 0.2s;
   border-left: 3px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar nav a:hover {
@@ -226,6 +229,8 @@ header {
   flex: 1;
   padding: 3rem;
   max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* ==================
@@ -1522,7 +1527,16 @@ html {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.comparison-subtitle-small {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
 }
 
 .comparison-description {
