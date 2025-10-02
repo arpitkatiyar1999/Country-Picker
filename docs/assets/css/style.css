@@ -907,42 +907,40 @@ html {
   justify-content: space-between;
   align-items: center;
   margin: 4rem 0 2rem;
-  padding: 2rem 0;
+  padding: 3rem 0 2rem;
   border-top: 2px solid var(--border-color);
   gap: 1rem;
 }
 
 .nav-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
+  gap: 1.5rem;
+  padding: 1rem 0.75rem;
   background-color: var(--surface);
   border: 2px solid var(--border-color);
   border-radius: 12px;
   text-decoration: none;
   color: var(--text-primary);
   transition: all 0.3s;
-  flex: 1;
-  max-width: 400px;
+  min-width: 200px;
 }
 
 .nav-button:hover {
-  background-color: var(--primary-color);
-  color: white;
   border-color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px var(--shadow);
   text-decoration: none;
+  transform: scale(1.05);
 }
 
 .nav-button-prev {
-  justify-content: flex-start;
+  padding-left: 0.75rem;
+  padding-right: 1.5rem;
 }
 
 .nav-button-next {
-  justify-content: flex-end;
   margin-left: auto;
+  padding-left: 1.5rem;
+  padding-right: 0.75rem;
 }
 
 .nav-button-content {
