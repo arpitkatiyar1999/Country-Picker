@@ -35,33 +35,19 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <nav>
+                <div class="nav-section-title">On This Page</div>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="#countrypicker">CountryPicker</a></li>
+                    <li><a href="#textfield">CountryPickerOutlinedTextField</a></li>
+                    <li><a href="#common-patterns">Common Patterns</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
                 </ul>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Components</div>
+                    <div class="nav-section-title">Navigation</div>
                     <ul>
-                        <li><a href="#countrypicker">CountryPicker</a></li>
-                        <li><a href="#textfield">CountryPickerOutlinedTextField</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-section">
-                    <div class="nav-section-title">Guides</div>
-                    <ul>
-                        <li><a href="customization.html">Customization</a></li>
-                        <li><a href="utilities.html">Utility Functions</a></li>
-                        <li><a href="models.html">Data Models</a></li>
-                        <li><a href="examples.html">Examples</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-section">
-                    <div class="nav-section-title">Reference</div>
-                    <ul>
-                        <li><a href="api-reference.html">API Reference</a></li>
+                        <li><a href="installation.html">← Installation</a></li>
+                        <li><a href="utilities.html">Utilities →</a></li>
                     </ul>
                 </div>
             </nav>
@@ -85,6 +71,28 @@
                 <div class="alert alert-info">
                     <strong>Use Case:</strong> Profile settings, address forms, country selection dropdowns,
                     or any scenario where you need a country selector without phone number input.
+                </div>
+
+                <h3>Visual Preview</h3>
+                <div class="screenshot-grid">
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/country-picker-default.png"
+                             alt="CountryPicker Default View"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: CountryPicker Default View<br><small>Add country-picker-default.png</small></div>'">
+                        <p>Default View</p>
+                    </div>
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/country-picker-dialog.png"
+                             alt="CountryPicker Dialog Mode"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: Dialog Mode<br><small>Add country-picker-dialog.png</small></div>'">
+                        <p>Dialog Mode</p>
+                    </div>
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/country-picker-bottomsheet.png"
+                             alt="CountryPicker BottomSheet Mode"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: BottomSheet Mode<br><small>Add country-picker-bottomsheet.png</small></div>'">
+                        <p>BottomSheet Mode</p>
+                    </div>
                 </div>
 
                 <h3>Function Signature</h3>
@@ -253,6 +261,28 @@ fun NorthAmericanCountryPicker() {
                 <div class="alert alert-info">
                     <strong>Use Case:</strong> User registration forms, contact information, phone verification,
                     or any scenario requiring phone number collection with validation.
+                </div>
+
+                <h3>Visual Preview</h3>
+                <div class="screenshot-grid">
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/textfield-empty.png"
+                             alt="Empty TextField with Placeholder"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: Empty TextField<br><small>Add textfield-empty.png</small></div>'">
+                        <p>Empty State with Placeholder</p>
+                    </div>
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/textfield-valid.png"
+                             alt="Valid Phone Number"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: Valid Phone Number<br><small>Add textfield-valid.png</small></div>'">
+                        <p>Valid Phone Number</p>
+                    </div>
+                    <div class="screenshot-grid-item">
+                        <img src="assets/images/screenshots/textfield-invalid.png"
+                             alt="Invalid Phone Number Error State"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'>Screenshot: Invalid Phone Number<br><small>Add textfield-invalid.png</small></div>'">
+                        <p>Invalid Phone Number (Error)</p>
+                    </div>
                 </div>
 
                 <h3>Function Signature (String version)</h3>
@@ -487,7 +517,7 @@ fun StyledPhoneInput() {
             </section>
 
             <!-- Common Patterns -->
-            <section>
+            <section id="common-patterns">
                 <h2>Common Patterns</h2>
 
                 <h3>Disabled State</h3>
@@ -540,7 +570,7 @@ CountryPicker(
             </section>
 
             <!-- Best Practices -->
-            <section>
+            <section id="best-practices">
                 <h2>Best Practices</h2>
 
                 <div class="card">
@@ -613,6 +643,24 @@ isMobileNumberValid("234567890", "US")</code></pre>
                     </div>
                 </div>
             </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="installation.html" class="nav-button nav-button-prev">
+                    <span class="nav-icon">←</span>
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Previous</span>
+                        <span class="nav-button-title">Installation</span>
+                    </div>
+                </a>
+                <a href="utilities.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Utilities</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
         </main>
     </div>
 

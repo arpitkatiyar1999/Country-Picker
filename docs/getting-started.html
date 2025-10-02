@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Getting started with Country-Picker - Installation and setup guide">
+    <meta name="description" content="Getting started with Country-Picker - Documentation hub">
     <title>Getting Started - Country-Picker Documentation</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">
@@ -20,456 +19,182 @@
                 <a href="components.html">Components</a>
                 <a href="examples.html">Examples</a>
                 <a href="api-reference.html">API Reference</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <span id="themeIcon">🌙</span>
-                </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-                    ☰
-                </button>
+                <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
             </nav>
         </div>
     </header>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <nav>
+                <div class="nav-section-title">Documentation Hub</div>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="getting-started.html" class="active">Getting Started</a></li>
+                    <li><a href="installation.html">📦 Installation</a></li>
+                    <li><a href="components.html">📚 Components</a></li>
+                    <li><a href="customization.html">🎨 Customization</a></li>
+                    <li><a href="utilities.html">🔧 Utilities</a></li>
+                    <li><a href="models.html">📊 Data Models</a></li>
+                    <li><a href="examples.html">💡 Examples</a></li>
+                    <li><a href="api-reference.html">📖 API Reference</a></li>
                 </ul>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Components</div>
+                    <div class="nav-section-title">External Links</div>
                     <ul>
-                        <li><a href="components.html#countrypicker">CountryPicker</a></li>
-                        <li><a href="components.html#textfield">CountryPickerOutlinedTextField</a></li>
+                        <li><a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">🤝 Contribute ↗</a></li>
+                        <li><a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">🐛 Report Issue ↗</a></li>
                     </ul>
                 </div>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Guides</div>
+                    <div class="nav-section-title">Navigation</div>
                     <ul>
-                        <li><a href="customization.html">Customization</a></li>
-                        <li><a href="utilities.html">Utility Functions</a></li>
-                        <li><a href="models.html">Data Models</a></li>
-                        <li><a href="examples.html">Examples</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-section">
-                    <div class="nav-section-title">Reference</div>
-                    <ul>
-                        <li><a href="api-reference.html">API Reference</a></li>
+                        <li><a href="index.html">← Home</a></li>
                     </ul>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <h1>Getting Started</h1>
-            <p class="text-muted">
-                This guide will help you integrate Country-Picker into your Android project in just a few minutes.
+            <p class="text-muted" style="font-size: 1.25rem; margin-bottom: 3rem;">
+                Welcome to Country-Picker! Choose a topic below to get started with integrating the library into your Android app.
             </p>
 
-            <!-- Prerequisites -->
-            <section>
-                <h2>Prerequisites</h2>
-                <p>Before you begin, ensure your project meets these requirements:</p>
+            <!-- Documentation Hub Cards -->
+            <div class="hub-cards">
+                <!-- Installation Card -->
+                <a href="installation.html" class="hub-card">
+                    <div class="hub-card-icon">📦</div>
+                    <h3 class="hub-card-title">Installation</h3>
+                    <p class="hub-card-description">
+                        Add Country-Picker to your project with JitPack. Quick setup guide with prerequisites and troubleshooting.
+                    </p>
+                </a>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Requirement</th>
-                            <th>Minimum Version</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Android API Level</td>
-                            <td>21 (Android 5.0 Lollipop)</td>
-                        </tr>
-                        <tr>
-                            <td>Compile SDK</td>
-                            <td>36 (recommended)</td>
-                        </tr>
-                        <tr>
-                            <td>Jetpack Compose Material 3</td>
-                            <td>1.3.0</td>
-                        </tr>
-                        <tr>
-                            <td>Kotlin</td>
-                            <td>1.8+</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Components Card -->
+                <a href="components.html" class="hub-card">
+                    <div class="hub-card-icon">📚</div>
+                    <h3 class="hub-card-title">Components</h3>
+                    <p class="hub-card-description">
+                        Detailed documentation for CountryPicker and CountryPickerOutlinedTextField with all parameters and examples.
+                    </p>
+                </a>
 
-                <div class="alert alert-warning">
-                    <strong>Important:</strong> This library requires Material 3 version <strong>1.3.0</strong> or later.
-                    If you're using the Compose BOM, check the
-                    <a href="https://developer.android.com/develop/ui/compose/bom/bom-mapping" target="_blank">BOM mapping</a>
-                    to verify your Material 3 version.
-                </div>
-            </section>
+                <!-- Customization Card -->
+                <a href="customization.html" class="hub-card">
+                    <div class="hub-card-icon">🎨</div>
+                    <h3 class="hub-card-title">Customization</h3>
+                    <p class="hub-card-description">
+                        Learn how to customize colors, text styles, dimensions, shapes, and theming to match your app's design.
+                    </p>
+                </a>
 
-            <!-- Installation -->
-            <section>
-                <h2>Installation</h2>
+                <!-- Utilities Card -->
+                <a href="utilities.html" class="hub-card">
+                    <div class="hub-card-icon">🔧</div>
+                    <h3 class="hub-card-title">Utility Functions</h3>
+                    <p class="hub-card-description">
+                        Phone number validation, formatting, and example generation using Google's libphonenumber library.
+                    </p>
+                </a>
 
-                <h3>Step 1: Add JitPack Repository</h3>
-                <p>
-                    Add the JitPack repository to your <code>settings.gradle.kts</code> (or <code>settings.gradle</code> for Groovy):
-                </p>
+                <!-- Data Models Card -->
+                <a href="models.html" class="hub-card">
+                    <div class="hub-card-icon">📊</div>
+                    <h3 class="hub-card-title">Data Models</h3>
+                    <p class="hub-card-description">
+                        Complete reference for CountryDetails, display properties, colors, text styles, and all configuration models.
+                    </p>
+                </a>
 
-                <div class="tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" data-tab="kotlin-settings">Kotlin DSL</button>
-                        <button class="tab-button" data-tab="groovy-settings">Groovy</button>
+                <!-- Examples Card -->
+                <a href="examples.html" class="hub-card">
+                    <div class="hub-card-icon">💡</div>
+                    <h3 class="hub-card-title">Examples</h3>
+                    <p class="hub-card-description">
+                        Real-world code examples, common use cases, and practical implementations for different scenarios.
+                    </p>
+                </a>
+
+                <!-- API Reference Card -->
+                <a href="api-reference.html" class="hub-card">
+                    <div class="hub-card-icon">📖</div>
+                    <h3 class="hub-card-title">API Reference</h3>
+                    <p class="hub-card-description">
+                        Complete API documentation with all functions, parameters, types, and return values.
+                    </p>
+                </a>
+
+                <!-- Contribute Card (External) -->
+                <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank" class="hub-card hub-card-external">
+                    <div class="hub-card-icon">🤝</div>
+                    <h3 class="hub-card-title">Contribute</h3>
+                    <p class="hub-card-description">
+                        Help improve Country-Picker! Contribute code, report bugs, or suggest features on GitHub.
+                    </p>
+                </a>
+
+                <!-- Report Issue Card (External) -->
+                <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank" class="hub-card hub-card-external">
+                    <div class="hub-card-icon">🐛</div>
+                    <h3 class="hub-card-title">Report Issue</h3>
+                    <p class="hub-card-description">
+                        Found a bug or have a feature request? Report it on GitHub Issues and we'll address it.
+                    </p>
+                </a>
+            </div>
+
+            <!-- Quick Links Section -->
+            <section style="margin-top: 4rem;">
+                <h2>Quick Links</h2>
+                <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="feature-card" style="text-align: center;">
+                        <h4>🚀 Quick Start</h4>
+                        <p style="font-size: 0.875rem;">New to Country-Picker?</p>
+                        <a href="installation.html">Start Here →</a>
                     </div>
-                </div>
-
-                <div id="kotlin-settings" class="tab-content active">
-                    <pre><code class="language-kotlin">dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven(url = "https://jitpack.io")  // Add this line
-    }
-}</code></pre>
-                </div>
-
-                <div id="groovy-settings" class="tab-content">
-                    <pre><code class="language-groovy">dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }  // Add this line
-    }
-}</code></pre>
-                </div>
-
-                <h3>Step 2: Add Library Dependency</h3>
-                <p>
-                    Add the Country-Picker dependency to your module-level <code>build.gradle.kts</code>
-                    (usually in the <code>app</code> folder):
-                </p>
-
-                <div class="tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" data-tab="kotlin-dep">Kotlin DSL</button>
-                        <button class="tab-button" data-tab="groovy-dep">Groovy</button>
+                    <div class="feature-card" style="text-align: center;">
+                        <h4>📱 Demo App</h4>
+                        <p style="font-size: 0.875rem;">See it in action</p>
+                        <a href="https://github.com/arpitkatiyar1999/Country-Picker/tree/master/app" target="_blank">View Demo →</a>
                     </div>
-                </div>
-
-                <div id="kotlin-dep" class="tab-content active">
-                    <pre><code class="language-kotlin">dependencies {
-    // Other dependencies...
-
-    // Country-Picker
-    implementation("com.github.arpitkatiyar1999:Country-Picker:2.1.5")
-}</code></pre>
-                </div>
-
-                <div id="groovy-dep" class="tab-content">
-                    <pre><code class="language-groovy">dependencies {
-    // Other dependencies...
-
-    // Country-Picker
-    implementation 'com.github.arpitkatiyar1999:Country-Picker:2.1.5'
-}</code></pre>
-                </div>
-
-                <div class="alert alert-info">
-                    <strong>Latest Version:</strong> Check
-                    <a href="https://github.com/arpitkatiyar1999/Country-Picker/releases" target="_blank">GitHub Releases</a>
-                    for the most recent version.
-                </div>
-
-                <h3>Step 3: Sync Project</h3>
-                <p>
-                    Click "Sync Now" in the banner that appears, or select
-                    <strong>File > Sync Project with Gradle Files</strong> in Android Studio.
-                </p>
-            </section>
-
-            <!-- Verification -->
-            <section>
-                <h2>Verify Installation</h2>
-                <p>To verify the library is installed correctly, try importing the components:</p>
-
-                <pre><code class="language-kotlin">import com.arpitkatiyarprojects.countrypicker.CountryPicker
-import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
-import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
-import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils</code></pre>
-
-                <p>If the imports resolve without errors, you're ready to go! 🎉</p>
-            </section>
-
-            <!-- Quick Example -->
-            <section>
-                <h2>Your First Country Picker</h2>
-                <p>Let's create a simple example to get you started:</p>
-
-                <h3>Basic CountryPicker</h3>
-                <pre><code class="language-kotlin">@Composable
-fun MyFirstPicker() {
-    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-
-    Column(modifier = Modifier.padding(16.dp)) {
-        // Country Picker
-        CountryPicker(
-            onCountrySelected = { country ->
-                selectedCountry = country
-            }
-        )
-
-        // Display selected country
-        selectedCountry?.let {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Selected: ${it.countryName}")
-            Text("Phone Code: ${it.countryPhoneNumberCode}")
-            Text("ISO Code: ${it.countryCode.uppercase()}")
-        }
-    }
-}</code></pre>
-
-                <h3>With Phone Number Input</h3>
-                <pre><code class="language-kotlin">@Composable
-fun PhoneNumberForm() {
-    var phoneNumber by remember { mutableStateOf("") }
-    var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
-
-    Column(modifier = Modifier.padding(16.dp)) {
-        CountryPickerOutlinedTextField(
-            mobileNumber = phoneNumber,
-            onMobileNumberChange = { phoneNumber = it },
-            onCountrySelected = { selectedCountry = it },
-            label = { Text("Phone Number") },
-            placeholder = {
-                Text("Enter your phone number")
-            }
-        )
-
-        // Validation
-        selectedCountry?.let { country ->
-            val isValid = CountryPickerUtils.isMobileNumberValid(
-                phoneNumber,
-                country.countryCode
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = if (isValid) "✓ Valid number" else "✗ Invalid number",
-                color = if (isValid) Color.Green else Color.Red
-            )
-        }
-    }
-}</code></pre>
-
-                <div class="alert alert-success">
-                    <strong>Success!</strong> You now have a working country picker. Continue to the next sections
-                    to explore customization options and advanced features.
-                </div>
-            </section>
-
-            <!-- Configuration -->
-            <section>
-                <h2>Basic Configuration</h2>
-
-                <h3>Setting Default Country</h3>
-                <p>You can specify a default country using its ISO 3166-1 alpha-2 code:</p>
-
-                <pre><code class="language-kotlin">CountryPicker(
-    defaultCountryCode = "US",  // United States
-    onCountrySelected = { country -> /* ... */ }
-)
-
-// Other examples:
-// "IN" for India
-// "GB" for United Kingdom
-// "CA" for Canada
-// "AU" for Australia</code></pre>
-
-                <div class="alert alert-info">
-                    If no default country is specified, the library will automatically detect the user's country
-                    from their SIM card using <code>TelephonyManager</code>.
-                </div>
-
-                <h3>Limiting Country List</h3>
-                <p>Restrict the picker to specific countries:</p>
-
-                <pre><code class="language-kotlin">CountryPicker(
-    countriesList = listOf("US", "CA", "MX"),  // North America only
-    onCountrySelected = { country -> /* ... */ }
-)
-
-// Or for European countries:
-// countriesList = listOf("GB", "FR", "DE", "IT", "ES")</code></pre>
-
-                <h3>Choosing Display Mode</h3>
-                <p>Select between Dialog and BottomSheet:</p>
-
-                <pre><code class="language-kotlin">import com.arpitkatiyarprojects.countrypicker.enums.CountryListDisplayType
-
-// Dialog mode (default)
-CountryPicker(
-    countryListDisplayType = CountryListDisplayType.Dialog,
-    onCountrySelected = { country -> /* ... */ }
-)
-
-// BottomSheet mode
-CountryPicker(
-    countryListDisplayType = CountryListDisplayType.BottomSheet,
-    onCountrySelected = { country -> /* ... */ }
-)</code></pre>
-            </section>
-
-            <!-- Common Issues -->
-            <section>
-                <h2>Troubleshooting</h2>
-
-                <div class="card">
-                    <h4>❌ Material 3 version error</h4>
-                    <p><strong>Problem:</strong> Getting errors about Material 3 compatibility</p>
-                    <p><strong>Solution:</strong> Ensure you're using Material 3 version 1.3.0 or later:</p>
-                    <pre><code class="language-kotlin">dependencies {
-    implementation("androidx.compose.material3:material3:1.3.0")
-    // Or use BOM:
-    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
-}</code></pre>
-                </div>
-
-                <div class="card">
-                    <h4>❌ JitPack build failed</h4>
-                    <p><strong>Problem:</strong> Dependency resolution fails</p>
-                    <p><strong>Solution:</strong> Make sure you added JitPack to repositories in <code>settings.gradle</code>, not in module-level <code>build.gradle</code></p>
-                </div>
-
-                <div class="card">
-                    <h4>❌ Country not auto-detecting</h4>
-                    <p><strong>Problem:</strong> Default country not detected automatically</p>
-                    <p><strong>Solution:</strong> This feature requires a SIM card. On emulators or devices without SIM, manually specify <code>defaultCountryCode</code></p>
-                </div>
-
-                <div class="card">
-                    <h4>❌ Phone validation not working</h4>
-                    <p><strong>Problem:</strong> <code>isMobileNumberValid()</code> always returns false</p>
-                    <p><strong>Solution:</strong> Make sure you're passing the mobile number WITHOUT the country phone code:</p>
-                    <pre><code class="language-kotlin">// ✗ Wrong
-CountryPickerUtils.isMobileNumberValid("+1234567890", "US")
-
-// ✓ Correct
-CountryPickerUtils.isMobileNumberValid("234567890", "US")</code></pre>
-                </div>
-            </section>
-
-            <!-- Next Steps -->
-            <section>
-                <h2>Next Steps</h2>
-                <p>Now that you have Country-Picker installed and working, explore these topics:</p>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h4>📋 Components</h4>
-                        <p>Detailed documentation for CountryPicker and CountryPickerOutlinedTextField</p>
-                        <a href="components.html">View Components →</a>
+                    <div class="feature-card" style="text-align: center;">
+                        <h4>📦 Latest Release</h4>
+                        <p style="font-size: 0.875rem;">v2.1.5</p>
+                        <a href="https://github.com/arpitkatiyar1999/Country-Picker/releases" target="_blank">Changelog →</a>
                     </div>
-
-                    <div class="feature-card">
-                        <h4>🎨 Customization</h4>
-                        <p>Learn how to customize colors, text styles, dimensions, and more</p>
-                        <a href="customization.html">Customize →</a>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>🔧 Utilities</h4>
-                        <p>Explore phone number validation and formatting functions</p>
-                        <a href="utilities.html">Utility Functions →</a>
-                    </div>
-
-                    <div class="feature-card">
-                        <h4>💡 Examples</h4>
-                        <p>Real-world examples and common use cases</p>
-                        <a href="examples.html">See Examples →</a>
+                    <div class="feature-card" style="text-align: center;">
+                        <h4>⭐ GitHub</h4>
+                        <p style="font-size: 0.875rem;">Star the repo</p>
+                        <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">View Repo →</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Version Info -->
-            <section>
-                <h2>Version Information</h2>
-                <p>Understanding the versioning format:</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Version Type</th>
-                            <th>Changes</th>
-                            <th>Breaking?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Major</strong> (X.0.0)</td>
-                            <td>New features, API changes, removal of deprecated code</td>
-                            <td>⚠️ May contain breaking changes</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Minor</strong> (0.X.0)</td>
-                            <td>New features, deprecations, backward compatible</td>
-                            <td>✅ Backward compatible</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Patch</strong> (0.0.X)</td>
-                            <td>Bug fixes and minor improvements</td>
-                            <td>✅ Fully compatible</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="alert alert-warning">
-                    <strong>Note:</strong> When updating major versions, review the changelog for potential breaking changes
-                    and migration guides.
-                </div>
-            </section>
-
-            <!-- Support -->
-            <section>
-                <h2>Need Help?</h2>
-                <p>If you encounter any issues during installation or setup:</p>
-                <ul>
-                    <li>
-                        Check the <a href="#troubleshooting">Troubleshooting</a> section above
-                    </li>
-                    <li>
-                        Browse <a href="examples.html">examples</a> for working code
-                    </li>
-                    <li>
-                        <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">
-                            Report an issue on GitHub
-                        </a>
-                    </li>
-                    <li>
-                        Check existing
-                        <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">
-                            GitHub issues
-                        </a>
-                        for solutions
-                    </li>
-                </ul>
-            </section>
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="index.html" class="nav-button nav-button-prev">
+                    <span class="nav-icon">←</span>
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Previous</span>
+                        <span class="nav-button-title">Home</span>
+                    </div>
+                </a>
+                <a href="installation.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Installation</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
         </main>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <p>
-            Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a>
-        </p>
+        <p>Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a></p>
         <p>
             <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub</a> |
             <a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a> |
@@ -477,7 +202,6 @@ CountryPickerUtils.isMobileNumberValid("234567890", "US")</code></pre>
         </p>
     </footer>
 
-    <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
 </body>
 </html>

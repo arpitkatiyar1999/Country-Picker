@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Installation guide for Country-Picker library">
+    <title>Installation - Country-Picker Documentation</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">CP</div>
+                <span>Country-Picker</span>
+            </a>
+            <nav class="header-nav">
+                <a href="getting-started.html">Get Started</a>
+                <a href="components.html">Components</a>
+                <a href="examples.html">Examples</a>
+                <a href="api-reference.html">API Reference</a>
+                <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <div class="nav-section-title">On This Page</div>
+                <ul>
+                    <li><a href="#prerequisites">Prerequisites</a></li>
+                    <li><a href="#add-jitpack">Add JitPack Repository</a></li>
+                    <li><a href="#add-dependency">Add Library Dependency</a></li>
+                    <li><a href="#sync-project">Sync Project</a></li>
+                    <li><a href="#verify">Verify Installation</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Navigation</div>
+                    <ul>
+                        <li><a href="getting-started.html">← Getting Started</a></li>
+                        <li><a href="components.html">Components →</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Installation</h1>
+            <p class="text-muted">Add Country-Picker to your Android project in just a few steps.</p>
+
+            <section id="prerequisites">
+                <h2>Prerequisites</h2>
+                <p>Before you begin, ensure your project meets these requirements:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Minimum Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Android API Level</td>
+                            <td>21 (Android 5.0 Lollipop)</td>
+                        </tr>
+                        <tr>
+                            <td>Compile SDK</td>
+                            <td>36 (recommended)</td>
+                        </tr>
+                        <tr>
+                            <td>Jetpack Compose Material 3</td>
+                            <td>1.4.0</td>
+                        </tr>
+                        <tr>
+                            <td>Kotlin</td>
+                            <td>1.9.0+ (Recommended: 2.0.0+)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> This library requires Material 3 version <strong>1.4.0</strong> or later.
+                    If you're using the Compose BOM, check the
+                    <a href="https://developer.android.com/develop/ui/compose/bom/bom-mapping" target="_blank">BOM mapping</a>
+                    to verify your Material 3 version.
+                </div>
+            </section>
+
+            <section id="add-jitpack">
+                <h2>Step 1: Add JitPack Repository</h2>
+                <p>Add the JitPack repository to your <code>settings.gradle.kts</code> (or <code>settings.gradle</code> for Groovy):</p>
+
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="kotlin-settings">Kotlin DSL</button>
+                        <button class="tab-button" data-tab="groovy-settings">Groovy</button>
+                    </div>
+                </div>
+
+                <div id="kotlin-settings" class="tab-content active">
+                    <pre><code class="language-kotlin">dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = "https://jitpack.io")  // Add this line
+    }
+}</code></pre>
+                </div>
+
+                <div id="groovy-settings" class="tab-content">
+                    <pre><code class="language-groovy">dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }  // Add this line
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="add-dependency">
+                <h2>Step 2: Add Library Dependency</h2>
+                <p>Add the Country-Picker dependency to your module-level <code>build.gradle.kts</code> (usually in the <code>app</code> folder):</p>
+
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="kotlin-dep">Kotlin DSL</button>
+                        <button class="tab-button" data-tab="groovy-dep">Groovy</button>
+                    </div>
+                </div>
+
+                <div id="kotlin-dep" class="tab-content active">
+                    <pre><code class="language-kotlin">dependencies {
+    // Other dependencies...
+
+    // Country-Picker
+    implementation("com.github.arpitkatiyar1999:Country-Picker:2.1.5")
+}</code></pre>
+                </div>
+
+                <div id="groovy-dep" class="tab-content">
+                    <pre><code class="language-groovy">dependencies {
+    // Other dependencies...
+
+    // Country-Picker
+    implementation 'com.github.arpitkatiyar1999:Country-Picker:2.1.5'
+}</code></pre>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>Latest Version:</strong> Check
+                    <a href="https://github.com/arpitkatiyar1999/Country-Picker/releases" target="_blank">GitHub Releases</a>
+                    for the most recent version.
+                </div>
+            </section>
+
+            <section id="sync-project">
+                <h2>Step 3: Sync Project</h2>
+                <p>Click "Sync Now" in the banner that appears, or select <strong>File > Sync Project with Gradle Files</strong> in Android Studio.</p>
+            </section>
+
+            <section id="verify">
+                <h2>Verify Installation</h2>
+                <p>To verify the library is installed correctly, try importing the components:</p>
+
+                <pre><code class="language-kotlin">import com.arpitkatiyarprojects.countrypicker.CountryPicker
+import com.arpitkatiyarprojects.countrypicker.CountryPickerOutlinedTextField
+import com.arpitkatiyarprojects.countrypicker.models.CountryDetails
+import com.arpitkatiyarprojects.countrypicker.utils.CountryPickerUtils</code></pre>
+
+                <p>If the imports resolve without errors, you're ready to go! 🎉</p>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Troubleshooting</h2>
+
+                <div class="card">
+                    <h4>❌ Material 3 version error</h4>
+                    <p><strong>Problem:</strong> Getting errors about Material 3 compatibility</p>
+                    <p><strong>Solution:</strong> Ensure you're using Material 3 version 1.4.0 or later:</p>
+                    <pre><code class="language-kotlin">dependencies {
+    implementation("androidx.compose.material3:material3:1.4.0")
+    // Or use BOM:
+    implementation(platform("androidx.compose:compose-bom:2024.09.00"))
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>❌ JitPack build failed</h4>
+                    <p><strong>Problem:</strong> Dependency resolution fails</p>
+                    <p><strong>Solution:</strong> Make sure you added JitPack to repositories in <code>settings.gradle</code>, not in module-level <code>build.gradle</code></p>
+                </div>
+
+                <div class="card">
+                    <h4>❌ Import errors</h4>
+                    <p><strong>Problem:</strong> Cannot import Country-Picker classes</p>
+                    <p><strong>Solution:</strong> Clean and rebuild your project:</p>
+                    <pre><code class="language-bash"># In Android Studio:
+Build → Clean Project
+Build → Rebuild Project
+
+# Or via command line:
+./gradlew clean build</code></pre>
+                </div>
+            </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="getting-started.html" class="nav-button nav-button-prev">
+                    <span class="nav-icon">←</span>
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Previous</span>
+                        <span class="nav-button-title">Getting Started</span>
+                    </div>
+                </a>
+                <a href="components.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Components</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a></p>
+        <p>
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub</a> |
+            <a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a> |
+            <a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank">License</a>
+        </p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

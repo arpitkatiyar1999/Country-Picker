@@ -28,30 +28,21 @@
     <div class="container">
         <aside class="sidebar" id="sidebar">
             <nav>
+                <div class="nav-section-title">On This Page</div>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="#validation">isMobileNumberValid()</a></li>
+                    <li><a href="#example">getExampleMobileNumber()</a></li>
+                    <li><a href="#formatting">getFormattedMobileNumber()</a></li>
+                    <li><a href="#workflow">Complete Workflow</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                    <li><a href="#error-handling">Error Handling</a></li>
                 </ul>
+
                 <div class="nav-section">
-                    <div class="nav-section-title">Components</div>
+                    <div class="nav-section-title">Navigation</div>
                     <ul>
-                        <li><a href="components.html#countrypicker">CountryPicker</a></li>
-                        <li><a href="components.html#textfield">CountryPickerOutlinedTextField</a></li>
-                    </ul>
-                </div>
-                <div class="nav-section">
-                    <div class="nav-section-title">Guides</div>
-                    <ul>
-                        <li><a href="customization.html">Customization</a></li>
-                        <li><a href="utilities.html" class="active">Utility Functions</a></li>
-                        <li><a href="models.html">Data Models</a></li>
-                        <li><a href="examples.html">Examples</a></li>
-                    </ul>
-                </div>
-                <div class="nav-section">
-                    <div class="nav-section-title">Reference</div>
-                    <ul>
-                        <li><a href="api-reference.html">API Reference</a></li>
+                        <li><a href="components.html">← Components</a></li>
+                        <li><a href="customization.html">Customization →</a></li>
                     </ul>
                 </div>
             </nav>
@@ -282,7 +273,7 @@ fun AutoFormattingPhoneInput() {
 }</code></pre>
             </section>
 
-            <section>
+            <section id="workflow">
                 <h2>Complete Validation Workflow</h2>
                 <p>Here's a comprehensive example combining all utility functions:</p>
 
@@ -377,7 +368,7 @@ fun CompletePhoneValidation() {
 }</code></pre>
             </section>
 
-            <section>
+            <section id="best-practices">
                 <h2>Best Practices</h2>
 
                 <div class="card">
@@ -416,7 +407,7 @@ isMobileNumberValid("2025550123", "US")</code></pre>
                 </div>
             </section>
 
-            <section>
+            <section id="error-handling">
                 <h2>Error Handling</h2>
                 <p>All utility functions handle errors gracefully:</p>
 
@@ -487,6 +478,24 @@ isMobileNumberValid("2025550123", "US")</code></pre>
                     </div>
                 </div>
             </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="components.html" class="nav-button nav-button-prev">
+                    <span class="nav-icon">←</span>
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Previous</span>
+                        <span class="nav-button-title">Components</span>
+                    </div>
+                </a>
+                <a href="customization.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Customization</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
         </main>
     </div>
 

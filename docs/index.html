@@ -37,33 +37,25 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <nav>
+                <div class="nav-section-title">On This Page</div>
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="getting-started.html">Getting Started</a></li>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#key-features">Key Features</a></li>
+                    <li><a href="#quick-start">Quick Start</a></li>
+                    <li><a href="#main-components">Main Components</a></li>
+                    <li><a href="#utility-functions">Utility Functions</a></li>
+                    <li><a href="#display-modes">Display Modes</a></li>
+                    <li><a href="#use-cases">Common Use Cases</a></li>
+                    <li><a href="#platform-support">Platform Support</a></li>
+                    <li><a href="#next-steps">Next Steps</a></li>
+                    <li><a href="#contributing">Contributing</a></li>
+                    <li><a href="#support">Support</a></li>
                 </ul>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Components</div>
+                    <div class="nav-section-title">Navigation</div>
                     <ul>
-                        <li><a href="components.html#countrypicker">CountryPicker</a></li>
-                        <li><a href="components.html#textfield">CountryPickerOutlinedTextField</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-section">
-                    <div class="nav-section-title">Guides</div>
-                    <ul>
-                        <li><a href="customization.html">Customization</a></li>
-                        <li><a href="utilities.html">Utility Functions</a></li>
-                        <li><a href="models.html">Data Models</a></li>
-                        <li><a href="examples.html">Examples</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav-section">
-                    <div class="nav-section-title">Reference</div>
-                    <ul>
-                        <li><a href="api-reference.html">API Reference</a></li>
+                        <li><a href="getting-started.html">Getting Started →</a></li>
                     </ul>
                 </div>
             </nav>
@@ -73,23 +65,34 @@
         <main class="main-content">
             <!-- Hero Section -->
             <section class="hero">
-                <h1>Country-Picker</h1>
-                <p>A beautiful, customizable Jetpack Compose library for country code selection with phone number validation</p>
+                <div style="margin-bottom: 1rem;">
+                    <span class="badge badge-primary" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">Version 2.1.5</span>
+                    <span class="badge badge-success" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">Material 3</span>
+                    <span class="badge badge-warning" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">API 21+</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2); color: white; margin: 0.25rem;">193+ Countries</span>
+                </div>
+                <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 800;">Country-Picker</h1>
+                <p style="font-size: 1.35rem; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    A beautiful, customizable Jetpack Compose library for country code selection with phone number validation
+                </p>
+                <p style="font-size: 1rem; opacity: 0.9; margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto;">
+                    ⚡ Lightweight • 🎨 Highly Customizable • ✅ Built-in Validation • 🔍 Smart Search
+                </p>
                 <div class="hero-buttons">
-                    <a href="getting-started.html" class="btn btn-primary">Get Started</a>
-                    <a href="https://github.com/arpitkatiyar1999/Country-Picker" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                    <a href="getting-started.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                        🚀 Get Started
+                    </a>
+                    <a href="https://github.com/arpitkatiyar1999/Country-Picker" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 0.5rem;">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
                 </div>
             </section>
 
-            <!-- Version & Platform Info -->
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <span class="badge badge-primary">Version 2.1.5</span>
-                <span class="badge badge-success">Material 3</span>
-                <span class="badge badge-warning">API 21+</span>
-            </div>
-
             <!-- Overview -->
-            <section>
+            <section id="overview">
                 <h2>Overview</h2>
                 <p>
                     Country-Picker is a lightweight, feature-rich Android library built with Jetpack Compose that provides
@@ -98,12 +101,12 @@
                 </p>
 
                 <div class="alert alert-info">
-                    <strong>Requirements:</strong> This library requires Material 3 version <strong>1.3.0</strong> or later to work properly.
+                    <strong>Requirements:</strong> This library requires Material 3 version <strong>1.4.0</strong> or later to work properly.
                 </div>
             </section>
 
             <!-- Key Features -->
-            <section>
+            <section id="key-features">
                 <h2>Key Features</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
@@ -137,12 +140,6 @@
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">🌐</div>
-                        <h3>Multi-Language</h3>
-                        <p>Uses string resources for easy internationalization</p>
-                    </div>
-
-                    <div class="feature-card">
                         <div class="feature-icon">💎</div>
                         <h3>Material 3</h3>
                         <p>Built with Material 3 components and theming support</p>
@@ -157,7 +154,7 @@
             </section>
 
             <!-- Quick Start -->
-            <section>
+            <section id="quick-start">
                 <h2>Quick Start</h2>
                 <h3>1. Add Dependency</h3>
                 <p>Add JitPack repository to your <code>settings.gradle</code>:</p>
@@ -214,7 +211,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Components Overview -->
-            <section>
+            <section id="main-components">
                 <h2>Main Components</h2>
 
                 <div class="card">
@@ -238,7 +235,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Utility Functions -->
-            <section>
+            <section id="utility-functions">
                 <h2>Utility Functions</h2>
                 <p>The library provides powerful utility functions for phone number operations:</p>
 
@@ -269,7 +266,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Display Modes -->
-            <section>
+            <section id="display-modes">
                 <h2>Display Modes</h2>
                 <p>Choose between two elegant display modes for the country list:</p>
 
@@ -293,7 +290,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Example Use Cases -->
-            <section>
+            <section id="use-cases">
                 <h2>Common Use Cases</h2>
                 <ul>
                     <li>✅ Phone number input forms with validation</li>
@@ -306,7 +303,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Browser Compatibility -->
-            <section>
+            <section id="platform-support">
                 <h2>Platform Support</h2>
                 <table>
                     <thead>
@@ -322,22 +319,22 @@ fun PhoneNumberInput() {
                         </tr>
                         <tr>
                             <td>Compile SDK</td>
-                            <td>API Level 36</td>
+                            <td>API Level 36 (Android 14+)</td>
                         </tr>
                         <tr>
                             <td>Jetpack Compose</td>
-                            <td>Material 3 version 1.3.0+</td>
+                            <td>Material 3 version 1.4.0+</td>
                         </tr>
                         <tr>
                             <td>Kotlin</td>
-                            <td>JVM Target 1.8</td>
+                            <td>1.9.0+ (Recommended: 2.0.0+)</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
             <!-- Next Steps -->
-            <section>
+            <section id="next-steps">
                 <h2>Next Steps</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
@@ -367,7 +364,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Contributing -->
-            <section>
+            <section id="contributing">
                 <h2>Contributing</h2>
                 <p>
                     We welcome contributions! If you'd like to contribute to the Country-Picker library,
@@ -377,7 +374,7 @@ fun PhoneNumberInput() {
             </section>
 
             <!-- Support -->
-            <section>
+            <section id="support">
                 <h2>Support</h2>
                 <p>Need help? Here are some resources:</p>
                 <ul>
@@ -405,6 +402,17 @@ fun PhoneNumberInput() {
                     </a>.
                 </p>
             </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="getting-started.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Getting Started</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
         </main>
     </div>
 
