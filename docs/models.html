@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Country-Picker Data Models - Complete reference for all data classes and enums">
+    <title>Data Models - Country-Picker Documentation</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">CP</div>
+                <span>Country-Picker</span>
+            </a>
+            <nav class="header-nav">
+                <a href="https://github.com/arpitkatiyar1999/Country-Picker#contributing" target="_blank">Contribute</a>
+                <a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">Report Issues</a>
+                <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <div class="nav-section-title">On This Page</div>
+                <ul>
+                    <li><a href="#country-details">CountryDetails</a></li>
+                    <li><a href="#display-type">CountryListDisplayType</a></li>
+                    <li><a href="#colors">CountryPickerColors</a></li>
+                    <li><a href="#text-styles">CountryPickerDialogTextStyles</a></li>
+                    <li><a href="#flag-dimensions">FlagDimensions</a></li>
+                    <li><a href="#border-thickness">BorderThickness</a></li>
+                </ul>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Navigation</div>
+                    <ul>
+                        <li><a href="utilities.html">← Utilities</a></li>
+                        <li><a href="components.html">Components →</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Data Models</h1>
+            <p class="text-muted">
+                Complete reference for all data classes and enums used in Country-Picker library.
+            </p>
+
+            <section id="country-details">
+                <h2>CountryDetails</h2>
+                <p>Represents complete information about a country including code, phone code, name, and flag.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">@Immutable
+data class CountryDetails(
+    val countryCode: String,
+    val countryPhoneNumberCode: String,
+    val countryName: String,
+    @DrawableRes val countryFlag: Int
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>countryCode</code></td>
+                            <td>String</td>
+                            <td>ISO 3166-1 alpha-2 country code (e.g., "US", "IN", "GB")</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryPhoneNumberCode</code></td>
+                            <td>String</td>
+                            <td>International dialing code with + prefix (e.g., "+1", "+91", "+44")</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryName</code></td>
+                            <td>String</td>
+                            <td>Full name of the country (e.g., "United States", "India", "United Kingdom")</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryFlag</code></td>
+                            <td>Int (@DrawableRes)</td>
+                            <td>Drawable resource ID of the country's flag image</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">var selectedCountry by remember { mutableStateOf<CountryDetails?>(null) }
+
+CountryPicker(
+    onCountrySelected = { country ->
+        selectedCountry = country
+        println("Selected: ${country.countryName}")
+        println("Code: ${country.countryCode}")
+        println("Phone: ${country.countryPhoneNumberCode}")
+    }
+)
+
+// Access country details
+selectedCountry?.let { country ->
+    Text("${country.countryName} (${country.countryPhoneNumberCode})")
+    Image(painter = painterResource(country.countryFlag), contentDescription = null)
+}</code></pre>
+            </section>
+
+            <section id="display-type">
+                <h2>CountryListDisplayType</h2>
+                <p>Enum defining how the country selection list is displayed to the user.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">enum class CountryListDisplayType {
+    BottomSheet,
+    Dialog
+}</code></pre>
+
+                <h3>Values</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>BottomSheet</code></td>
+                            <td>Displays the country list as a bottom sheet that slides up from the bottom of the screen. Recommended for mobile-first designs.</td>
+                        </tr>
+                        <tr>
+                            <td><code>Dialog</code></td>
+                            <td>Displays the country list in a centered dialog box. Better for larger screens or when you want to focus user attention.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">CountryPicker(
+    countryListDisplayType = CountryListDisplayType.BottomSheet,
+    onCountrySelected = { country -> /* ... */ }
+)
+
+// Or use Dialog
+CountryPicker(
+    countryListDisplayType = CountryListDisplayType.Dialog,
+    onCountrySelected = { country -> /* ... */ }
+)</code></pre>
+            </section>
+
+            <section id="colors">
+                <h2>CountryPickerColors</h2>
+                <p>Defines all color customizations for the Country Picker component.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">@Immutable
+data class CountryPickerColors(
+    val dropDownIconColor: Color,
+    val backIconColor: Color,
+    val searchIconColor: Color,
+    val cancelIconColor: Color,
+    val searchCursorColor: Color,
+    val selectedCountryContainerColor: Color,
+    val countriesListContainerColor: Color,
+    val selectedCountryDisabledContainerColor: Color,
+    val dropDownDisabledIconColor: Color
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>dropDownIconColor</code></td>
+                            <td>Color</td>
+                            <td>Color of the dropdown arrow icon</td>
+                        </tr>
+                        <tr>
+                            <td><code>backIconColor</code></td>
+                            <td>Color</td>
+                            <td>Color of the back/close icon in dialog/bottom sheet</td>
+                        </tr>
+                        <tr>
+                            <td><code>searchIconColor</code></td>
+                            <td>Color</td>
+                            <td>Color of the search icon in the search bar</td>
+                        </tr>
+                        <tr>
+                            <td><code>cancelIconColor</code></td>
+                            <td>Color</td>
+                            <td>Color of the cancel/clear icon in search bar</td>
+                        </tr>
+                        <tr>
+                            <td><code>searchCursorColor</code></td>
+                            <td>Color</td>
+                            <td>Color of the text cursor in search field</td>
+                        </tr>
+                        <tr>
+                            <td><code>selectedCountryContainerColor</code></td>
+                            <td>Color</td>
+                            <td>Background color of selected country container</td>
+                        </tr>
+                        <tr>
+                            <td><code>countriesListContainerColor</code></td>
+                            <td>Color</td>
+                            <td>Background color of the countries list dialog/bottom sheet</td>
+                        </tr>
+                        <tr>
+                            <td><code>selectedCountryDisabledContainerColor</code></td>
+                            <td>Color</td>
+                            <td>Background color when country picker is disabled</td>
+                        </tr>
+                        <tr>
+                            <td><code>dropDownDisabledIconColor</code></td>
+                            <td>Color</td>
+                            <td>Color of dropdown icon when disabled</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">CountryPicker(
+    colors = CountryPickerColors(
+        dropDownIconColor = Color.Blue,
+        backIconColor = Color.Black,
+        searchIconColor = Color.Gray,
+        cancelIconColor = Color.Red,
+        searchCursorColor = Color.Blue,
+        selectedCountryContainerColor = Color.Transparent,
+        countriesListContainerColor = Color.White,
+        selectedCountryDisabledContainerColor = Color.LightGray,
+        dropDownDisabledIconColor = Color.Gray
+    ),
+    onCountrySelected = { /* ... */ }
+)</code></pre>
+            </section>
+
+            <section id="text-styles">
+                <h2>CountryPickerDialogTextStyles</h2>
+                <p>Customizes text appearance in the country picker dialog/bottom sheet.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">@Immutable
+data class CountryPickerDialogTextStyles(
+    val countryPhoneCodeTextStyle: TextStyle? = null,
+    val countryNameTextStyle: TextStyle? = null,
+    val countryCodeTextStyle: TextStyle? = null,
+    val searchBarHintTextStyle: TextStyle? = null,
+    val titleTextStyle: TextStyle? = null,
+    val noSearchedCountryAvailableTextStyle: TextStyle? = null
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>countryPhoneCodeTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for country phone code (e.g., "+1")</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryNameTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for country name (e.g., "United States")</td>
+                        </tr>
+                        <tr>
+                            <td><code>countryCodeTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for country code (e.g., "US")</td>
+                        </tr>
+                        <tr>
+                            <td><code>searchBarHintTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for search bar placeholder text</td>
+                        </tr>
+                        <tr>
+                            <td><code>titleTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for dialog title (e.g., "Select a Country")</td>
+                        </tr>
+                        <tr>
+                            <td><code>noSearchedCountryAvailableTextStyle</code></td>
+                            <td>TextStyle?</td>
+                            <td>null</td>
+                            <td>Text style for "no results" message</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">CountryPicker(
+    dialogTextStyles = CountryPickerDialogTextStyles(
+        countryPhoneCodeTextStyle = MaterialTheme.typography.bodyMedium.copy(
+            fontWeight = FontWeight.Bold
+        ),
+        countryNameTextStyle = MaterialTheme.typography.bodyLarge,
+        titleTextStyle = MaterialTheme.typography.headlineSmall.copy(
+            color = Color.Blue
+        ),
+        searchBarHintTextStyle = MaterialTheme.typography.bodySmall.copy(
+            color = Color.Gray
+        )
+    ),
+    onCountrySelected = { /* ... */ }
+)</code></pre>
+            </section>
+
+            <section id="flag-dimensions">
+                <h2>FlagDimensions</h2>
+                <p>Specifies the width and height dimensions for country flag images.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">@Immutable
+data class FlagDimensions(
+    val width: Dp,
+    val height: Dp
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>width</code></td>
+                            <td>Dp</td>
+                            <td>Width of the flag in density-independent pixels</td>
+                        </tr>
+                        <tr>
+                            <td><code>height</code></td>
+                            <td>Dp</td>
+                            <td>Height of the flag in density-independent pixels</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">CountryPicker(
+    flagDimensions = FlagDimensions(
+        width = 32.dp,
+        height = 24.dp
+    ),
+    onCountrySelected = { /* ... */ }
+)
+
+// Larger flags
+CountryPicker(
+    flagDimensions = FlagDimensions(
+        width = 48.dp,
+        height = 36.dp
+    ),
+    onCountrySelected = { /* ... */ }
+)</code></pre>
+            </section>
+
+            <section id="border-thickness">
+                <h2>BorderThickness</h2>
+                <p>Defines border thickness for focused and unfocused states in CountryPickerOutlinedTextField.</p>
+
+                <h3>Declaration</h3>
+                <pre><code class="language-kotlin">@Immutable
+data class BorderThickness(
+    val focusedBorderThickness: Dp = 2.dp,
+    val unfocusedBorderThickness: Dp = 1.dp
+)</code></pre>
+
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>focusedBorderThickness</code></td>
+                            <td>Dp</td>
+                            <td>2.dp</td>
+                            <td>Border thickness when the text field is focused</td>
+                        </tr>
+                        <tr>
+                            <td><code>unfocusedBorderThickness</code></td>
+                            <td>Dp</td>
+                            <td>1.dp</td>
+                            <td>Border thickness when the text field is not focused</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-kotlin">CountryPickerOutlinedTextField(
+    mobileNumber = phoneNumber,
+    onMobileNumberChange = { phoneNumber = it },
+    onCountrySelected = { /* ... */ },
+    borderThickness = BorderThickness(
+        focusedBorderThickness = 3.dp,
+        unfocusedBorderThickness = 1.5.dp
+    )
+)</code></pre>
+            </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-navigation">
+                <a href="utilities.html" class="nav-button nav-button-prev">
+                    <span class="nav-icon">←</span>
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Previous</span>
+                        <span class="nav-button-title">Utilities</span>
+                    </div>
+                </a>
+                <a href="components.html" class="nav-button nav-button-next">
+                    <div class="nav-button-content">
+                        <span class="nav-button-label">Next</span>
+                        <span class="nav-button-title">Components</span>
+                    </div>
+                    <span class="nav-icon">→</span>
+                </a>
+            </nav>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <!-- Column 1: Branding -->
+            <div class="footer-column">
+                <div class="footer-branding">
+                    <a href="index.html" class="footer-logo">
+                        <div class="footer-logo-icon">CP</div>
+                        <span>Country-Picker</span>
+                    </a>
+                    <p class="footer-tagline">Beautiful country selection for Jetpack Compose</p>
+                    <span class="footer-badge">v2.1.5</span>
+                </div>
+            </div>
+
+            <!-- Column 2: Resources -->
+            <div class="footer-column">
+                <h4 class="footer-heading">Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/arpitkatiyar1999/Country-Picker" target="_blank">GitHub Repository</a></li>
+                    <li><a href="https://jitpack.io/#arpitkatiyar1999/Country-Picker" target="_blank">JitPack</a></li>
+                    <li><a href="https://github.com/arpitkatiyar1999/Country-Picker/releases" target="_blank">Latest Releases</a></li>
+                    <li><a href="https://github.com/arpitkatiyar1999/Country-Picker/issues" target="_blank">Report Issue</a></li>
+                    <li><a href="https://github.com/arpitkatiyar1999/Country-Picker#contributing" target="_blank">Contributing</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Info -->
+            <div class="footer-column">
+                <h4 class="footer-heading">Project Info</h4>
+                <div class="footer-info-item">
+                    <span class="footer-info-icon">💎</span>
+                    <span>Built with Kotlin</span>
+                </div>
+                <div class="footer-info-item">
+                    <span class="footer-info-icon">📱</span>
+                    <span>API Level 21+</span>
+                </div>
+                <div class="footer-info-item">
+                    <span class="footer-info-icon">🎨</span>
+                    <span>Material 3</span>
+                </div>
+                <div class="footer-info-item">
+                    <span class="footer-info-icon">📄</span>
+                    <span><a href="https://github.com/arpitkatiyar1999/Country-Picker/blob/master/LICENSE" target="_blank" style="color: rgba(255, 255, 255, 0.8);">Apache 2.0 License</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            Made with ❤️ by <a href="https://github.com/arpitkatiyar1999" target="_blank">Arpit Katiyar</a>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
