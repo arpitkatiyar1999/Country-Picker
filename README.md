@@ -110,6 +110,7 @@ fun CountryPicker(
   - `flagDimensions: FlagDimensions`: Sets the dimensions for the selected country flag, including the following:-
     - `width: Dp` - Width of the flag. Default is `28.dp`.
     - `height: Dp` - Height of the flag. Default is `21.dp`.
+    - **Note**: Flag icons use a **4:3 aspect ratio**. For best visual results, maintain this ratio when customizing dimensions (e.g., 28dp x 21dp, 40dp x 30dp, etc.).
 
   - `textStyles: SelectedCountryTextStyles`: Defines text styles for displaying selected country details, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle` - Style for the country phone code text. Default is `Bold`.
@@ -127,6 +128,7 @@ fun CountryPicker(
   - `flagDimensions: FlagDimensions`: Sets the dimensions for flags displayed in the dialog, including the following:
     - `width: Dp` - Width of the flag. Default is `30.dp`.
     - `height: Dp` - Height of the flag. Default is `22.dp`.
+    - **Note**: Flag icons use a **4:3 aspect ratio**. For best visual results, maintain this ratio when customizing dimensions.
 
   - `textStyles: CountryPickerDialogTextStyles`: Sets text style settings for country list dialog, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle?` - Style for displaying the country phone code in the list. Default is `null`.
