@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
  */
 data class CountriesListDialogDisplayProperties(
     val properties: CountriesListDialogProperties = CountriesListDialogProperties(),
-    val flagDimensions: FlagDimensions = FlagDimensions(width = 30.dp, height = 20.dp),
+    val flagDimensions: FlagDimensions = FlagDimensions(width = 300.dp, height = 200.dp),
     val textStyles: CountryPickerDialogTextStyles = CountryPickerDialogTextStyles(),
     val flagShape: Shape = RectangleShape
 )
