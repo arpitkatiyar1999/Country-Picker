@@ -95,6 +95,7 @@ fun CountryPicker(
     - `spaceAfterCountryName: Dp` - Specifies spacing after the country name. Default is `6.dp`.
     - `spaceAfterCountryCode: Dp` - Specifies spacing after the country code. Default is `6.dp`.
     - `showDropDownIcon: Boolean`- If true, shows the dropdown icon next to the selected country. Default is `true`.
+    - `dropDownIconComposable: (@Composable () -> Unit)?` - Optional custom composable for the dropdown icon. If `null`, the default ArrowDropDown icon will be used. This allows you to fully customize the dropdown icon appearance. Default is `null`.
 
 
   - `flagDimensions: FlagDimensions`: Sets the dimensions for the selected country flag, including the following:-
@@ -231,6 +232,8 @@ fun CountryPickerOutlinedTextField(
 
 ## Example Usage
 
+### Helper Functions Examples
+
 ```kotlin
 // Example for isMobileNumberValid
 val isValid = CountryPickerUtils.isMobileNumberValid("8123456789", "IN")
@@ -243,6 +246,29 @@ println(exampleNumber) // Output: Example formatted number, like "81234 56789"
 // Example for getFormattedMobileNumber
 val formattedNumber = CountryPickerUtils.getFormattedMobileNumber("8123456789", "IN")
 println(formattedNumber) // Output: Formatted number, like "81234 56789"
+```
+
+### Custom Dropdown Icon Example
+
+You can customize the dropdown icon by providing your own composable:
+
+```kotlin
+CountryPicker(
+    selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+        properties = SelectedCountryProperties(
+            dropDownIconComposable = {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Select Country",
+                    tint = Color.Blue
+                )
+            }
+        )
+    ),
+    onCountrySelected = { country ->
+        // Handle country selection
+    }
+)
 ```
 
 For detailed examples of implementing `CountryPicker` and `CountryPickerOutlinedTextField`:

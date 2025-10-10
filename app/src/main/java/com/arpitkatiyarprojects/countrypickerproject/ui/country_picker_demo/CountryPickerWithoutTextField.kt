@@ -39,7 +39,7 @@ fun CountryPickerWithoutTextField() {
     var selectedCountryDisplayProperties by remember {
         mutableStateOf(
             SelectedCountryDisplayProperties(
-                flagShape = RoundedCornerShape(4.dp)
+                flagShape = RoundedCornerShape(0.dp)
             )
         )
     }
@@ -47,7 +47,7 @@ fun CountryPickerWithoutTextField() {
     var countriesListDialogDisplayProperties by remember {
         mutableStateOf(
             CountriesListDialogDisplayProperties(
-                flagShape = RoundedCornerShape(6.dp),
+                flagShape = RoundedCornerShape(0.dp),
                 textStyles = CountryPickerDialogTextStyles(
                     titleTextStyle = TextStyle(
                         fontSize = 18.sp,
