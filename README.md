@@ -8,9 +8,9 @@ integration with the visual identity of your application.
 
 ![Platform](https://img.shields.io/badge/Platform-Android-crimson) &nbsp;
 ![API Level](https://img.shields.io/badge/API-24%2B-yellow) &nbsp;
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-orange) &nbsp;
 ![License](https://img.shields.io/badge/License-Apache%202-blue) &nbsp;
-[![](https://jitpack.io/v/arpitkatiyar1999/Country-Picker.svg)](https://jitpack.io/#arpitkatiyar1999/Country-Picker) &nbsp;
-![Language](https://img.shields.io/badge/Language-Kotlin-orange)
+[![](https://jitpack.io/v/arpitkatiyar1999/Country-Picker.svg)](https://jitpack.io/#arpitkatiyar1999/Country-Picker)
 
 ## Preview
 
