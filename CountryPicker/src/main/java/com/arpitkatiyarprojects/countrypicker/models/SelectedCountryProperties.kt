@@ -1,5 +1,6 @@
 package com.arpitkatiyarprojects.countrypicker.models
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
  * @param spaceAfterCountryName Defines the spacing after the country name, iff showCountryName = true , represented as [Dp].
  * @param spaceAfterCountryCode Defines the spacing after the country code, iff showCountryCode = true , represented as [Dp].
  * @param showDropDownIcon If true, shows the dropdown icon next to the selected country.
+ * @param dropDownIconComposable Optional custom composable for the dropdown icon. If null, the default ArrowDropDown icon will be used.
  */
 @Immutable
 data class SelectedCountryProperties(
@@ -26,5 +28,6 @@ data class SelectedCountryProperties(
     val spaceAfterCountryPhoneCode: Dp = 6.dp,
     val spaceAfterCountryName: Dp = 6.dp,
     val spaceAfterCountryCode: Dp = 6.dp,
-    val showDropDownIcon: Boolean = true
+    val showDropDownIcon: Boolean = true,
+    val dropDownIconComposable: (@Composable () -> Unit)? = null
 )

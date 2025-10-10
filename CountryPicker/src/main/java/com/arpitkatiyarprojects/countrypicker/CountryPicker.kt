@@ -179,11 +179,15 @@ private fun SelectedCountrySection(
                 Spacer(modifier = Modifier.width(properties.spaceAfterCountryCode))
             }
             if (properties.showDropDownIcon) {
-                Icon(
-                    imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = stringResource(R.string.select_country_dropdown),
-                    tint = if (isPickerEnabled) countryPickerColors.dropDownIconColor else countryPickerColors.dropDownDisabledIconColor
-                )
+                if (properties.dropDownIconComposable != null) {
+                    properties.dropDownIconComposable.invoke()
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = stringResource(R.string.select_country_dropdown),
+                        tint = if (isPickerEnabled) countryPickerColors.dropDownIconColor else countryPickerColors.dropDownDisabledIconColor
+                    )
+                }
             }
         }
     }
