@@ -446,7 +446,7 @@ internal object FunctionHelper {
             "do",
             "+1",
             context.getString(R.string.dominican_republic),
-            R.drawable.ic_do
+            R.drawable.do_flag
         ),
         CountryDetails(
             "dz",

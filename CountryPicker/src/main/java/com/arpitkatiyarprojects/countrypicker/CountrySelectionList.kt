@@ -243,7 +243,7 @@ private fun CountriesListTopBarSection(
     }
     with(countriesListDialogDisplayProperties) {
         CenterAlignedTopAppBar(
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = countryPickerColors.countriesListContainerColor),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = countryPickerColors.countriesListContainerColor),
             windowInsets = WindowInsets(top = 0.dp, bottom = 0.dp),
             title = {
                 if (isSearchEnabled) {
@@ -265,7 +265,6 @@ private fun CountriesListTopBarSection(
                         placeholder = {
                             Text(
                                 text = stringResource(R.string.search_country),
-                                color = MaterialTheme.colorScheme.onSurface,
                                 style = textStyles.searchBarHintTextStyle ?: LocalTextStyle.current
                             )
                         },
@@ -285,7 +284,6 @@ private fun CountriesListTopBarSection(
                         modifier = Modifier.offset(y = (-2).dp),
                         text = stringResource(R.string.select_country),
                         style = textStyles.titleTextStyle ?: MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
             },

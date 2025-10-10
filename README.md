@@ -7,10 +7,10 @@ user experience. It effortlessly adapts to your application's theme, facilitatin
 integration with the visual identity of your application.
 
 ![Platform](https://img.shields.io/badge/Platform-Android-crimson) &nbsp;
-![API Level](https://img.shields.io/badge/API-21%2B-yellow) &nbsp;
+![API Level](https://img.shields.io/badge/API-24%2B-yellow) &nbsp;
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-orange) &nbsp;
 ![License](https://img.shields.io/badge/License-Apache%202-blue) &nbsp;
-[![](https://jitpack.io/v/arpitkatiyar1999/Country-Picker.svg)](https://jitpack.io/#arpitkatiyar1999/Country-Picker) &nbsp;
-![Language](https://img.shields.io/badge/Language-Kotlin-orange)
+[![](https://jitpack.io/v/arpitkatiyar1999/Country-Picker.svg)](https://jitpack.io/#arpitkatiyar1999/Country-Picker)
 
 ## Preview
 
@@ -21,14 +21,23 @@ integration with the visual identity of your application.
 
 ## Requirement
 
+### Version 3.0.0+ Requirements
 
-Jetpack Compose Country Code Picker requires Material 3 version **1.3.0** or later to work properly.
-To
-ensure compatibility, please make sure your project includes Material 3 version **1.3.0** or later.
+**Breaking Changes in Version 3.0.0:**
+- **Minimum SDK Version**: Increased from API 21 to **API 24** (Android 7.0)
+- **Target SDK**: Supports up to **API 36** (Android 16)
+- **Material 3 Version**: Requires **1.4.0** or later (previously 1.3.0)
+
+### General Requirements
+
+Jetpack Compose Country Code Picker requires Material 3 version **1.4.0** or later to work properly.
+To ensure compatibility, please make sure your project includes Material 3 version **1.4.0** or later.
 
 If you are using the Compose BOM to manage dependencies, you can check your current Material
 3 version by referring to
 the [Compose BOM mapping](https://developer.android.com/develop/ui/compose/bom/bom-mapping).
+
+> **Note**: If you are using a version prior to 3.0.0, the minimum requirements are API 21 and Material 3 version 1.3.0.
 
 ## Installation
 
@@ -95,11 +104,12 @@ fun CountryPicker(
     - `spaceAfterCountryName: Dp` - Specifies spacing after the country name. Default is `6.dp`.
     - `spaceAfterCountryCode: Dp` - Specifies spacing after the country code. Default is `6.dp`.
     - `showDropDownIcon: Boolean`- If true, shows the dropdown icon next to the selected country. Default is `true`.
+    - `dropDownIconComposable: (@Composable () -> Unit)?` - Optional custom composable for the dropdown icon. If `null`, the default ArrowDropDown icon will be used. This allows you to fully customize the dropdown icon appearance. Default is `null`.
 
 
   - `flagDimensions: FlagDimensions`: Sets the dimensions for the selected country flag, including the following:-
     - `width: Dp` - Width of the flag. Default is `28.dp`.
-    - `height: Dp` - Height of the flag. Default is `18.dp`.
+    - `height: Dp` - Height of the flag. Default is `21.dp`.
 
   - `textStyles: SelectedCountryTextStyles`: Defines text styles for displaying selected country details, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle` - Style for the country phone code text. Default is `Bold`.
@@ -116,7 +126,7 @@ fun CountryPicker(
 
   - `flagDimensions: FlagDimensions`: Sets the dimensions for flags displayed in the dialog, including the following:
     - `width: Dp` - Width of the flag. Default is `30.dp`.
-    - `height: Dp` - Height of the flag. Default is `20.dp`.
+    - `height: Dp` - Height of the flag. Default is `22.dp`.
 
   - `textStyles: CountryPickerDialogTextStyles`: Sets text style settings for country list dialog, including the following:-
     - `countryPhoneCodeTextStyle: TextStyle?` - Style for displaying the country phone code in the list. Default is `null`.
@@ -231,6 +241,8 @@ fun CountryPickerOutlinedTextField(
 
 ## Example Usage
 
+### Helper Functions Examples
+
 ```kotlin
 // Example for isMobileNumberValid
 val isValid = CountryPickerUtils.isMobileNumberValid("8123456789", "IN")
@@ -243,6 +255,29 @@ println(exampleNumber) // Output: Example formatted number, like "81234 56789"
 // Example for getFormattedMobileNumber
 val formattedNumber = CountryPickerUtils.getFormattedMobileNumber("8123456789", "IN")
 println(formattedNumber) // Output: Formatted number, like "81234 56789"
+```
+
+### Custom Dropdown Icon Example
+
+You can customize the dropdown icon by providing your own composable:
+
+```kotlin
+CountryPicker(
+    selectedCountryDisplayProperties = SelectedCountryDisplayProperties(
+        properties = SelectedCountryProperties(
+            dropDownIconComposable = {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Select Country",
+                    tint = Color.Blue
+                )
+            }
+        )
+    ),
+    onCountrySelected = { country ->
+        // Handle country selection
+    }
+)
 ```
 
 For detailed examples of implementing `CountryPicker` and `CountryPickerOutlinedTextField`:
