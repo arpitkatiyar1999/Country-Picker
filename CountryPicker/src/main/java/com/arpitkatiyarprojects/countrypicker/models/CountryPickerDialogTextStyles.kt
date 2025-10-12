@@ -19,5 +19,6 @@ data class CountryPickerDialogTextStyles(
     val countryCodeTextStyle: TextStyle? = null,
     val searchBarHintTextStyle: TextStyle? = null,
     val titleTextStyle: TextStyle? = null,
-    val noSearchedCountryAvailableTextStyle: TextStyle? = null
+    val noSearchedCountryAvailableTextStyle: TextStyle? = null,
+    val searchBarEnteredTextTextStyle: TextStyle? = null
 )

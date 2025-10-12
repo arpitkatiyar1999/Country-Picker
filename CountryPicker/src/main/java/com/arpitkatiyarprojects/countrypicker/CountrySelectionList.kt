@@ -277,7 +277,8 @@ private fun CountriesListTopBarSection(
                             unfocusedIndicatorColor = Color.Transparent,
                             cursorColor = countryPickerColors.searchCursorColor
                         ),
-                        textStyle = MaterialTheme.typography.labelLarge,
+                        textStyle = textStyles.searchBarEnteredTextTextStyle
+                            ?: MaterialTheme.typography.labelLarge,
                     )
                 } else {
                     Text(

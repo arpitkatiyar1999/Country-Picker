@@ -56,7 +56,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.github.arpitkatiyar1999"
                 artifactId = "countrypicker"
-                version = "2.1.5"
+                version = "3.0.1"
                 from(components["release"])
             }
         }
