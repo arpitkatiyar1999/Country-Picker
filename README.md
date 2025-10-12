@@ -135,6 +135,7 @@ fun CountryPicker(
     - `countryNameTextStyle: TextStyle?` - Style for displaying the country name in the list. Default is `null`.
     - `countryCodeTextStyle: TextStyle?` - Style for displaying the country code in the list. Default is `null`.
     - `searchBarHintTextStyle: TextStyle?` - Text style for the placeholder/hint text in the search bar. Default is `null`.
+    - `searchBarEnteredTextTextStyle: TextStyle?` - Text style for the actual input text typed in the search bar. Default is `null`.
     - `titleTextStyle: TextStyle?` - Text style for the dialog title (e.g., "Select a Country"). Default is `null`.
     - `noSearchedCountryAvailableTextStyle: TextStyle?` - Text style for the message displayed when no countries match the search. Default is `null`.
 

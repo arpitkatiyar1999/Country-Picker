@@ -60,7 +60,8 @@ fun CountryPickerWithoutTextField() {
                     noSearchedCountryAvailableTextStyle = TextStyle(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold
-                    )
+                    ),
+                    searchBarEnteredTextTextStyle = TextStyle(fontSize = 24.sp)
                 )
             )
         )
