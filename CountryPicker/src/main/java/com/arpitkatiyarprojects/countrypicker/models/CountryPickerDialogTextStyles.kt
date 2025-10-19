@@ -11,6 +11,7 @@ import androidx.compose.ui.text.TextStyle
  * @param searchBarHintTextStyle Text style for the placeholder/hint text in the search bar.
  * @param titleTextStyle Text style for the dialog title (e.g., "Select a Country").
  * @param noSearchedCountryAvailableTextStyle Text style for the message displayed when no countries match the search.
+ * @param searchBarEnteredTextTextStyle Text style for the actual input text typed in the search bar.
  */
 @Immutable
 data class CountryPickerDialogTextStyles(
